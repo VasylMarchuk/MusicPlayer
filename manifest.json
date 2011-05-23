@@ -1,0 +1,72 @@
+{
+	"name": "__MSG_extName__",
+	"version": "1.0",
+	"description": "__MSG_extDescription__",
+	"default_locale" : "en",
+	"minimum_chrome_version" : "11.0.696.65",
+	"background_page": "back/back.html",
+
+	"icons": {
+		"16": "icon.png",
+		"48": "icon.png",
+		"128": "icon.png"
+	},
+
+	"browser_action": {
+		"default_title": "__MSG_extToolTip__",
+		"default_icon": "icon.png",
+		"popup" : "popup/popup.html"
+	},
+
+	"content_scripts": [
+		{
+			"matches": [
+				"http://*.last.fm/api/grantaccess",
+				"http://*.lastfm.ru/api/grantaccess",
+				"http://*.lastfm.pt/api/grantaccess",
+				"http://*.lastfm.de/api/grantaccess",
+				"http://*.lastfm.es/api/grantaccess",
+				"http://*.lastfm.fr/api/grantaccess",
+				"http://*.lastfm.it/api/grantaccess",
+				"http://*.lastfm.jp/api/grantaccess",
+				"http://*.lastfm.pl/api/grantaccess",
+				"http://*.lastfm.com.br/api/grantaccess",
+				"http://*.lastfm.se/api/grantaccess",
+				"http://*.lastfm.com.tr/api/grantaccess"
+			],
+			"js": [
+				"inject/access.js"
+			]
+		},
+		{
+			"matches": [
+				"http://*.last.fm/*",
+				"http://*.lastfm.ru/*",
+				"http://*.lastfm.pt/*",
+				"http://*.lastfm.de/*",
+				"http://*.lastfm.es/*",
+				"http://*.lastfm.fr/*",
+				"http://*.lastfm.it/*",
+				"http://*.lastfm.jp/*",
+				"http://*.lastfm.pl/*",
+				"http://*.lastfm.com.br/*",
+				"http://*.lastfm.se/*",
+				"http://*.lastfm.com.tr/*"
+			],
+			"css": [ "inject/inject.css" ],
+			"js": [
+				"jquery-1.6.min.js",
+				"inject/inject.js",
+				"inject/parsers/tracklist.js"
+			]
+		}
+	],
+
+	"permissions": [
+		"http://api.flickr.com/",
+		"http://vkontakte.ru/*",
+		"http://vk.com/*",
+		"http://ws.audioscrobbler.com/*",
+		"tabs"
+	]
+}

@@ -1,0 +1,58 @@
+{
+	"extName" : {
+		"message" : "Last.fm Плеер",
+		"description" : "Имя расширения"
+	},
+	"extDescription" : {
+		"message" : "Проигрыватель музыки Last.fm",
+		"description" : "Описание расширения"
+	},
+	"extId" : {
+		"message" : "ID расширения: $1",
+		"description" : "ID расширения"
+	},
+	"extToolTip" : {
+		"message" : "Last.fm Плеер",
+		"description" : "Подсказка на иконке плагина по умолчанию"
+	},
+	"extToolTipPlaying" : {
+		"message" : "Играет: $1 - $2",
+		"description" : "Подсказка на иконке плагина во время воспроизведения"
+	},
+	"playInPlayer" : {
+		"message" : "Играть в плеере Last.fm",
+		"description" : "Подсказка на кнопке воспроизведения на страницах Last.fm"
+	},
+	"playbackStopped" : {
+		"message" : "Воспроизведение остановлено",
+		"description" : "Текст, который показывается в окне плеера, когда воспроизведение остановлено"
+	},
+	"nothingToPlay" : {
+		"message" : "Достигнут конец списка воспроизведения",
+		"description" : "Текст ошибки, когда достигнут конец списка воспроизведения"
+	},
+	"trackNotInPlaylist" : {
+		"message" : "Трек `$1` не найден в списке воспроизведения",
+		"description" : "Текст ошибки, когда запрошенный трек отсутствует в списке воспроизведения [trackId]"
+	},
+	"noMp3sForTrack" : {
+		"message" : "Не удалось найти ни одного mp3 файла",
+		"description" : "Текст ошибки, когда не найдено ни одного mp3 файла для трека [title, artist]"
+	},
+	"playCurrentTrack" : {
+		"message" : "Играть",
+		"description" : "Подсказка на кнопке Играть в плеере"
+	},
+	"playNextTrack" : {
+		"message" : "Играть следующий трек",
+		"description" : "Подсказка на кнопке Следующий трек (>>) в плеере"
+	},
+	"pauseCurrentTrack" : {
+		"message" : "Пауза",
+		"description" : "Подсказка на кнопке Пауза в плеере"
+	},
+	"revealCurrentTrackInPlayList" : {
+		"message" : "Показать текущий трек в списке воспроизведения",
+		"description" : "Подсказка для лейбы номера текущего трека (1/500) в плеере"
+	}
+}

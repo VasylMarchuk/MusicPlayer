@@ -1,0 +1,58 @@
+{
+	"extName" : {
+		"message" : "Last.fm Player",
+		"description" : "Extension name"
+	},
+	"extDescription" : {
+		"message" : "Last.fm music player",
+		"description" : "Extension description"
+	},
+	"extId" : {
+		"message" : "Extension ID: $1",
+		"description" : "Extension ID  [id]"
+	},
+	"extToolTip" : {
+		"message" : "Last.fm Player",
+		"description" : "Default extenstion icon tooltip"
+	},
+	"extToolTipPlaying" : {
+		"message" : "Playing: $1 - $2",
+		"description" : "Extenstion icon tooltip when playing a song [title, artist]"
+	},
+	"playInPlayer" : {
+		"message" : "Play in Last.fm Player",
+		"description" : "Tooltip for Play button on Last.fm pages"
+	},
+	"playbackStopped" : {
+		"message" : "Playback stopped",
+		"description" : "Text to display in Player when playback is stopped"
+	},
+	"nothingToPlay" : {
+		"message" : "Nothing to play",
+		"description" : "Error message when there are no more tracks in playlist"
+	},
+	"trackNotInPlaylist" : {
+		"message" : "Track `$1` is not in playlist",
+		"description" : "Error message when requested track is not in the playlist [trackId]"
+	},
+	"noMp3sForTrack" : {
+		"message" : "No mp3s found in the music database",
+		"description" : "Error message when no mp3 files have been found for track [title, artist]"
+	},
+	"playCurrentTrack" : {
+		"message" : "Resume",
+		"description" : "Tooltip for the player's Play button"
+	},
+	"playNextTrack" : {
+		"message" : "Play next track",
+		"description" : "Tooltip for the player's Next button"
+	},
+	"pauseCurrentTrack" : {
+		"message" : "Pause",
+		"description" : "Tooltip for the player's Pause button"
+	},
+	"revealCurrentTrackInPlayList" : {
+		"message" : "Reveal current track in playlist",
+		"description" : "Tooltip for the player's 'current track number (1/500)' label"
+	}
+}
