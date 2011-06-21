@@ -2,6 +2,7 @@
 
 	var PlayerWidget = app.classes.PlayerWidget;
 	var TrackListWidget = app.classes.TrackListWidget;
+	var StatusBarWidget = app.classes.StatusBarWidget;
 
 	//Constructor
 	$(function(){
@@ -19,12 +20,16 @@
 
 		var trackListWidget = new TrackListWidget(player);
 		var playerWidget = new PlayerWidget(player, trackListWidget);
+		var statusBarWidget = new StatusBarWidget(player, trackListWidget);
 
 		$('#player-container').append(playerWidget.$element);
 		playerWidget.$element.trigger('addedToDom');
 
 		$('#track-list-container').append(trackListWidget.$element);
 		trackListWidget.$element.trigger('addedToDom');
+
+		$('#status-bar-container').append(statusBarWidget.$element);
+		statusBarWidget.$element.trigger('addedToDom');
 
 	});
 

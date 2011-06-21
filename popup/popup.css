@@ -7,7 +7,7 @@ body {
 }
 
 #main-content {
-	padding:10px;
+	padding:10px 10px 3px 10px;
 }
 
 #player-container{
@@ -24,7 +24,7 @@ body {
 	top:0;
 	bottom:0;
 	left:0;
-	right:45px;
+	right:22px;
 }
 
 #player-widget .button { position:absolute; cursor:pointer; background-repeat: no-repeat; background-position:center center; border-radius:3px; }
@@ -32,8 +32,8 @@ body {
 #player-widget .button.pause { top:13px; left:8px; height:25px; width:25px; background-image:url('pause.png'); display:none; }
 
 #player-widget .button.next {
-	top:20px;
-	left:328px;
+	top:5px;
+	left:351px;
 	width:17px;
 	height:14px;
 	background-image:url('next.png');
@@ -42,7 +42,7 @@ body {
 }
 
 #player-widget .button.love {
-	top:20px;
+	top:29px;
 	left:351px;
 	width:17px;
 	height:14px;
@@ -159,9 +159,17 @@ body {
 		inset rgba(0, 0, 0, 0.2) 0 1px 3px;
 }
 
-#track-list { height: 400px; margin-top:10px; }
-#track-list .viewport { width: 365px; height: 400px; overflow: hidden; position: relative; }
-#track-list .viewport.wide { width: 380px; }
+#track-list-container {
+	position:relative;
+	box-shadow: inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
+	border-radius: 5px;
+	padding: 5px;
+	margin-top: 5px;
+}
+
+#track-list { height: 400px; }
+#track-list .viewport { width: 358px; height: 400px; overflow: hidden; position: relative; }
+#track-list .viewport.wide { width: 373px; }
 #track-list .overview { list-style: none; position: absolute; left: 0; top: 0; right:0; }
 #track-list .thumb .end,
 #track-list .thumb { background-color: #3ccbff; border-radius:5px; }
@@ -193,6 +201,8 @@ body {
 .track-widget.even {
 	background-color: #fcfbfb;
 }
+
+.track-widget.last { margin-bottom: 2px; }
 
 .track-widget.playing {
 	box-shadow:0 0 2px #3ccbff;
@@ -240,4 +250,84 @@ body {
 
 .track-widget.playing .on {
 	display:block;
+}
+
+#status-bar-container{
+	margin-top:5px;
+	position:relative;
+}
+
+#status-bar-widget {
+	height:12px;
+}
+
+#status-bar-widget .status-bar-item.down {
+	box-shadow:
+		inset gray 0 0 2px,
+		inset rgba(0, 0, 0, 0.2) 0 1px 3px;
+}
+
+#status-bar-widget .playlist-position {
+	font:5.7pt Verdana;
+	line-height: 12px;
+	position: absolute;
+	top: 0;
+	right: 1px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	padding: 0 1px;
+	text-align: center;
+	width: 40px;
+	box-shadow:inset gray 0 0 2px;
+	cursor:pointer;
+}
+
+#status-bar-widget .scrobbling-status {
+	font:5.7pt Verdana;
+	line-height: 12px;
+	position: absolute;
+	top: 0;
+	right: 46px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	padding: 0 1px;
+	text-align: center;
+	width: 80px;
+	box-shadow:inset gray 0 0 2px;
+	cursor:pointer;
+}
+#status-bar-widget .scrobbling-status.on {
+	box-shadow:
+		inset gray 0 0 2px,
+		inset rgba(0, 180, 255, 0.8) 0 0 3px;
+}
+
+#status-bar-widget .lastfm-status {
+	font:5.7pt Verdana;
+	line-height: 12px;
+	position: absolute;
+	top: 0;
+	left: 1px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	padding: 0 1px;
+	text-align: center;
+	width: 80px;
+	box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
+	cursor:pointer;
+}
+
+#status-bar-widget .vk-status {
+	font:5.7pt Verdana;
+	line-height: 12px;
+	position: absolute;
+	top: 0;
+	left: 86px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	padding: 0 1px;
+	text-align: center;
+	width: 95px;
+	box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
+	cursor:pointer;
 }

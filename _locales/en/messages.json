@@ -53,6 +53,18 @@
 	},
 	"revealCurrentTrackInPlayList" : {
 		"message" : "Reveal current track in playlist",
-		"description" : "Tooltip for the player's 'current track number (1/500)' label"
+		"description" : "Tooltip for the status bar's 'current track number (1/500)' label"
+	},
+	"scrobblingStatusOn" : {
+		"message" : "Scrobbling: ON",
+		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is on"
+	},
+	"scrobblingStatusOff" : {
+		"message" : "Scrobbling: OFF",
+		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is off"
+	},
+	"toggleScrobbling" : {
+		"message" : "Toggle scrobbling ON/OFF",
+		"description" : "Tooltip for the status bar's 'toggle scrobbling' label"
 	}
 }

@@ -14,6 +14,10 @@
 				);
 		$el.trackWidget = me;
 
+		if(index+1 == player.playList.length) {
+			$el.addClass('last');
+		}
+
 		$el.bind({
 			click : function(){
 				player.play(track.id);

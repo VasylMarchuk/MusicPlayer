@@ -27,7 +27,6 @@
 			progressHandle : $('<div>', { 'class':'progress-handle' }),
 			time : $('<div/>', {'class':'time'}),
 			duration : $('<div/>', {'class':'duration'}),
-			playListPosition : $('<div/>', {'class':'playlist-position', text : '0/0', title:i18n.getMessage('revealCurrentTrackInPlayList') }),
 			next : $('<div/>', {'class':'button next', title:i18n.getMessage('playNextTrack')}),
 			love : $('<div/>', {'class':'button love', title:i18n.getMessage('loveTrack')})
 		};
@@ -73,12 +72,6 @@
 			mouseup : function(){ $(this).removeClass('down'); }
 		});
 
-		ctrl.playListPosition.bind({
-			click :function(){ trackListWidget.scrollToCurrent(); },
-			mousedown : function(){ $(this).addClass('down'); },
-			mouseup : function(){ $(this).removeClass('down'); }
-		});
-
 		ctrl.love.bind({
 			click :function(){
 				ctrl.love.addClass('down');
@@ -105,7 +98,7 @@
 			mouseup : function(){ $(this).removeClass('down'); }
 		});
 
-		$el.append(ctrl.play, ctrl.pause, ctrl.innerBackground, ctrl.title, ctrl.progress, ctrl.time, ctrl.duration, ctrl.playListPosition, ctrl.next, ctrl.love);
+		$el.append(ctrl.play, ctrl.pause, ctrl.innerBackground, ctrl.title, ctrl.progress, ctrl.time, ctrl.duration, ctrl.next, ctrl.love);
 
 		$el.bind('addedToDom', function(){
 			me.initSlider();
@@ -149,7 +142,6 @@
 		}
 		me.controls.title.text(track.artist + ' - ' + track.title);
 		me.controls.title.data('otext', track.artist + ' - ' + track.title);
-		me.controls.playListPosition.text((me.player.getTrackIndex(trackId) + 1) + '/' + me.player.playList.length);
 		me.updateProgress();
 	};
 	PlayerWidget.prototype.setPaused = function() {
