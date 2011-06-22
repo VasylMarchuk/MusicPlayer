@@ -3,6 +3,14 @@
 	function TrackWidget(player, index, track) {
 		var me = this;
 		me.player = player;
+		var altsCount = 0;
+
+
+		var trCache = JSON.parse(localStorage.getItem('tracksCache') || '{}');
+		if(track.id in trCache) {
+			altsCount = trCache[track.id].tracks.length;
+		}
+
 		var $el = me.$element = $('<div />', {
 			id:'track-widget-' + track.id,
 			'class' : 'track-widget ' + (index%2===0?'odd':'even'),
@@ -10,7 +18,14 @@
 		}).append(
 				$('<span/>', {'class':'number', text:(index + 1) + '. '}),
 				track.artist + ' - ' + track.title,
-				$('<span/>', {'class':'on', text:'ON'})
+				$('<span/>', {'class':'on', text:altsCount>1?altsCount:'ON'}).click(function(){
+					var tracksCache = JSON.parse(localStorage.getItem('tracksCache') || '{}');
+					if(track.id in tracksCache && tracksCache[track.id].tracks.length>1) {
+						tracksCache[track.id].tracks.push(tracksCache[track.id].tracks.shift());
+						localStorage.setItem('tracksCache', JSON.stringify(tracksCache));
+						player.play(track.id, false);
+					}
+				})
 				);
 		$el.trackWidget = me;
 

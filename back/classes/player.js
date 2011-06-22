@@ -133,13 +133,18 @@
 
 		track.scrobbled = false;
 
+		var tracksCache = JSON.parse(localStorage.getItem('tracksCache') || '{}');
+
 		//find song
 		function vkResponse(tracks) {
 			//TODO: CLEAN CACHE ONCE IN A WHILE
-			me.cache[trackId] = {
+			tracksCache[trackId] = {
 				time : Date.now,
 				tracks : tracks
 			};
+
+			localStorage.setItem('tracksCache', JSON.stringify(tracksCache));
+
 			if(tracks && tracks.length>0) {
 				$('#audio').unbind();
 				$('#player').empty();
@@ -222,8 +227,8 @@
 			}
 		}
 
-		if(trackId in me.cache) {
-			vkResponse(me.cache[trackId].tracks);
+		if(trackId in tracksCache) {
+			vkResponse(tracksCache[trackId].tracks);
 		} else {
 			if(me.vk) {
 				me.vk.searchSongs(track.artist, track.title, function(err,data){
