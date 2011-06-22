@@ -59,13 +59,19 @@
 				"inject/inject.js",
 				"inject/parsers/tracklist.js"
 			]
+		},
+		{
+			"matches" : [
+				"http://api.vkontakte.ru/blank.html",
+				"http://api.vk.com/blank.html"
+			],
+			"js" : ["inject/vkaccess.js"]
 		}
 	],
 
 	"permissions": [
-		"http://api.flickr.com/",
-		"http://vkontakte.ru/*",
-		"http://vk.com/*",
+		"https://api.vkontakte.ru/*",
+		"https://api.vk.com/*",
 		"http://ws.audioscrobbler.com/*",
 		"tabs"
 	]

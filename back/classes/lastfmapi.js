@@ -30,14 +30,14 @@
 		return false;
 	}
 
-	function LastFm(sessionKey, apiKey, apiSecret) {
+	function LastFmApi(sessionKey, apiKey, apiSecret) {
 		var me = this;
 		me.sessionKey = sessionKey;
-		me.apiKey = apiKey;
+		me.appId = apiKey;
 		me.apiSecret = apiSecret;
 	}
 
-	LastFm.getSession = function(apiKey, apiSecret, token, callback) {
+	LastFmApi.getSession = function(apiKey, apiSecret, token, callback) {
 		$.get(apiBase, sign({
 			method : 'auth.getSession',
 			api_key : apiKey,
@@ -58,7 +58,7 @@
 			cbk(callback, new Error('Could not fetch session'));
 		});
 	};
-	LastFm.getToken = function(apiKey, apiSecret, callback) {
+	LastFmApi.getToken = function(apiKey, apiSecret, callback) {
 		$.get(apiBase, sign({method:'auth.getToken', api_key:apiKey}, apiSecret), function(xml, status) {
 			if(status == 'success' && $.isXMLDoc(xml)) {
 				var $xml = $(xml);
@@ -70,25 +70,25 @@
 			cbk(callback, new Error('Could not fetch token'));
 		});
 	};
-	LastFm.authToken = function(apiKey, token, callback) {
+	LastFmApi.authToken = function(apiKey, token, callback) {
 		chrome.tabs.create({url:'http://www.last.fm/api/auth/?api_key='+apiKey+'&token='+token}, function tabCreated(tab){
-
-			console.log(tab);
-
 			var authedHandler = function authedHandler(request, sender, back) {
+				try {
+					back({});
+				} catch(e){}
+
 				if(request.cmd == 'authSuccess') {
 					cbk(callback);
 					chrome.extension.onRequest.removeListener(authedHandler);
 					chrome.tabs.remove(tab.id);
 				}
-				back({});
 			};
 
 			chrome.extension.onRequest.addListener(authedHandler);
 		});
 	};
 
-	LastFm.prototype.apiCall = function(params, method, callback) {
+	LastFmApi.prototype.apiCall = function(params, method, callback) {
 		var me = this;
 
 		if(method !== undefined && typeof method == 'function') {
@@ -96,7 +96,7 @@
 			method = 'GET';
 		}
 
-		params.api_key = me.apiKey;
+		params.api_key = me.appId;
 		params.sk = me.sessionKey;
 
 		$.ajax({
@@ -124,7 +124,7 @@
 		});
 	};
 
-	LastFm.prototype.setNowPlaying = function(artist, title, album, duration, callback) {
+	LastFmApi.prototype.setNowPlaying = function(artist, title, album, duration, callback) {
 		var me = this;
 		me.apiCall({
 			method : 'track.updateNowPlaying',
@@ -134,7 +134,7 @@
 			duration:parseInt(duration)
 		}, 'POST', callback);
 	};
-	LastFm.prototype.scrobble = function(artist, title, album, duration, callback){
+	LastFmApi.prototype.scrobble = function(artist, title, album, duration, callback){
 		var me = this;
 		me.apiCall({
 			method : 'Track.scrobble',
@@ -145,7 +145,7 @@
 			timestamp: parseInt(Date.now()/1000.0)
 		}, 'POST', callback);
 	};
-	LastFm.prototype.loveTrack = function(artist, title, callback){
+	LastFmApi.prototype.loveTrack = function(artist, title, callback){
 		var me = this;
 		me.apiCall({
 			method : 'Track.love',
@@ -154,6 +154,6 @@
 		}, 'POST', callback)
 	};
 
-	app.classes.LastFm = LastFm;
+	app.classes.LastFmApi = LastFmApi;
 
 })(ChromePlayer);

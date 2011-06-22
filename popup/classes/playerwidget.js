@@ -10,6 +10,14 @@
 				(d.getUTCSeconds()>9 ? d.getUTCSeconds().toString(10) : '0' + d.getUTCSeconds().toString(10));
 	}
 
+	function clickable(el, onclick) {
+		$(el).bind({
+			click : onclick,
+			mousedown : function(){ $(this).addClass('down'); },
+			mouseup : function(){ $(this).removeClass('down'); }
+		});
+	}
+
 	function PlayerWidget(player, trackListWidget) {
 		var me = this;
 		me.player = player;
@@ -66,22 +74,8 @@
 			}
 		});
 
-		ctrl.next.bind({
-			click :function(){ player.playNextAvailable(player.currentTrackId); },
-			mousedown : function(){ $(this).addClass('down'); },
-			mouseup : function(){ $(this).removeClass('down'); }
-		});
-
-		ctrl.love.bind({
-			click :function(){
-				ctrl.love.addClass('down');
-				me.player.loveTrack(me.player.currentTrackId, function(){
-					ctrl.love.removeClass('down');
-				})
-			},
-			mousedown : function(){ $(this).addClass('down'); },
-			mouseup : function(){ $(this).removeClass('down'); }
-		});
+		clickable(ctrl.next, function(){ player.playNextAvailable(player.currentTrackId); });
+		clickable(ctrl.love, function(){ ctrl.love.addClass('down'); me.player.loveTrack(me.player.currentTrackId, function(){ ctrl.love.removeClass('down'); }); });
 
 		ctrl.progressBackground.click(function(ev){
 			var total = player.currentDuration;

@@ -3,9 +3,12 @@
 	var LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
 	var LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
 
+	var VK_APP_ID = "2387324";
+
 	var i18n = chrome.i18n;
 	var button = app.classes.Button;
-	var LastFm = app.classes.LastFm;
+	var LastFmApi = app.classes.LastFmApi;
+	var VKApi = app.classes.VKApi;
 
 	var cbk = app.cbk;
 
@@ -13,7 +16,13 @@
 		var me = this;
 
 		if(localStorage.getItem('lastFmSessionKey')) {
-			me.lastFm = new LastFm(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
+			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
+		}
+
+		if(localStorage.getItem('vkSessionAccessToken')) {
+			if(localStorage.getItem('vkSessionExpires') > Date.now()) {
+				me.vk = new VKApi(localStorage.getItem('vkSessionAccessToken'), localStorage.getItem('vkSessionUserId'), VK_APP_ID);
+			}
 		}
 
 		me.scrobblingEnabled = localStorage.getItem('lastFmScrobblingEnabled') && me.lastFm !== undefined;
@@ -216,7 +225,15 @@
 		if(trackId in me.cache) {
 			vkResponse(me.cache[trackId].tracks);
 		} else {
-			VK.search(track.artist, track.title, undefined, vkResponse);
+			if(me.vk) {
+				me.vk.searchSongs(track.artist, track.title, function(err,data){
+					if(data) {
+						vkResponse(data);
+					}
+				})
+			} else {
+				//TODO: VK AUTH
+			}
 		}
 	};
 	Player.prototype.pause = function(callback){
@@ -279,19 +296,37 @@
 		}
 	};
 
+	Player.prototype.vkAuth = function(callback){
+		var me = this;
+
+		VKApi.getSession(VK_APP_ID, function(err, sess){
+			if(!err) {
+				localStorage.setItem('vkSessionAccessToken', sess.accessToken);
+				localStorage.setItem('vkSessionExpires', Date.now() + sess.expiresIn);
+				localStorage.setItem('vkSessionUserId', sess.userId);
+				me.vk = new VKApi(sess.accessToken, sess.userId, VK_APP_ID);
+				me.trigger('vkAuthChanged');
+				cbk(callback, sess);
+			} else {
+				console.error(err);
+				cbk(callback, err);
+			}
+		});
+	};
+
 	Player.prototype.toggleScrobbling = function(enable, callback) {
 		var me = this;
 		if(enable) {
 			if(localStorage.getItem('lastFmSessionKey')!==null) {
 				localStorage.setItem('lastFmScrobblingEnabled', true);
-				me.lastFm = new LastFm(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
+				me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
 				me.scrobblingEnabled = true;
 				me.trigger('scrobblingEnabled');
 				cbk(callback);
 			} else {
-				LastFm.getToken(LASTFM_API_KEY, LASTFM_API_SECRET, function(err,token){
-					LastFm.authToken(LASTFM_API_KEY, token, function(err) {
-						LastFm.getSession(LASTFM_API_KEY, LASTFM_API_SECRET, token, function(err,sess) {
+				LastFmApi.getToken(LASTFM_API_KEY, LASTFM_API_SECRET, function(err,token){
+					LastFmApi.authToken(LASTFM_API_KEY, token, function(err) {
+						LastFmApi.getSession(LASTFM_API_KEY, LASTFM_API_SECRET, token, function(err,sess) {
 							localStorage.setItem('lastFmSessionKey', sess.key);
 							localStorage.setItem('lastFmSessionUserName', sess.name);
 							localStorage.setItem('lastFmSessionSubscriber', sess.subscriber);
