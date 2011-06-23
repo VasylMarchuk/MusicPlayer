@@ -62,11 +62,12 @@ Track.prototype.play = function(){
 	}
 
 	chrome.extension.sendRequest({cmd: "loadPlayList", playList:plTracks, trackId:this.id}, function(response) {
-
 		if(response && response.err && response.err.code === 156) {
 			var welcomeMessage = new WelcomeMessage(response.vkLoginText, response.vkInfoMessageText, function(err){
 				if(!err) {
+
 					me.play();
+
 				}
 			});
 

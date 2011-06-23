@@ -34,13 +34,18 @@ var popup;
 				});
 				break;
 			case 'doVkAuth':
-					player.vkAuth(function(err){
-						if(err) {
-							console.error(err);
-							callback({err:err});
-						} else {
-							callback({});
-						}
+					chrome.tabs.getSelected(null, function(currTab){
+						player.vkAuth(function(err){
+							if(err) {
+								console.error(err);
+								callback({err:err});
+							} else {
+								if(currTab) {
+									chrome.tabs.update(currTab.id, {selected:true});
+								}
+								callback({});
+							}
+						});
 					});
 			break;
 			default:
