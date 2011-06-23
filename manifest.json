@@ -56,6 +56,7 @@
 			"css": [ "inject/inject.css" ],
 			"js": [
 				"jquery-1.6.min.js",
+				"inject/welcomemessage.js",
 				"inject/inject.js",
 				"inject/parsers/tracklist.js"
 			]

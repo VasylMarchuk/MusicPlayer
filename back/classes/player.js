@@ -119,8 +119,8 @@
 		if(isNext === undefined) {
 			isNext = false;
 		} else if (isNext instanceof Function) {
-			isNext = false;
 			callback = isNext;
+			isNext = false;
 		}
 
 		var track = me.getTrack(trackId);
@@ -237,7 +237,9 @@
 					}
 				})
 			} else {
-				//TODO: VK AUTH
+				var e = new Error('Must be logged in to VKontakte.ru');
+				e.code = 156;
+				cbk(callback, e);
 			}
 		}
 	};
@@ -319,25 +321,41 @@
 		});
 	};
 
+	Player.prototype.lastFmAuth = function(callback){
+		var me = this;
+		LastFmApi.getToken(LASTFM_API_KEY, LASTFM_API_SECRET, function(err,token){
+			LastFmApi.authToken(LASTFM_API_KEY, token, function(err) {
+				LastFmApi.getSession(LASTFM_API_KEY, LASTFM_API_SECRET, token, function(err,sess) {
+					if(!err) {
+						localStorage.setItem('lastFmSessionKey', sess.key);
+						localStorage.setItem('lastFmSessionUserName', sess.name);
+						localStorage.setItem('lastFmSessionSubscriber', sess.subscriber);
+						me.lastFm = new LastFmApi(sess.key, LASTFM_API_KEY, LASTFM_API_SECRET);
+						me.trigger('lastFmAuthChanged');
+						cbk(callback, sess);
+					} else {
+						cbk(callback, err);
+					}
+				});
+			})
+		});
+	};
+
 	Player.prototype.toggleScrobbling = function(enable, callback) {
 		var me = this;
 		if(enable) {
-			if(localStorage.getItem('lastFmSessionKey')!==null) {
+			if(me.lastFm) {
 				localStorage.setItem('lastFmScrobblingEnabled', true);
-				me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
 				me.scrobblingEnabled = true;
 				me.trigger('scrobblingEnabled');
 				cbk(callback);
 			} else {
-				LastFmApi.getToken(LASTFM_API_KEY, LASTFM_API_SECRET, function(err,token){
-					LastFmApi.authToken(LASTFM_API_KEY, token, function(err) {
-						LastFmApi.getSession(LASTFM_API_KEY, LASTFM_API_SECRET, token, function(err,sess) {
-							localStorage.setItem('lastFmSessionKey', sess.key);
-							localStorage.setItem('lastFmSessionUserName', sess.name);
-							localStorage.setItem('lastFmSessionSubscriber', sess.subscriber);
-							me.toggleScrobbling(true, callback);
-						});
-					})
+				me.lastFmAuth(function(err, sess) {
+					if(!err) {
+						me.toggleScrobbling(true, callback);
+					} else {
+						cbk(callback, err);
+					}
 				});
 			}
 		} else {

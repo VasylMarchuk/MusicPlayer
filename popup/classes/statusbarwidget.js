@@ -18,7 +18,7 @@
 		var $el = me.$element = $('<div />', {
 			id:'status-bar-widget'
 		});
-		$el.trackListWidget = me;
+		$el.statusBarWidget = me;
 
 		var ctrl = me.controls = {
 			lastFmStatus : $('<div/>', {'class':'status-bar-item lastfm-status', text : 'LastFm: unlogged', title:i18n.getMessage('loginToLastFm') }),
@@ -30,6 +30,7 @@
 		clickable(ctrl.playListPosition, function(){ me.trackListWidget.scrollToCurrent(); });
 		clickable(ctrl.scrobblingStatus, function(){ me.player.toggleScrobbling(!me.player.scrobblingEnabled); });
 		clickable(ctrl.vkStatus, function(){ me.player.vkAuth(); });
+		clickable(ctrl.lastFmStatus, function(){ me.player.lastFmAuth(); });
 
 		player.bind( {
 			'playList.statusBarWidget' : function onPlayList(ev) {
@@ -53,6 +54,9 @@
 						}
 					});
 				}
+			},
+			'lastFmAuthChanged.statusBarWidget' : function onLastFmAuthChanged() {
+				me.setLastFmStatus(localStorage.getItem('lastFmSessionUserName'));
 			}
 		});
 

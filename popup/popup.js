@@ -3,6 +3,7 @@
 	var PlayerWidget = app.classes.PlayerWidget;
 	var TrackListWidget = app.classes.TrackListWidget;
 	var StatusBarWidget = app.classes.StatusBarWidget;
+	var WelcomeWidget = app.classes.WelcomeWidget;
 
 	//Constructor
 	$(function(){
@@ -14,23 +15,37 @@
 			player.unbind('.trackWidget');
 			player.unbind('.trackListWidget');
 			player.unbind('.playerWidget');
+			player.unbind('.statusBarWidget');
 		}
 
 		bgPage.popup = window;
 
-		var trackListWidget = new TrackListWidget(player);
-		var playerWidget = new PlayerWidget(player, trackListWidget);
-		var statusBarWidget = new StatusBarWidget(player, trackListWidget);
+		if(!player.vk) {
+			var welcomeWidget = new WelcomeWidget(player);
+			$('#main-content').empty().append(welcomeWidget.$element);
+			welcomeWidget.$element.trigger('addedToDom');
+		} else {
 
-		$('#player-container').append(playerWidget.$element);
-		playerWidget.$element.trigger('addedToDom');
+			var ctrl = {
+				playerContainer : $('<div />', { id:'player-container' }),
+				statusBarContainer : $('<div />', { id:'status-bar-container' }),
+				trackListContainer : $('<div />', { id:'track-list-container' })
+			};
 
-		$('#track-list-container').append(trackListWidget.$element);
-		trackListWidget.$element.trigger('addedToDom');
+			var trackListWidget = new TrackListWidget(player);
+			var playerWidget = new PlayerWidget(player, trackListWidget);
+			var statusBarWidget = new StatusBarWidget(player, trackListWidget);
 
-		$('#status-bar-container').append(statusBarWidget.$element);
-		statusBarWidget.$element.trigger('addedToDom');
+			ctrl.playerContainer.append(playerWidget.$element);
+			ctrl.statusBarContainer.append(statusBarWidget.$element);
+			ctrl.trackListContainer.append(trackListWidget.$element);
 
+			$('#main-content').empty().append(ctrl.playerContainer, ctrl.statusBarContainer, ctrl.trackListContainer);
+			
+			playerWidget.$element.trigger('addedToDom');
+			statusBarWidget.$element.trigger('addedToDom');
+			trackListWidget.$element.trigger('addedToDom');
+		}
 	});
 
 })(ChromePlayer);

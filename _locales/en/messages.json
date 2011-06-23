@@ -66,5 +66,13 @@
 	"toggleScrobbling" : {
 		"message" : "Toggle scrobbling ON/OFF",
 		"description" : "Tooltip for the status bar's 'toggle scrobbling' label"
+	},
+	"loginToVk" : {
+		"message" : "Log in to VKontakte.ru",
+		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
+	},
+	"vkInfoMessage" : {
+		"message" : "vkontake.ru is used as an mp3 source",
+		"description" : "Explanation for the welcome panel's 'login to vk'"
 	}
 }

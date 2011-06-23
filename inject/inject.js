@@ -1,3 +1,7 @@
+var ChromePlayer = {
+	classes : {}
+};
+
 function Parser(){
 	this.tracks = [];
 }
@@ -50,13 +54,25 @@ Track.prototype.toObject = function(){
 	};
 };
 Track.prototype.play = function(){
+	var me = this;
+
 	var plTracks = [];
 	for(var ti=0; ti<this.playList.tracks.length; ti++) {
 		plTracks.push(this.playList.tracks[ti].toObject());
 	}
 
 	chrome.extension.sendRequest({cmd: "loadPlayList", playList:plTracks, trackId:this.id}, function(response) {
-		console.log('RESPONSE: ', response);
+
+		if(response && response.err && response.err.code === 156) {
+			var welcomeMessage = new WelcomeMessage(response.vkLoginText, response.vkInfoMessageText, function(err){
+				if(!err) {
+					me.play();
+				}
+			});
+
+			$('body').append(welcomeMessage.$element);
+			welcomeMessage.$element.trigger('addedToDom');
+		}
 	});
 };
 

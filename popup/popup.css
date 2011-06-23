@@ -9,6 +9,38 @@ body {
 #main-content {
 	/*padding:10px 10px 3px 10px;*/
 	padding:10px;
+	min-height:100px;
+	min-width:200px;
+}
+
+#welcome-widget {
+	height:100px;
+}
+
+#welcome-widget .vk-login-button {
+	font-size:14px;
+	font-weight:bold;
+	position: relative;
+	top: 35px;
+	background-color: #f9f9f9;
+	border-radius: 3px;
+	padding: 3px 5px;
+	text-align: center;
+	width: 180px;
+	box-shadow:#F0F0F0 0 0 2px, rgba(0, 0, 0, 0.1) 0 1px 3px, inset #F0F0F0 0 0 2px;
+	border:1px solid #dfdfdf;
+	margin:0 auto;
+	cursor:pointer;
+}
+
+#welcome-widget .vk-info-message {
+	font-size: 10px;
+	color:#999999;
+	text-align: center;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 73px;
 }
 
 #player-container{

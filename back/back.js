@@ -5,6 +5,8 @@ var popup;
 
 	player = app.classes.Player;
 
+	var i18n = chrome.i18n;
+
 	chrome.extension.onRequest.addListener(function(request, sender, callback) {
 
 		switch(request.cmd) {
@@ -17,7 +19,13 @@ var popup;
 						player.play(request.trackId, function(err){
 							if(err) {
 								console.error(err);
-								callback({err:err});
+
+								if(err.code == 156) {
+									callback({err:err, vkLoginText:i18n.getMessage('loginToVk'), vkInfoMessageText:i18n.getMessage('vkInfoMessage')});
+								} else {
+									callback({err:err});
+								}
+
 							} else {
 								callback({});
 							}
@@ -25,6 +33,16 @@ var popup;
 					}
 				});
 				break;
+			case 'doVkAuth':
+					player.vkAuth(function(err){
+						if(err) {
+							console.error(err);
+							callback({err:err});
+						} else {
+							callback({});
+						}
+					});
+			break;
 			default:
 				callback({err:new Error('Unknown command: ' + request.cmd)});
 				break;
