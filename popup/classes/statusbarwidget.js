@@ -21,8 +21,8 @@
 		$el.statusBarWidget = me;
 
 		var ctrl = me.controls = {
-			lastFmStatus : $('<div/>', {'class':'status-bar-item lastfm-status', text : 'LastFm: unlogged', title:i18n.getMessage('loginToLastFm') }),
-			vkStatus : $('<div/>', {'class':'status-bar-item vk-status', text : 'ВКонтакте: unlogged', title:i18n.getMessage('loginToVk') }),
+			lastFmStatus : $('<div/>', {'class':'status-bar-item lastfm-status', text : 'LastFm: unlogged' }),
+			vkStatus : $('<div/>', {'class':'status-bar-item vk-status', text : i18n.getMessage('vkontakte') + ': unlogged' }),
 			scrobblingStatus : $('<div/>', {'class':'status-bar-item scrobbling-status', text : i18n.getMessage('scrobblingStatusOff'), title:i18n.getMessage('toggleScrobbling') }),
 			playListPosition : $('<div/>', {'class':'status-bar-item playlist-position', text : '0/0', title:i18n.getMessage('revealCurrentTrackInPlayList') })
 		};
@@ -75,7 +75,7 @@
 			});
 		}
 
-		$el.append(ctrl.lastFmStatus, ctrl.vkStatus, ctrl.scrobblingStatus, ctrl.playListPosition);
+		$el.append(ctrl.lastFmStatus, ctrl.vkStatus, ctrl.playListPosition, ctrl.scrobblingStatus);
 		
 //		$el.bind('addedToDom', function addedToDom(){});
 	}
@@ -97,7 +97,7 @@
 	};
 	StatusBarWidget.prototype.setVkStatus = function(username) {
 		var me = this;
-		me.controls.vkStatus.text('ВКонтакте: ' + (username || 'unlogged'));
+		me.controls.vkStatus.text(i18n.getMessage('vkontakte') + ': ' + (username || 'unlogged'));
 	};
 
 	app.classes.StatusBarWidget = StatusBarWidget;

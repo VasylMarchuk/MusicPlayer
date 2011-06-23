@@ -47,6 +47,10 @@
 		"message" : "Play next track",
 		"description" : "Tooltip for the player's Next button"
 	},
+	"loveTrack" : {
+		"message" : "Love track on Last.fm",
+		"description" : "Tooltip for the player's Love button"
+	},
 	"pauseCurrentTrack" : {
 		"message" : "Pause",
 		"description" : "Tooltip for the player's Pause button"
@@ -71,8 +75,16 @@
 		"message" : "Log in to VKontakte.ru",
 		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
 	},
+	"vkontakte" : {
+		"message" : "VKontakte",
+		"description" : "Title for vkontakte.ru"
+	},
 	"vkInfoMessage" : {
-		"message" : "vkontake.ru is used as an mp3 source",
+		"message" : "Vkontake.ru is used as an mp3 source",
 		"description" : "Explanation for the welcome panel's 'login to vk'"
+	},
+	"nextMp3" : {
+		"message" : "Play next found mp3 for this track",
+		"description" : "Explanation for the track's mp3 count label"
 	}
 }

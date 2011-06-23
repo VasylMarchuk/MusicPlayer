@@ -47,6 +47,10 @@
 		"message" : "Играть следующий трек",
 		"description" : "Подсказка на кнопке Следующий трек (>>) в плеере"
 	},
+	"loveTrack" : {
+		"message" : "Добавить в любимые на Last.fm",
+		"description" : "Подсказка на иконке Нравится в плеере"
+	},
 	"pauseCurrentTrack" : {
 		"message" : "Пауза",
 		"description" : "Подсказка на кнопке Пауза в плеере"
@@ -54,5 +58,33 @@
 	"revealCurrentTrackInPlayList" : {
 		"message" : "Показать текущий трек в списке воспроизведения",
 		"description" : "Подсказка для лейбы номера текущего трека (1/500) в плеере"
+	},
+	"scrobblingStatusOn" : {
+		"message" : "Скробблинг: ВКЛ",
+		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is on"
+	},
+	"scrobblingStatusOff" : {
+		"message" : "Скробблинг: ВЫКЛ",
+		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is off"
+	},
+	"toggleScrobbling" : {
+		"message" : "Включить/выключить скробблинг",
+		"description" : "Tooltip for the status bar's 'toggle scrobbling' label"
+	},
+	"loginToVk" : {
+		"message" : "Авторизоваться ВКонтакте",
+		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
+	},
+	"vkontakte" : {
+		"message" : "ВКонтакте",
+		"description" : "Title for vkontakte.ru"
+	},
+	"vkInfoMessage" : {
+		"message" : "файлы mp3 играют из ВКонтакте",
+		"description" : "Explanation for the welcome panel's 'login to vk'"
+	},
+	"nextMp3" : {
+		"message" : "Играть следующий найденный mp3 для этого трека",
+		"description" : "Explanation for the track's mp3 count label"
 	}
 }
