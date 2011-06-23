@@ -51,6 +51,10 @@
 		"message" : "Добавить в любимые на Last.fm",
 		"description" : "Подсказка на иконке Нравится в плеере"
 	},
+	"unLoveTrack" : {
+		"message" : "Удалить из любимых на Last.fm",
+		"description" : "Подсказка на иконке Не Нравится в плеере"
+	},
 	"pauseCurrentTrack" : {
 		"message" : "Пауза",
 		"description" : "Подсказка на кнопке Пауза в плеере"

@@ -16,7 +16,7 @@
 		var me = this;
 
 		if(localStorage.getItem('lastFmSessionKey')) {
-			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), LASTFM_API_KEY, LASTFM_API_SECRET);
+			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), localStorage.getItem('lastFmSessionUserName'), LASTFM_API_KEY, LASTFM_API_SECRET);
 		}
 
 		if(localStorage.getItem('vkSessionAccessToken')) {
@@ -330,7 +330,7 @@
 						localStorage.setItem('lastFmSessionKey', sess.key);
 						localStorage.setItem('lastFmSessionUserName', sess.name);
 						localStorage.setItem('lastFmSessionSubscriber', sess.subscriber);
-						me.lastFm = new LastFmApi(sess.key, LASTFM_API_KEY, LASTFM_API_SECRET);
+						me.lastFm = new LastFmApi(sess.key, sess.name, LASTFM_API_KEY, LASTFM_API_SECRET);
 						me.trigger('lastFmAuthChanged');
 						cbk(callback, sess);
 					} else {
@@ -386,6 +386,49 @@
 			}
 		} else {
 			cbk(callback, new Error('No track to love'));
+		}
+	};
+	Player.prototype.unLoveTrack = function(trackId, callback) {
+		var me = this;
+		var track = me.getTrack(trackId);
+		if(track) {
+			if(me.lastFm) {
+				me.lastFm.unLoveTrack(track.artist, track.title, function(err){
+					if(!err) {
+						console.log("Track unloved: %s", trackId);
+						me.trigger('trackUnLoved', [trackId]);
+						cbk(callback);
+					} else {
+						console.log("Failed to unlove track: %s", err.message);
+						cbk(callback, err);
+					}
+				});
+			} else {
+				cbk(callback, new Error('LastFM is not authorized'));
+			}
+		} else {
+			cbk(callback, new Error('No track to unlove'));
+		}
+	};
+	Player.prototype.isTrackLoved = function(trackId, callback) {
+		var me = this;
+		var track = me.getTrack(trackId);
+		if(track) {
+			if(me.lastFm) {
+				me.lastFm.getTrackInfo(track.artist, track.title, function(err, track) {
+					if(!err) {
+						console.log("Track loved status detected for track %s: %s", trackId, $('userloved', track).text());
+						cbk(callback, $('userloved', track).text() == '1');
+					} else {
+						console.log("Failed get loved status for track: %s", err.message);
+						cbk(callback, err);
+					}
+				});
+			} else {
+				cbk(callback, new Error('LastFM is not authorized'));
+			}
+		} else {
+			cbk(callback, new Error('No track to determine'));
 		}
 	};
 

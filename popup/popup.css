@@ -84,6 +84,17 @@ body {
 	border: 1px solid #dfdfdf;
 }
 
+#player-widget .button.love.undetermined {
+	opacity:0.1;
+}
+#player-widget .button.love.disabled {
+	opacity:0.1;
+}
+
+#player-widget .button.love.loved {
+	background-image:url('loved.png');
+}
+
 
 #player-widget.playing .button.play { display:none; }
 #player-widget.playing .button.pause { display:block; }

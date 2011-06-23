@@ -51,6 +51,10 @@
 		"message" : "Love track on Last.fm",
 		"description" : "Tooltip for the player's Love button"
 	},
+	"unLoveTrack" : {
+		"message" : "Unlove track on Last.fm",
+		"description" : "Tooltip for the player's UnLove button"
+	},
 	"pauseCurrentTrack" : {
 		"message" : "Pause",
 		"description" : "Tooltip for the player's Pause button"

@@ -12,9 +12,9 @@
 
 	function clickable(el, onclick) {
 		$(el).bind({
-			click : onclick,
-			mousedown : function(){ $(this).addClass('down'); },
-			mouseup : function(){ $(this).removeClass('down'); }
+			click : function() {  if($(this).hasClass('disabled')) { return; } if(onclick) { onclick.call(this);} },
+			mousedown : function(){ if($(this).hasClass('disabled')) { return; } $(this).addClass('down'); },
+			mouseup : function(){  if($(this).hasClass('disabled')) { return; } $(this).removeClass('down'); }
 		});
 	}
 
@@ -36,7 +36,7 @@
 			time : $('<div/>', {'class':'time'}),
 			duration : $('<div/>', {'class':'duration'}),
 			next : $('<div/>', {'class':'button next', title:i18n.getMessage('playNextTrack')}),
-			love : $('<div/>', {'class':'button love', title:i18n.getMessage('loveTrack')})
+			love : $('<div/>', {'class':'button love disabled', title:i18n.getMessage('loveTrack')})
 		};
 
 		ctrl.progress.append(ctrl.progressBackground, ctrl.progressHandle);
@@ -75,7 +75,30 @@
 		});
 
 		clickable(ctrl.next, function(){ player.playNextAvailable(player.currentTrackId); });
-		clickable(ctrl.love, function(){ ctrl.love.addClass('down'); me.player.loveTrack(me.player.currentTrackId, function(){ ctrl.love.removeClass('down'); }); });
+
+		ctrl.love.click(function(){
+			if($(this).hasClass('disabled')) {
+				return;
+			}
+
+			ctrl.love.addClass('down');
+
+			if(ctrl.love.hasClass('undetermined') || !ctrl.love.hasClass('loved')) {
+				me.player.loveTrack(me.player.currentTrackId, function(){
+					ctrl.love.removeClass('down');
+					me.updateLovedStatus();
+				});
+			} else {
+				me.player.unLoveTrack(me.player.currentTrackId, function(){
+					ctrl.love.removeClass('down');
+					me.updateLovedStatus();
+				});
+			}
+
+		});
+		if(player.lastFm) {
+			ctrl.love.removeClass('disabled');
+		}
 
 		ctrl.progressBackground.click(function(ev){
 			var total = player.currentDuration;
@@ -121,6 +144,15 @@
 			},
 			'progress.playerWidget' : function onProgress() {
 				me.updateProgress();
+			},
+			'lastFmAuthChanged.playerWidget' : function onLastFmAuthChanged() {
+				ctrl.love.toggleClass('disabled', !player.lastFm);
+			},
+			'trackLoved.playerWidget' : function onTrackLoved() {
+//				ctrl.love.removeClass('undetermined').addClass('loved');
+			},
+			'trackUnLoved.playerWidget' : function onTrackUnLoved() {
+//				ctrl.love.removeClass('undetermined').removeClass('loved');
 			}
 		});
 
@@ -137,6 +169,7 @@
 		me.controls.title.text(track.artist + ' - ' + track.title);
 		me.controls.title.data('otext', track.artist + ' - ' + track.title);
 		me.updateProgress();
+		me.updateLovedStatus();
 	};
 	PlayerWidget.prototype.setPaused = function() {
 		var me = this;
@@ -206,6 +239,19 @@
 		me.controls.progressHandle.draggable('option', 'containment', [$pbg.offset().left - $ph.width() / 2,0,$pbg.offset().left + newwidth - $ph.width() / 2,0])
 		me.controls.progressHandle.draggable('option', 'disabled', me.player.currentState == 'stopped');
 	};
+	PlayerWidget.prototype.updateLovedStatus = function() {
+		var me = this;
+		var trackId = me.player.currentTrackId;
+		me.controls.love.addClass('undetermined');
+		me.player.isTrackLoved(trackId, function(err, isLoved){
+			if(me.player.currentTrackId == trackId) { //if it's the same track still playing
+				me.controls.love.removeClass('undetermined');
+				me.controls.love.toggleClass('loved', isLoved);
+				me.controls.love.attr('title', i18n.getMessage('unLoveTrack'));
+			}
+		});
+	};
+
 
 	app.classes.PlayerWidget = PlayerWidget;
 

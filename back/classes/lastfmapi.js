@@ -30,9 +30,10 @@
 		return false;
 	}
 
-	function LastFmApi(sessionKey, apiKey, apiSecret) {
+	function LastFmApi(sessionKey, userName, apiKey, apiSecret) {
 		var me = this;
 		me.sessionKey = sessionKey;
+		me.userName = userName;
 		me.appId = apiKey;
 		me.apiSecret = apiSecret;
 	}
@@ -103,10 +104,11 @@
 			url: apiBase,
 			data: sign(params, me.apiSecret),
 			type : method,
+			cache : false,
 			success: function(xml, status) {
 				if(status == 'success' && $.isXMLDoc(xml)) {
 					if($(xml).find('lfm').attr('status')=='ok') {
-						cbk(callback);
+						cbk(callback, xml);
 						return;
 					} else if(handleXmlError(xml, callback)) {
 						return;
@@ -152,6 +154,24 @@
 			artist : artist,
 			track : title
 		}, 'POST', callback)
+	};
+	LastFmApi.prototype.unLoveTrack = function(artist, title, callback){
+		var me = this;
+		me.apiCall({
+			method : 'Track.unlove',
+			artist : artist,
+			track : title
+		}, 'POST', callback)
+	};
+
+	LastFmApi.prototype.getTrackInfo = function(artist, title, callback) {
+		var me = this;
+		me.apiCall({
+			method : 'Track.getInfo',
+			artist : artist,
+			track : title,
+			username : me.userName
+		}, callback);
 	};
 
 	app.classes.LastFmApi = LastFmApi;
