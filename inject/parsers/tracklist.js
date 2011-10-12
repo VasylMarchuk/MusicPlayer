@@ -19,7 +19,7 @@
 				try {
 					var artist;
 					var title;
-					if(expressions.isUnderscore(href)) {
+					if(expressions.isUnderscore.test(href)) {
 						var res = expressions.artistUnderscoreTitle.exec(href);
 						artist = res[1];
 						title = res[2];
