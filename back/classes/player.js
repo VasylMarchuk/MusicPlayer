@@ -308,7 +308,6 @@
 				localStorage.setItem('vkSessionUserId', sess.userId);
 				me.vk = new VKApi(sess.accessToken, sess.userId, app.VK_APP_ID);
 				me.trigger('vkAuthChanged');
-                console.log('TRIGGERING CALLBACK');
 				cbk(callback, sess);
 			} else {
 				console.error(err);
