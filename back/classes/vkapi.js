@@ -10,14 +10,17 @@
 		this.appId = appId;
 	}
 
-	VKApi.getSession = function(appId, callback) {
-		chrome.tabs.create({url:'http://api.vkontakte.ru/oauth/authorize?client_id='+appId+'&scope=audio,offline&display=popup&response_type=token' }, function tabCreated(tab){
+	VKApi.getSession = function(callback) {
+		chrome.tabs.create({url:'http://api.vkontakte.ru/oauth/authorize?client_id='+app.VK_APP_ID+'&scope=audio,offline&display=popup&response_type=token' }, function tabCreated(tab){
 			var authedHandler = function authedHandler(request, sender, back) {
 				if(request.cmd == 'vkAuthSuccess') {
-					try {
-						back({});
-					} catch(e) {}
-					
+                    try {
+                        back({});
+                    } catch(e) {}
+
+                    chrome.extension.onRequest.removeListener(authedHandler);
+                    chrome.tabs.remove(tab.id);
+
 					var hash = request.hash.substr(1).split('&');
 
 					var userId, expiresIn, accessToken;
@@ -39,9 +42,6 @@
 							}
 						}
 					}
-
-					chrome.extension.onRequest.removeListener(authedHandler);
-					chrome.tabs.remove(tab.id);
 
 					if(userId !== undefined && accessToken !== undefined) {
 						cbk(callback, {userId:userId, accessToken:accessToken,expiresIn:expiresIn});
