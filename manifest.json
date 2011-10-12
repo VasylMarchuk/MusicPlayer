@@ -72,7 +72,9 @@
 
 	"permissions": [
 		"https://api.vkontakte.ru/*",
+		"http://api.vkontakte.ru/*",
 		"https://api.vk.com/*",
+		"http://api.vk.com/*",
 		"http://ws.audioscrobbler.com/*",
 		"tabs"
 	]
