@@ -87,6 +87,10 @@
 		"message" : "файлы mp3 играют из ВКонтакте",
 		"description" : "Explanation for the welcome panel's 'login to vk'"
 	},
+	"vkWaitingAuth" : {
+		"message" : "Ожидаю авторизации ВКонтакте…",
+		"description" : "Explanation for the welcome panel's 'busy' status"
+	},
 	"nextMp3" : {
 		"message" : "Играть следующий найденный mp3 для этого трека",
 		"description" : "Explanation for the track's mp3 count label"

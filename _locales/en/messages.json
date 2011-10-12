@@ -87,6 +87,10 @@
 		"message" : "Vkontake.ru is used as an mp3 source",
 		"description" : "Explanation for the welcome panel's 'login to vk'"
 	},
+	"vkWaitingAuth" : {
+		"message" : "Waiting for VK authorization…",
+		"description" : "Explanation for the welcome panel's 'busy' status"
+	},
 	"nextMp3" : {
 		"message" : "Play next found mp3 for this track",
 		"description" : "Explanation for the track's mp3 count label"
