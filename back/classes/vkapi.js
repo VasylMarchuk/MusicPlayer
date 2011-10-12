@@ -81,12 +81,14 @@
 
 	VKApi.prototype.getUserName = function(callback) {
 		var me = this;
-		me.apiCall('getProfiles', { uids:me.userId.toString(), fields:'nickname' }, function(err, data) {
+		me.apiCall('getProfiles', { uids:me.userId.toString(), fields:'nickname, screen_name' }, function(err, data) {
 			if(!err && data.response) {
 				var uname = data.response[0];
-				if(uname.nickname !== undefined) {
+				if(uname.nickname) {
 					uname = uname.nickname;
-				} else {
+				} else if(uname.screen_name) {
+                    uname = uname.screen_name;
+                } else {
 					uname = uname.first_name + (uname.last_name || uname.first_name ? ' ' : '') + uname.last_name;
 				}
 				cbk(callback, uname);
