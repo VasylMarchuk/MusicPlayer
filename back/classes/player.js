@@ -1,10 +1,5 @@
 (function(app){
 
-	var LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
-	var LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
-
-	var VK_APP_ID = "2387324";
-
 	var i18n = chrome.i18n;
 	var button = app.classes.Button;
 	var LastFmApi = app.classes.LastFmApi;
@@ -16,12 +11,12 @@
 		var me = this;
 
 		if(localStorage.getItem('lastFmSessionKey')) {
-			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), localStorage.getItem('lastFmSessionUserName'), LASTFM_API_KEY, LASTFM_API_SECRET);
+			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), localStorage.getItem('lastFmSessionUserName'), app.LASTFM_API_KEY, app.LASTFM_API_SECRET);
 		}
 
 		if(localStorage.getItem('vkSessionAccessToken')) {
 			if(localStorage.getItem('vkSessionExpires') > Date.now()) {
-				me.vk = new VKApi(localStorage.getItem('vkSessionAccessToken'), localStorage.getItem('vkSessionUserId'), VK_APP_ID);
+				me.vk = new VKApi(localStorage.getItem('vkSessionAccessToken'), localStorage.getItem('vkSessionUserId'), app.VK_APP_ID);
 			}
 		}
 
@@ -306,13 +301,14 @@
 	Player.prototype.vkAuth = function(callback){
 		var me = this;
 
-		VKApi.getSession(VK_APP_ID, function(err, sess){
+		VKApi.getSession(function(err, sess){
 			if(!err) {
 				localStorage.setItem('vkSessionAccessToken', sess.accessToken);
 				localStorage.setItem('vkSessionExpires', Date.now() + sess.expiresIn);
 				localStorage.setItem('vkSessionUserId', sess.userId);
-				me.vk = new VKApi(sess.accessToken, sess.userId, VK_APP_ID);
+				me.vk = new VKApi(sess.accessToken, sess.userId, app.VK_APP_ID);
 				me.trigger('vkAuthChanged');
+                console.log('TRIGGERING CALLBACK');
 				cbk(callback, sess);
 			} else {
 				console.error(err);
@@ -323,14 +319,14 @@
 
 	Player.prototype.lastFmAuth = function(callback){
 		var me = this;
-		LastFmApi.getToken(LASTFM_API_KEY, LASTFM_API_SECRET, function(err,token){
-			LastFmApi.authToken(LASTFM_API_KEY, token, function(err) {
-				LastFmApi.getSession(LASTFM_API_KEY, LASTFM_API_SECRET, token, function(err,sess) {
+		LastFmApi.getToken(app.LASTFM_API_KEY, app.LASTFM_API_SECRET, function(err,token){
+			LastFmApi.authToken(app.LASTFM_API_KEY, token, function(err) {
+				LastFmApi.getSession(app.LASTFM_API_KEY, app.LASTFM_API_SECRET, token, function(err,sess) {
 					if(!err) {
 						localStorage.setItem('lastFmSessionKey', sess.key);
 						localStorage.setItem('lastFmSessionUserName', sess.name);
 						localStorage.setItem('lastFmSessionSubscriber', sess.subscriber);
-						me.lastFm = new LastFmApi(sess.key, sess.name, LASTFM_API_KEY, LASTFM_API_SECRET);
+						me.lastFm = new LastFmApi(sess.key, sess.name, app.LASTFM_API_KEY, app.LASTFM_API_SECRET);
 						me.trigger('lastFmAuthChanged');
 						cbk(callback, sess);
 					} else {
