@@ -56,10 +56,14 @@ body {
 }
 
 #search-container {
-    -webkit-transform: translate(0,-100px);
-    opacity: 0;
+    -webkit-transition: opacity, -webkit-transform, 0.3s ease-in-out 0.2s;
     position: relative;
     height: 35px;
+}
+
+#search-container.init-animation {
+    -webkit-transform: translate(0,-100px);
+    opacity:0;
 }
 
 #search-widget .omnibox {
@@ -80,8 +84,7 @@ body {
 }
 
 #player-container{
-    /*-webkit-transform: translate(0, -100px);*/
-    opacity:0;
+    -webkit-transition: -webkit-transform, opacity, 0.3s ease-in-out;
 	position: relative;
 	height: 50px;
 	background-color: #f7f7f7;
@@ -89,6 +92,12 @@ body {
 	margin: 0 2px;
 	box-shadow: 0 0 2px gray;
 }
+
+#player-container.init-animation {
+    opacity:0;
+    -webkit-transform:scale(0.9,0.9);
+}
+
 
 #player-widget {
 	position:absolute;
@@ -242,14 +251,19 @@ body {
 }
 
 #track-list-container {
-    /*-webkit-transform: translate(-500px,0);*/
-    opacity: 0;
+    -webkit-transition: opacity 0.3s ease-in-out 0.1s;
 	position:relative;
 	box-shadow: inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
 	border-radius: 5px;
 	padding: 5px;
 	margin-top: 5px;
 }
+
+#track-list-container.init-animation {
+    opacity:0;
+    /*-webkit-transform:scale(0.9,0.9);*/
+}
+
 
 #track-list { height: 400px; }
 #track-list .viewport { width: 358px; height: 400px; overflow: hidden; position: relative; }
@@ -340,12 +354,16 @@ body {
 }
 
 #status-bar-container{
-    -webkit-transform: translate(10px,0);
-    opacity: 0;
+    -webkit-transition: -webkit-transform, opacity, 0.3s ease-in-out 0.3s;
 	/*margin-top:5px;*/
 	position:relative;
     margin-bottom: -5px;
     margin-top: 7px;
+}
+
+#status-bar-container.init-animation {
+    opacity:0;
+    -webkit-transform:scale(0.9,0.9);
 }
 
 #status-bar-widget {

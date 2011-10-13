@@ -28,10 +28,10 @@
 		} else {
 
 			var ctrl = {
-                searchContainer : $('<div />', { id:'search-container' }),
-				playerContainer : $('<div />', { id:'player-container' }),
-				statusBarContainer : $('<div />', { id:'status-bar-container' }),
-				trackListContainer : $('<div />', { id:'track-list-container' })
+                searchContainer : $('<div />', { id:'search-container', 'class':'init-animation' }),
+				playerContainer : $('<div />', { id:'player-container', 'class':'init-animation' }),
+				statusBarContainer : $('<div />', { id:'status-bar-container', 'class':'init-animation' }),
+				trackListContainer : $('<div />', { id:'track-list-container', 'class':'init-animation' })
 			};
 
 			var searchWidget = new SearchWidget();
@@ -52,10 +52,11 @@
 			trackListWidget.$element.trigger('addedToDom');
 
             setTimeout(function(){
-                ctrl.searchContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.2s', '-webkit-transform': 'translate(0,0)', opacity:1 });
-                ctrl.playerContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out', '-webkit-transform': 'translate(0,0)', opacity:1 });
-                ctrl.trackListContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.3s', '-webkit-transform': 'translate(0,0)', opacity:1 });
-                ctrl.statusBarContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.5s', '-webkit-transform': 'translate(0,0)', opacity:1 });
+                $('.init-animation').removeClass('init-animation');
+//                ctrl.searchContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.2s', '-webkit-transform': 'translate(0,0)', opacity:1 });
+//                ctrl.playerContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out', '-webkit-transform': 'translate(0,0)', opacity:1 });
+//                ctrl.trackListContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.3s', '-webkit-transform': 'translate(0,0)', opacity:1 });
+//                ctrl.statusBarContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.5s', '-webkit-transform': 'translate(0,0)', opacity:1 });
             }, 300);
 		}
 	});
