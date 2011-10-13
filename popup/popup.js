@@ -34,7 +34,7 @@
 				trackListContainer : $('<div />', { id:'track-list-container', 'class':'init-animation' })
 			};
 
-			var searchWidget = new SearchWidget();
+			var searchWidget = new SearchWidget(player);
 			var trackListWidget = new TrackListWidget(player);
 			var playerWidget = new PlayerWidget(player, trackListWidget);
 			var statusBarWidget = new StatusBarWidget(player, trackListWidget);
@@ -53,10 +53,6 @@
 
             setTimeout(function(){
                 $('.init-animation').removeClass('init-animation');
-//                ctrl.searchContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.2s', '-webkit-transform': 'translate(0,0)', opacity:1 });
-//                ctrl.playerContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out', '-webkit-transform': 'translate(0,0)', opacity:1 });
-//                ctrl.trackListContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.3s', '-webkit-transform': 'translate(0,0)', opacity:1 });
-//                ctrl.statusBarContainer.css( { '-webkit-transition' : 'all 0.3s ease-in-out 0.5s', '-webkit-transform': 'translate(0,0)', opacity:1 });
             }, 300);
 		}
 	});

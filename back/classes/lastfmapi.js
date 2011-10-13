@@ -174,6 +174,24 @@
 		}, callback);
 	};
 
+    LastFmApi.prototype.getArtistTopTracks = function(artist, autoCorrect, callback) {
+		var me = this;
+		me.apiCall({
+			method : 'Artist.getTopTracks',
+			artist : artist,
+            autocorrect : autoCorrect ? 1:0
+		}, callback);
+	};
+
+    LastFmApi.prototype.findTrack = function(artist, track, callback) {
+		var me = this;
+		me.apiCall({
+			method : 'Track.search',
+			artist : artist,
+            track: track
+		}, callback);
+	};
+
 	app.classes.LastFmApi = LastFmApi;
 
 })(ChromePlayer);
