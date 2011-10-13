@@ -32,6 +32,7 @@
         });
 
         var searchTimeout;
+        var delay = true;
         ctrl.omniBox.keyup(function(ev){
             var txt = ctrl.omniBox.val();
 
@@ -50,17 +51,19 @@
                 return function (){
 //                    ctrl.results.html('Searching…').show().parent().addClass('open');
 
-                    var sw = new SpinnerWidget();
-                    ctrl.results.append(sw.$element).show().parent().addClass('open');
-                    return;
-                    
+                    var sw = new SpinnerWidget(delay);
+                    delay = false;
+
+                    ctrl.results.empty().append(sw.$element).show().parent().addClass('open');
+
                     if(txt.indexOf('-') === -1) { //artist
                         player.lastFm.getArtistTopTracks(txt, true, function(err, tracks){
                             console.log('LFM ANSWER');
+                            ctrl.results.empty();
                             if(err) {
+
                                 //TODO: SHOW ERRROR
                             } else {
-                                ctrl.results.empty();
                                 var realArtistName = $('toptracks', tracks).attr('artist');
                                 $('track', tracks).each(function(index, track){
                                     ctrl.results.append($('<div/>').html(realArtistName + ' - ' + track.getElementsByTagName('name')[0].textContent));
@@ -70,11 +73,11 @@
                     } else { //track
                         var txtParts = txt.split(' - ', 2);
                         player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
+                            ctrl.results.empty();
                             console.log('LFM ANSWER FOR TRACKS');
                             if(err) {
                                 //TODO: SHOW ERRROR
                             } else {
-                                ctrl.results.empty();
                                 $('track', tracks).each(function(index, track){
                                     ctrl.results.append($('<div/>').html(track.getElementsByTagName('artist')[0].textContent + ' - ' + track.getElementsByTagName('name')[0].textContent));
                                 });
@@ -87,6 +90,7 @@
             if(txt) {
                 searchTimeout = setTimeout(searchQuery, ev.keyCode == 13 ? 0 : 500);
             } else {
+                delay = true;
                 ctrl.results.hide().parent().removeClass('open');
             }
         });

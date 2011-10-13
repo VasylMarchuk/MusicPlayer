@@ -48,16 +48,16 @@ body {
 	-webkit-animation-name: spinner;
 	-webkit-animation-duration: 2s;
 	-webkit-animation-iteration-count: infinite;
-	/*-webkit-animation-direction: alternate;*/
 	-webkit-animation-timing-function: ease-out;
-    /*-webkit-animation-timing-function: cubic-bezier(0.40,0.00,0.72,0.97)*/
-    -webkit-animation-delay: .3s;
     position: relative;
     margin-left: auto;
     margin-right: auto;
     width: 33px;
     height: 35px;
     top: -50%;
+}
+.spinner-widget .inner.delayed {
+    -webkit-animation-delay: .3s;
 }
 
 .spinner-widget .part {
