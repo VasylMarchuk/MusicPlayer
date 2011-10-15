@@ -94,7 +94,7 @@
 				return;
 			}
 
-			var toPos = ($scrollTo.offset().top - me.controls.overView.position().top) - me.$element.offset().top - 2;
+			var toPos = ($scrollTo.offset().top - me.controls.overView.position().top) - me.$element.offset().top - 12;
 			if(toPos > me.controls.overView.height() - me.controls.viewPort.height()) {
 				toPos = 'bottom';
 			}

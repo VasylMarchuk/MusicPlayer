@@ -11,10 +11,12 @@
 		});
 	}
 
-	function SearchWidget(player) {
+	function SearchWidget(player, playerAndPlayListContainer, trackList) {
 		var me = this;
         
         me.player = player;
+
+        playerAndPlayListContainer = $(playerAndPlayListContainer);
 
 		var $el = me.$element = $('<div />', {
 			id:'search-widget'
@@ -54,14 +56,20 @@
                     var sw = new SpinnerWidget(delay);
                     delay = false;
 
+                    trackList.controls.scrollBar.hide();
                     ctrl.results.empty().append(sw.$element).show().parent().addClass('open');
+                    playerAndPlayListContainer.one('webkitTransitionEnd', function(){
+                        trackList.scrollToCurrent();
+                        trackList.controls.scrollBar.show();
+                    });
+                    playerAndPlayListContainer.addClass('collapsed');
+
 
                     if(txt.indexOf('-') === -1) { //artist
                         player.lastFm.getArtistTopTracks(txt, true, function(err, tracks){
                             console.log('LFM ANSWER');
                             ctrl.results.empty();
                             if(err) {
-
                                 //TODO: SHOW ERRROR
                             } else {
                                 var realArtistName = $('toptracks', tracks).attr('artist');
@@ -91,7 +99,15 @@
                 searchTimeout = setTimeout(searchQuery, ev.keyCode == 13 ? 0 : 500);
             } else {
                 delay = true;
+
+                trackList.controls.scrollBar.hide();
                 ctrl.results.hide().parent().removeClass('open');
+                playerAndPlayListContainer.one('webkitTransitionEnd', function(){
+                    trackList.scrollToCurrent();
+                    trackList.controls.scrollBar.show();
+                });
+                playerAndPlayListContainer.removeClass('collapsed');
+
             }
         });
 
