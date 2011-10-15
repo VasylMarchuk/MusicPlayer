@@ -22,14 +22,19 @@
         bgPage.popup = window;
 
         var metaPressed;
+        var shiftPressed;
         $(document).bind( {
             keydown : function(e){
                 if(e.originalEvent.keyIdentifier == 'Meta') {
                     metaPressed = true;
+                } else if(e.originalEvent.keyIdentifier == 'Shift'){
+                    shiftPressed=true;
                 } else if (e.keyCode == 82) {// 'r' key
                     if(metaPressed) {
                         console.log('Reloading player and pop-up');
-                        bgPage.location.reload(true);
+                        if(shiftPressed) {
+                            bgPage.location.reload(true);
+                        }
                         window.location.reload(true);
                     }
                 }
@@ -37,6 +42,8 @@
             keyup : function(e) {
                 if(e.originalEvent.keyIdentifier == 'Meta') {
                     metaPressed = false;
+                } else if(e.originalEvent.keyIdentifier == 'Shift') {
+                    shiftPressed = false;
                 }
             }
         });

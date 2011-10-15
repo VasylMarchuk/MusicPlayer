@@ -21,7 +21,7 @@
 		});
 
 		var ctrl = me.controls = {
-			omniBox : $('<input />', {'class':'omnibox', text : '', placeholder : 'Search: Artist - Title' }),
+			omniBox : $('<input />', {'class':'omnibox', text : '', placeholder : 'Search for Artist or Artist - Title' }),
             clearButton : $('<div />', { 'class' : 'omnibox-clear' }),
             results : $('<div />', {'class':'results'})
 		};

@@ -118,17 +118,17 @@ body {
 #search-container {
     -webkit-transition: opacity, -webkit-transform, 0.3s ease-in-out 0.2s;
     position: relative;
-    margin-bottom: 9px;
+    margin-bottom: 10px;
 }
 
 #search-container.init-animation {
-    -webkit-transform: translate(0,-100px);
+    -webkit-transform: translate(0,-6px);
     opacity:0;
 }
 
 #search-widget {
     -webkit-transition: min-height 0.3s ease-in-out;
-    min-height: 25px;
+    min-height: 28px;
     position: relative;
 }
 
@@ -142,16 +142,17 @@ body {
     font: 9pt 'Lucida Grande', 'Trebuchet MS', Verdana,Tahoma, sans-serif;
     position: absolute;
     top: 0;
-    right: -1px;
+    right: -2px;
     left: -1px;
     height: 20px;
     padding: 3px 7px;
-    /*width: 364px;*/
+    text-align:center;
 }
 
 #search-widget .omnibox:focus {
     outline: none;
-    box-shadow: inset 0 0 1px #dfdfdf
+    box-shadow: inset 0 0 1px #dfdfdf;
+    text-align:left;
 }
 
 #search-widget .omnibox-clear {
@@ -194,10 +195,10 @@ body {
     -webkit-transition: -webkit-transform, opacity, 0.3s ease-in-out;
 	position: relative;
 	height: 50px;
-	background-color: #f7f7f7;
 	border-radius: 5px;
-	margin: 0 2px;
+	margin-bottom:10px;
 	box-shadow: 0 0 2px gray;
+    background:-webkit-gradient(linear, left top, left bottom, from(#FBFBFB), to(whiteSmoke))
 }
 
 #player-container.init-animation {
@@ -211,7 +212,7 @@ body {
 	top:0;
 	bottom:0;
 	left:0;
-	right:22px;
+	right:25px;
 }
 
 #player-widget .button { position:absolute; cursor:pointer; background-repeat: no-repeat; background-position:center center; border-radius:3px; }
@@ -362,7 +363,7 @@ body {
 	box-shadow: inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
 	border-radius: 5px;
 	padding: 5px;
-	margin-top: 5px;
+	/*margin-top: 5px;*/
 }
 
 #track-list-container.init-animation {
