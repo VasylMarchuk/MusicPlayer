@@ -156,6 +156,10 @@ body {
     padding: 3px 7px;
 }
 
+#search-widget .omnibox::-webkit-input-placeholder {
+    text-align: center;
+}
+
 #search-widget .omnibox:focus {
     outline: none;
     box-shadow: inset 0 0 1px #dfdfdf;
@@ -174,6 +178,7 @@ body {
 #search-widget .omnibox-clear:hover {
     background-position: 0 0;
 }
+
 
 #search-widget .results {
     position: absolute;
