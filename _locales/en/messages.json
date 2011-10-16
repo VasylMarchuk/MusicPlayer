@@ -94,5 +94,17 @@
 	"nextMp3" : {
 		"message" : "Play next found mp3 for this track",
 		"description" : "Explanation for the track's mp3 count label"
-	}
+	},
+    "searchBoxPlaceholder" : {
+        "message" : "Search for Artist or Artist - Title",
+        "description" : "Placeholder text shown in the search field"
+    },
+    "searchNoResults" : {
+        "message" : "Could not find anything :(",
+        "description" : "Error message when search did not return results (should be short)"
+    },
+    "searchUnknownError" : {
+        "message" : "Unknown error O_o",
+        "description" : "Error message when search had errors"
+    }
 }

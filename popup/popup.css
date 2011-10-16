@@ -194,12 +194,13 @@ body {
     background-size: 380px 96px;
 }
 
-#search-widget .results.message {
-    text-shadow: rgba(255, 255, 255, 1) 0px 1px 2px;
-    color: #888;
-    font-size: 13px;
+#search-widget .results .message {
+    font-size: 14px;
+    color: white;
+    text-shadow: 0 0 10px black, 0 0 3px rgba(0, 0, 0, 0.4);
+    font-weight: bold;
     text-align: center;
-    line-height: 92px;
+    line-height: 88px;
 }
 
 #search-widget .results .track {

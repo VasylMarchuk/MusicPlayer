@@ -54,7 +54,7 @@
         });
 
         var ctrl = me.controls = {
-            omniBox : $('<input />', {'class':'omnibox', text : '', placeholder : 'Search for Artist or Artist - Title' }),
+            omniBox : $('<input />', {'class':'omnibox', text : '', placeholder : i18n.getMessage('searchBoxPlaceholder') }),
             clearButton : $('<div />', { 'class' : 'omnibox-clear' }),
             results : $('<div />', {'class':'results'})
         };
@@ -82,8 +82,6 @@
 
             var searchQuery = (function(txt){
                 return function (){
-//                    ctrl.results.html('Searching…').show().parent().addClass('open');
-
                     var sw = new SpinnerWidget(delay);
                     delay = false;
 
@@ -99,10 +97,17 @@
                     var playList = [];
 
                     if(txt.indexOf('-') === -1) { //artist
-                        player.lastFm.getArtistTopTracks(txt, true, function(err, tracks){
+                        player.lastFm.getArtistTopTracks(txt.trim(), false, function(err, tracks){
                             ctrl.results.empty();
                             if(err) {
-                                //TODO: SHOW ERRROR
+                                var $m = $('<div/>', { 'class' : 'message' });
+                                ctrl.results.empty().append($m);
+
+                                if(err.message && err.message.indexOf('code=6;')!==-1) {
+                                    $m.text(i18n.getMessage('searchNoResults'));
+                                } else {
+                                    $m.text(i18n.getMessage('searchUnknownError'));
+                                }
                             } else {
                                 var realArtistName = $('toptracks', tracks).attr('artist');
                                 $('track', tracks).each(function(index, track){
@@ -112,16 +117,24 @@
                         })
                     } else { //track
                         var txtParts = txt.split(' - ', 2);
-                        player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
-                            ctrl.results.empty();
-                            if(err) {
-                                //TODO: SHOW ERRROR
-                            } else {
-                                $('track', tracks).each(function(index, track){
-                                    ctrl.results.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
-                                });
-                            }
-                        });
+                        if(txtParts[0].trim() && txtParts[1].trim()) {
+                            player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
+                                ctrl.results.empty();
+                                if(err) {
+                                    var $m = $('<div/>', { 'class' : 'message' });
+                                    ctrl.results.empty().append($m);
+                                    if(err.message && err.message.indexOf('code=6;')!==-1) {
+                                        $m.text(i18n.getMessage('searchNoResults'));
+                                    } else {
+                                        $m.text(i18n.getMessage('searchUnknownError'));
+                                    }
+                                } else {
+                                    $('track', tracks).each(function(index, track){
+                                        ctrl.results.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
+                                    });
+                                }
+                            });
+                        }
                     }
                 };
             })(txt);
