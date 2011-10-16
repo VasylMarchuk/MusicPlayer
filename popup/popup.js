@@ -59,6 +59,7 @@
         var $mainContent = $('#main-content');
 
         if(!player.vk) {
+            $mainContent.addClass('welcome');
             var welcomeWidget = new WelcomeWidget(player);
             $mainContent.empty().append(welcomeWidget.$element);
             welcomeWidget.$element.trigger('addedToDom');

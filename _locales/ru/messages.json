@@ -1,10 +1,10 @@
 {
 	"extName" : {
-		"message" : "Last.fm Плеер",
+		"message" : "Chrome Player",
 		"description" : "Имя расширения"
 	},
 	"extDescription" : {
-		"message" : "Проигрыватель музыки Last.fm",
+		"message" : "Лёгкий в обращении проигрыватель музыки для Chrome",
 		"description" : "Описание расширения"
 	},
 	"extId" : {
@@ -12,7 +12,7 @@
 		"description" : "ID расширения"
 	},
 	"extToolTip" : {
-		"message" : "Last.fm Плеер",
+		"message" : "Chrome Player",
 		"description" : "Подсказка на иконке плагина по умолчанию"
 	},
 	"extToolTipPlaying" : {
@@ -20,7 +20,7 @@
 		"description" : "Подсказка на иконке плагина во время воспроизведения"
 	},
 	"playInPlayer" : {
-		"message" : "Играть в плеере Last.fm",
+		"message" : "Играть в Chrome Player",
 		"description" : "Подсказка на кнопке воспроизведения на страницах Last.fm"
 	},
 	"playbackStopped" : {
@@ -75,22 +75,6 @@
 		"message" : "Включить/выключить скробблинг",
 		"description" : "Tooltip for the status bar's 'toggle scrobbling' label"
 	},
-	"loginToVk" : {
-		"message" : "Авторизоваться ВКонтакте",
-		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
-	},
-	"vkontakte" : {
-		"message" : "ВКонтакте",
-		"description" : "Title for vkontakte.ru"
-	},
-	"vkInfoMessage" : {
-		"message" : "файлы mp3 играют из ВКонтакте",
-		"description" : "Explanation for the welcome panel's 'login to vk'"
-	},
-	"vkWaitingAuth" : {
-		"message" : "Ожидаю авторизации ВКонтакте…",
-		"description" : "Explanation for the welcome panel's 'busy' status"
-	},
 	"nextMp3" : {
 		"message" : "Играть следующий найденный mp3 для этого трека",
 		"description" : "Explanation for the track's mp3 count label"
@@ -106,5 +90,29 @@
     "searchUnknownError" : {
         "message" : "Ошибка O_o",
         "description" : "Error message when search had errors"
-    }
+    },
+    "vkontakte" : {
+        "message" : "ВКонтакте",
+        "description" : "Title for vkontakte.ru"
+    },
+    "welcomeLoginButton" : {
+        "message" : "Авторизоваться",
+        "description": "Text for 'log in' button on the welcome widget"
+    },
+    "loginToVk" : {
+        "message" : "Авторизоваться ВКонтакте",
+        "description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
+    },
+	"vkInfoMessage" : {
+		"message" : "файлы mp3 играют из ВКонтакте",
+		"description" : "Explanation for the welcome panel's 'login to vk'"
+	},
+	"loginToLastFm" : {
+		"message" : "Авторизоваться на Last.fm",
+		"description" : "Tooltip for the welcome panel's 'login to last.fm' button and tooltip"
+	},
+	"lastFmInfoMessage" : {
+		"message" : "Last.fm используется для поиска музыки",
+		"description" : "Explanation for the welcome panel's 'login to last.fm'"
+	}
 }
