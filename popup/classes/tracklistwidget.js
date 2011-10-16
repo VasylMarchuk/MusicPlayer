@@ -66,7 +66,10 @@
 			});
 		}
 
-		me.initScroll();
+        //dirty :(
+		setTimeout(function(){
+            me.initScroll();
+        }, 200);
 	};
 
 	TrackListWidget.prototype.initScroll = function initScroll() {

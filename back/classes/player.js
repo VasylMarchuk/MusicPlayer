@@ -120,6 +120,8 @@
 
 		var track = me.getTrack(trackId);
 
+        var trackCacheKey = track.artist + '-' + track.title;
+
 		if(!track) {
 			var err = new Error(i18n.getMessage('trackNotInPlaylist', [trackId]));
 			me.trigger('trackError', [trackId, err]);
@@ -132,8 +134,9 @@
 
 		//find song
 		function vkResponse(tracks) {
+
 			//TODO: CLEAN CACHE ONCE IN A WHILE
-			tracksCache[trackId] = {
+			tracksCache[trackCacheKey] = {
 				time : Date.now,
 				tracks : tracks
 			};
@@ -222,8 +225,8 @@
 			}
 		}
 
-		if(trackId in tracksCache) {
-			vkResponse(tracksCache[trackId].tracks);
+		if(trackCacheKey in tracksCache) {
+			vkResponse(tracksCache[trackCacheKey].tracks);
 		} else {
 			if(me.vk) {
 				me.vk.searchSongs(track.artist, track.title, function(err,data){

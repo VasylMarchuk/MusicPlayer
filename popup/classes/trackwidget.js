@@ -6,11 +6,12 @@
 		var me = this;
 		me.player = player;
 		var altsCount = 0;
+        var trackCacheKey = track.artist + '-' + track.title;
 
 
 		var trCache = JSON.parse(localStorage.getItem('tracksCache') || '{}');
-		if(track.id in trCache) {
-			altsCount = trCache[track.id].tracks.length;
+		if(trackCacheKey in trCache) {
+			altsCount = trCache[trackCacheKey].tracks.length;
 		}
 
 		var $el = me.$element = $('<div />', {
@@ -32,8 +33,8 @@
 		ctrl.trackMp3s.bind({
 			click : function(){
 				var tracksCache = JSON.parse(localStorage.getItem('tracksCache') || '{}');
-				if(track.id in tracksCache && tracksCache[track.id].tracks.length>1) {
-					tracksCache[track.id].tracks.push(tracksCache[track.id].tracks.shift());
+				if(trackCacheKey in tracksCache && tracksCache[trackCacheKey].tracks.length>1) {
+					tracksCache[trackCacheKey].tracks.push(tracksCache[trackCacheKey].tracks.shift());
 					localStorage.setItem('tracksCache', JSON.stringify(tracksCache));
 					player.play(track.id, false);
 				}
