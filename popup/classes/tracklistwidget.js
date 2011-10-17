@@ -4,7 +4,8 @@
 		var me = this;
 		me.player = player;
 		me.playerWidget = playerWidget;
-		
+		me.playList = null;
+
 		var $el = me.$element = $('<div />', {
 			id:'track-list'
 		});
@@ -52,6 +53,8 @@
 
 		var TrackWidget = app.classes.TrackWidget;
 
+        me.playList = playList;
+
 		me.controls.overView.empty();
 		me.controls.viewPort.removeClass('wide');
 
@@ -69,6 +72,9 @@
         //dirty :(
 		setTimeout(function(){
             me.initScroll();
+            if(playList && playList.length) {
+                me.controls.scrollBar.show();
+            }
         }, 200);
 	};
 

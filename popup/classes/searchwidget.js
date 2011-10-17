@@ -89,7 +89,9 @@
                     ctrl.results.empty().append(sw.$element).show().parent().addClass('open');
                     playerAndPlayListContainer.one('webkitTransitionEnd', function(){
                         trackList.scrollToCurrent();
-                        trackList.controls.scrollBar.show();
+                        if(trackList.playList && trackList.playList.length) {
+                            trackList.controls.scrollBar.show();
+                        }
                     });
                     playerAndPlayListContainer.addClass('collapsed');
 
@@ -148,7 +150,9 @@
                 ctrl.results.hide().parent().removeClass('open');
                 playerAndPlayListContainer.one('webkitTransitionEnd', function(){
                     trackList.scrollToCurrent();
-                    trackList.controls.scrollBar.show();
+                    if(trackList.playList && trackList.playList.length) {
+                        trackList.controls.scrollBar.show();
+                    }
                 });
                 playerAndPlayListContainer.removeClass('collapsed');
 
