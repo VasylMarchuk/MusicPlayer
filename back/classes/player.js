@@ -31,12 +31,14 @@
 		me.currentProgress = 0;
 		me.cache = {};
 		me.currentState = 'stopped';
+        me.lovedTracksCache = {};
 
 		//TODO: Start and stop progress checking only when needed
 		me.progressInterval = setInterval(function(){
 			me.checkProgress();
 		}, 1000);
 	}
+    
 	Player.prototype.loadPlayList = function (playList, callback){
 		if(!playList) {
 			playList = [];
@@ -55,6 +57,7 @@
 				me.currentState = 'stopped';
 
 				if(playList && playList.length) {
+//                    me.refreshLovedTracks();
 
 					for(var ti=0;ti<playList.length; ti++) {
 						var track = playList[ti];
@@ -407,6 +410,19 @@
 			cbk(callback, new Error('No track to unlove'));
 		}
 	};
+
+    Player.prototype.refreshLovedTracks = function(callback){
+        var me = this;
+        
+        if(me.lastFm) {
+            me.lastFm.getLovedTracks(function(err, results){
+               console.log('LOVED TRACKS', err, results);
+            });
+        } else {
+            cbk(callback, new Error('LastFM is not authorized'));
+        }
+    },
+
 	Player.prototype.isTrackLoved = function(trackId, callback) {
 		var me = this;
 		var track = me.getTrack(trackId);

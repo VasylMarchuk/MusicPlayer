@@ -89,85 +89,6 @@
 
 
         iFrameWindow.redirect(url);
-
-//        $.ajax({
-//            url:url,
-//            success: function(res, status, jXHR){
-//
-//                function authedHandler(request, sender, back) {
-//                    if(request.cmd == 'vkAuthSuccess') {
-//                        try {
-//                            back({});
-//                        } catch(e) {}
-//
-//                        chrome.extension.onRequest.removeListener(authedHandler);
-//
-//                        var hash = request.hash.substr(1).split('&');
-//
-//                        var userId, expiresIn, accessToken;
-//
-//                        if(hash) {
-//                            for(var hi=0; hi<hash.length; hi++) {
-//                                var hp = hash[hi].split('=', 2);
-//
-//                                switch(hp[0]) {
-//                                    case 'access_token':
-//                                        accessToken = hp[1];
-//                                        break;
-//                                    case 'expires_in':
-//                                        expiresIn = hp[1];
-//                                        break;
-//                                    case 'user_id':
-//                                        userId = hp[1];
-//                                        break;
-//                                }
-//                            }
-//                        }
-//
-//                        if(userId !== undefined && accessToken !== undefined && expiresIn !== undefined) {
-//                            cbk(callback, {userId:userId, accessToken:accessToken,expiresIn:expiresIn});
-//                        } else {
-//                            cbk(callback, new Error('Failed to get session'));
-//                        }
-//                    }
-//                }
-//
-//                chrome.extension.onRequest.addListener(authedHandler);
-//
-//                if(res.indexOf('Login success') !== -1) {
-//                    iFrameWindow.redirect(url);
-//                    return;
-//                }
-//
-//                iFrameWindow.setContent(res);
-//
-//                $('.box_login', iFrameWindow).css('width','385px');
-//
-//                $('head script', iFrameWindow.document).each(function(){
-//                    var s = iFrameWindow.document.createElement('script'); s.type = 'text/javascript';
-//                    if(this.src) {
-//                        s.async=true; s.src = this.src;
-//                    }
-//                    else {
-//                        s.innerHTML = this.innerHTML.replace('parent','0');
-//                    }
-//                    var h = iFrameWindow.document.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
-//                });
-//            }
-//        });
-
-
-
-
-
-
-
-
-
-
-//		chrome.tabs.create({url:'http://www.last.fm/api/auth/?api_key='+apiKey+'&token='+token}, function tabCreated(tab){
-//
-//		});
     };
 
     LastFmApi.prototype.apiCall = function(params, method, callback) {
@@ -228,6 +149,22 @@
             timestamp: parseInt(Date.now()/1000.0)
         }, 'POST', callback);
     };
+
+    LastFmApi.prototype.getLovedTracks = function(callback){
+        var me = this;
+        me.apiCall({
+            method : 'User.getLovedTracks',
+            user : me.userName
+        }, callback)
+    };
+
+    LastFmApi.prototype.getUserInfo = function(callback){
+        var me = this;
+        me.apiCall({
+            method : 'User.getInfo'
+        }, callback)
+    };
+
     LastFmApi.prototype.loveTrack = function(artist, title, callback){
         var me = this;
         me.apiCall({
