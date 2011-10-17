@@ -319,10 +319,10 @@
         });
 	};
 
-	Player.prototype.lastFmAuth = function(callback){
+	Player.prototype.lastFmAuth = function(authFrame, callback){
 		var me = this;
 		LastFmApi.getToken(app.LASTFM_API_KEY, app.LASTFM_API_SECRET, function(err,token){
-			LastFmApi.authToken(app.LASTFM_API_KEY, token, function(err) {
+			LastFmApi.authToken($(authFrame)[0].contentWindow, app.LASTFM_API_KEY, token, function(err) {
 				LastFmApi.getSession(app.LASTFM_API_KEY, app.LASTFM_API_SECRET, token, function(err,sess) {
 					if(!err) {
 						localStorage.setItem('lastFmSessionKey', sess.key);

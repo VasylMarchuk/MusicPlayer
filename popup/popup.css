@@ -23,7 +23,13 @@ body {
 #main-content.auth {
     height: auto;
     margin-bottom: 15px;
-    width:502px;
+    width:602px;
+}
+
+#main-content.auth-huge {
+    height: auto;
+    margin-bottom: 15px;
+    width:602px;
 }
 
 #search-container {
@@ -122,12 +128,18 @@ body {
     box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
 }
 
+#welcome-widget .step.success {
+    background: #FAFAFA;
+    box-shadow: inset 0 0 5px #dfdfdf;
+    color:gray;
+}
+
 #welcome-widget .step .number {
     color:gray;
     font-size: 13px;
 }
 
-#welcome-widget .button {
+#welcome-widget .step .button {
     font-size: 12px;
     background: #F0F0F0;
     border: 1px solid #DFDFDF;
@@ -138,6 +150,42 @@ body {
     text-shadow: 0 0 1px rgba(200, 200, 200, 0.7);
     cursor: pointer;
 }
+
+#welcome-widget .step.success .button {
+    cursor: default;
+    background: #EEE;
+    box-shadow: none;
+    border-color: #DDD;
+}
+
+@-webkit-keyframes 'zoomAppear' {
+    from {
+        opacity:0;
+        -webkit-transform:scale(0.5,0.5);
+    }
+    to {
+        opacity:1;
+        -webkit-transform:scale(1,1);
+    }
+}
+
+#vk-auth-frame {
+    -webkit-animation-name: zoomAppear;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: altername;
+    -webkit-animation-timing-function: ease-in;
+    opacity: 0;
+    border: 1px solid #DFDFDF;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 0;
+    width: 600px;
+    height: 400px;
+}
+
 
 /*
 * Search widget
@@ -187,35 +235,6 @@ body {
 #search-widget .omnibox-clear:hover {
     background-position: 0 0;
 }
-
-@-webkit-keyframes 'zoomAppear' {
-    from {
-        opacity:0;
-        -webkit-transform:scale(0.5,0.5);
-    }
-    to {
-        opacity:1;
-        -webkit-transform:scale(1,1);
-    }
-}
-
-#vk-auth-frame {
-    -webkit-animation-name: zoomAppear;
-    -webkit-animation-duration: .2s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-direction: altername;
-    -webkit-animation-timing-function: ease-in;
-    opacity: 0;
-    border: 1px solid #DFDFDF;
-    position: relative;
-    left: 0;
-    right: 0;
-    top: 5px;
-    bottom: 0;
-    width: 500px;
-    height: 300px;
-}
-
 
 #search-widget .results {
     position: absolute;

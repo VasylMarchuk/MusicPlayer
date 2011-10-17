@@ -58,7 +58,7 @@
 
         var $mainContent = $('#main-content');
 
-        if(!player.vk) {
+        if(!player.vk || !player.lastFm) {
             $mainContent.addClass('welcome');
             var welcomeWidget = new WelcomeWidget(player, $mainContent);
             $mainContent.empty().append(welcomeWidget.$element);

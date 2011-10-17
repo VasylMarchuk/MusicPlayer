@@ -36,7 +36,8 @@
 			],
 			"js": [
 				"inject/access.js"
-			]
+			],
+            "all_frames" : true
 		},
 		{
 			"matches": [

@@ -95,9 +95,13 @@
         "message" : "ВКонтакте",
         "description" : "Title for vkontakte.ru"
     },
-    "welcomeLoginButton" : {
+    "welcomeAuthButton" : {
         "message" : "Авторизоваться",
         "description": "Text for 'log in' button on the welcome widget"
+    },
+    "welcomeAuthDoneButton" : {
+        "message" : "Готово",
+        "description": "Text for 'log in' button on the welcome widget when auth is done"
     },
     "loginToVk" : {
         "message" : "Авторизоваться ВКонтакте",
