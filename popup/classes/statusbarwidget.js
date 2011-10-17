@@ -21,7 +21,7 @@
 		$el.statusBarWidget = me;
 
 		var ctrl = me.controls = {
-			lastFmStatus : $('<div/>', {'class':'status-bar-item lastfm-status', text : 'LastFm: unlogged' }),
+			lastFmStatus : $('<div/>', {'class':'status-bar-item lastfm-status', text : 'Last.fm: unlogged' }),
 			vkStatus : $('<div/>', {'class':'status-bar-item vk-status', text : i18n.getMessage('vkontakte') + ': unlogged' }),
 			scrobblingStatus : $('<div/>', {'class':'status-bar-item scrobbling-status', text : i18n.getMessage('scrobblingStatusOff'), title:i18n.getMessage('toggleScrobbling') }),
 			playListPosition : $('<div/>', {'class':'status-bar-item playlist-position', text : '0/0', title:i18n.getMessage('revealCurrentTrackInPlayList') })
@@ -29,8 +29,6 @@
 
 		clickable(ctrl.playListPosition, function(){ me.trackListWidget.scrollToCurrent(); });
 		clickable(ctrl.scrobblingStatus, function(){ me.player.toggleScrobbling(!me.player.scrobblingEnabled); });
-		clickable(ctrl.vkStatus, function(){ me.player.vkAuth(); });
-		clickable(ctrl.lastFmStatus, function(){ me.player.lastFmAuth(); });
 
 		player.bind( {
 			'playList.statusBarWidget' : function onPlayList(ev) {
@@ -45,18 +43,6 @@
 			},
 			'scrobblingDisabled.statusBarWidget' : function onScrobblingDisabled() {
 				me.setScrobblingStatus(false);
-			},
-			'vkAuthChanged.statusBarWidget' : function onVKAuthChanged() {
-				if(player.vk) {
-					player.vk.getUserName(function(err, name){
-						if(!err) {
-							me.setVkStatus(name);
-						}
-					});
-				}
-			},
-			'lastFmAuthChanged.statusBarWidget' : function onLastFmAuthChanged() {
-				me.setLastFmStatus(localStorage.getItem('lastFmSessionUserName'));
 			}
 		});
 
@@ -93,7 +79,7 @@
 
 	StatusBarWidget.prototype.setLastFmStatus = function(username) {
 		var me = this;
-		me.controls.lastFmStatus.text('LastFm: ' + (username || 'unlogged'));
+		me.controls.lastFmStatus.text('Last.fm: ' + (username || 'unlogged'));
 	};
 	StatusBarWidget.prototype.setVkStatus = function(username) {
 		var me = this;

@@ -663,8 +663,7 @@ body {
     border-radius: 3px;
     padding: 0 3px;
     text-align: center;
-    box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
-    cursor:pointer;
+    /*box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;*/
 }
 
 #status-bar-widget .vk-status {
@@ -676,8 +675,7 @@ body {
     border-radius: 3px;
     padding: 0 3px;
     text-align: center;
-    box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;
-    cursor:pointer;
+    /*box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;*/
 }
 
 /*

@@ -313,7 +313,6 @@
                 me.trigger('vkAuthChanged');
                 cbk(callback, sess);
             } else {
-                console.error(err);
                 cbk(callback, err);
             }
         });

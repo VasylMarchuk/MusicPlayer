@@ -7,14 +7,13 @@
 	"background_page": "back/back.html",
 
 	"icons": {
-		"16": "icon.png",
-		"48": "icon.png",
-		"128": "icon.png"
+        "19" : "icon19.png",
+		"128": "icon128.png"
 	},
 
 	"browser_action": {
 		"default_title": "__MSG_extToolTip__",
-		"default_icon": "icon.png",
+		"default_icon": "icon19.png",
 		"popup" : "popup/popup.html"
 	},
 
@@ -37,7 +36,8 @@
 			"js": [
 				"inject/access.js"
 			],
-            "all_frames" : true
+            "all_frames" : true,
+            "run_at" : "document_start"
 		},
 		{
 			"matches": [
@@ -71,7 +71,18 @@
 			],
 			"js" : ["inject/vkaccess.js"],
             "all_frames" : true
-		}
+		},
+        {
+            "matches" : [
+                "http://api.vkontakte.ru/oauth/authorize*",
+                "http://api.vk.com/oauth/authorize*",
+                "https://api.vkontakte.ru/oauth/authorize*",
+                "https://api.vk.com/oauth/authorize*"
+            ],
+            "js" : ["inject/vkframe.js"],
+            "all_frames" : true,
+            "run_at" : "document_start"
+        }
 	],
 
 	"permissions": [

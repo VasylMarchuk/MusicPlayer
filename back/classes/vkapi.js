@@ -57,11 +57,29 @@
 
                 chrome.extension.onRequest.addListener(authedHandler);
 
+                function reloadHandler(request, sender, back) {
+                    if(request.cmd == 'vkFrameReload') {
+                        try {
+                            back({});
+                        } catch(e){}
+
+                        chrome.extension.onRequest.removeListener(authedHandler);
+
+                        cbk(callback, new Error('Need reload'));
+                    }
+                }
+
+                chrome.extension.onRequest.addListener(reloadHandler);
+
                 if(res.indexOf('Login success') !== -1) {
                     iFrameWindow.redirect(url);
                     return;
                 }
 
+                if(iFrameWindow == null || !('setContent' in iFrameWindow)) {
+                    return;
+                }
+                
                 iFrameWindow.setContent(res);
 
                 $('.box_login', iFrameWindow).css('width','385px');

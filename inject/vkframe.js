@@ -11,26 +11,28 @@
 //	});
 ////});
 
-if(window.location.href.indexOf('vkontakte')!==-1) {
+chrome.extension.sendRequest({cmd: "vkFrameReload" }, function(response) {});
 
-}
-
-parent = false;
-
-document.onreadystatechange = function(){
-	parent = false;
-	document.scripts = [];
-	document.getElementsByTagName('script')[0] = null;
-	document.getElementsByTagName('script')[1] = null;
-	document.getElementsByTagName('script')[2] = null;
-	//$('script','head').remove();
-	var s = document.createElement('script'); s.type = 'text/javascript'; s.async=true;
-	s.innerHTML = 'window.parent=false;console.log(parent,window);';
-	var h = document.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
-	//delete document.scripts[1];
-	//document.write(document.readyState);
-//	if(document.readyState=='complete') {
-//	}
-//	else {
-//	}
-};
+//if(window.location.href.indexOf('vkontakte')!==-1) {
+//
+//}
+//
+//parent = false;
+//
+//document.onreadystatechange = function(){
+//	parent = false;
+//	document.scripts = [];
+//	document.getElementsByTagName('script')[0] = null;
+//	document.getElementsByTagName('script')[1] = null;
+//	document.getElementsByTagName('script')[2] = null;
+//	//$('script','head').remove();
+//	var s = document.createElement('script'); s.type = 'text/javascript'; s.async=true;
+//	s.innerHTML = 'window.parent=false;console.log(parent,window);';
+//	var h = document.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
+//	//delete document.scripts[1];
+//	//document.write(document.readyState);
+////	if(document.readyState=='complete') {
+////	}
+////	else {
+////	}
+//};

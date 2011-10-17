@@ -53,10 +53,17 @@
                 ctrl.vkAuthFrame.css('opacity', 1);
             });
             $el.append(ctrl.vkAuthFrame);
-            
-            player.vkAuth(ctrl.vkAuthFrame, function(err){
+
+            function vkAuthResponder(err){
                 ctrl.vkAuthFrame.remove();
                 ctrl.vkAuthFrame = $('<iframe/>', { id:'vk-auth-frame', src:'authframe.html' });
+
+                if(err && err.message=='Need reload') {
+                    $el.append(ctrl.vkAuthFrame.css('opacity', 1));
+                    player.vkAuth(ctrl.vkAuthFrame, vkAuthResponder);
+                    return;
+                }
+
                 $mainContent.removeClass('auth');
                 if(!err) {
                     ctrl.vkLoginButton.text(i18n.getMessage('welcomeAuthDoneButton'));
@@ -67,7 +74,9 @@
                 if(player.lastFm) {
                     window.location.reload();
                 }
-            });
+            }
+
+            player.vkAuth(ctrl.vkAuthFrame, vkAuthResponder);
         });
 
 		clickable(ctrl.lastFmLoginButton, function(){
@@ -113,10 +122,6 @@
         }
 
 		$el.append(ctrl.title, ctrl.vkStepContainer.append(ctrl.vkLoginButton), ctrl.lastFmStepContainer.append(ctrl.lastFmLoginButton));
-
-        $el.bind('addedToDom', function(){
-//           ctrl.vkLoginButton.click();
-        });
 	}
 
 	app.classes.WelcomeWidget = WelcomeWidget;

@@ -50,6 +50,7 @@
             player.unbind('.trackListWidget');
             player.unbind('.playerWidget');
             player.unbind('.statusBarWidget');
+            player.unbind('.mainWindow');
         }
 
         bgPage.popup = window;
@@ -64,6 +65,9 @@
             $mainContent.empty().append(welcomeWidget.$element);
             welcomeWidget.$element.trigger('addedToDom');
         } else {
+            player.bind('vkAuthChanged.mainWindow', function(){
+               window.location.reload();
+            });
 
             var ctrl = {
                 searchContainer : $('<div />', { id:'search-container', 'class':'init-animation' }),
