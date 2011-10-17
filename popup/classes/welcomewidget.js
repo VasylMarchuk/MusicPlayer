@@ -10,9 +10,11 @@
 		});
 	}
 
-	function WelcomeWidget(player) {
+	function WelcomeWidget(player, $mainContent) {
 		var me = this;
 		me.player = player;
+
+        $mainContent = $($mainContent);
 
 		var $el = me.$element = $('<div />', {
 			id:'welcome-widget'
@@ -32,12 +34,42 @@
             ),
             lastFmLoginButton : $('<span/>', {'class':'button', text : i18n.getMessage('welcomeLoginButton') }),
 
+            vkAuthFrame : $('<iframe/>', { id:'vk-auth-frame', src:'authframe.html' })
+
 //			vkInfoMessage : $('<div/>', {'class':'vk-info-message', text : i18n.getMessage('vkInfoMessage') }),
 //			lastFmInfoMessage : $('<div/>', {'class':'lastfm-info-message', text : i18n.getMessage('vkInfoMessage') }),
 //			lastFmLogin : $('<div/>', {'class':'lastfm-login-button', text : i18n.getMessage('loginToVk'), title:i18n.getMessage('loginToVk') }),
 		};
 
 		clickable(ctrl.vkLoginButton, function(){
+            if(ctrl.vkLoginButton.hasClass('success')) {
+                return;
+            }
+            
+            ctrl.vkStepContainer.hide();
+            ctrl.lastFmStepContainer.hide();
+            $mainContent.addClass('auth');
+            ctrl.vkAuthFrame.one('webkitAnimationStart', function(){
+                ctrl.vkAuthFrame.css('opacity', 0);
+            });
+            ctrl.vkAuthFrame.one('webkitAnimationEnd', function(){
+                ctrl.vkAuthFrame.css('opacity', 1);
+            });
+            $el.append(ctrl.vkAuthFrame);
+            
+            player.vkAuth(ctrl.vkAuthFrame, function(err){
+                ctrl.vkAuthFrame.remove();
+                ctrl.vkAuthFrame = $('<iframe/>', { id:'vk-auth-frame', src:'authframe.html' });
+                $mainContent.removeClass('auth');
+                if(!err) {
+                    ctrl.vkLoginButton.text('SUCCESS!').addClass('success');
+                }
+                ctrl.vkStepContainer.show();
+                ctrl.lastFmStepContainer.show();
+            });
+
+            return;
+
 //            ctrl.vkInfoMessage.hide();
 //            ctrl.vkLogin.hide();
 //            ctrl.vkWaitingAuth.show();
@@ -54,6 +86,10 @@
         });
 
 		$el.append(ctrl.title, ctrl.vkStepContainer.append(ctrl.vkLoginButton), ctrl.lastFmStepContainer.append(ctrl.lastFmLoginButton));
+
+        $el.bind('addedToDom', function(){
+//           ctrl.vkLoginButton.click();
+        });
 	}
 
 	app.classes.WelcomeWidget = WelcomeWidget;

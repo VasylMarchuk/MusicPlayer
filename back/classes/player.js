@@ -301,22 +301,22 @@
 		}
 	};
 
-	Player.prototype.vkAuth = function(callback){
+	Player.prototype.vkAuth = function(authFrame, callback){
 		var me = this;
 
-		VKApi.getSession(function(err, sess){
-			if(!err) {
-				localStorage.setItem('vkSessionAccessToken', sess.accessToken);
-				localStorage.setItem('vkSessionExpires', Date.now() + sess.expiresIn);
-				localStorage.setItem('vkSessionUserId', sess.userId);
-				me.vk = new VKApi(sess.accessToken, sess.userId, app.VK_APP_ID);
-				me.trigger('vkAuthChanged');
-				cbk(callback, sess);
-			} else {
-				console.error(err);
-				cbk(callback, err);
-			}
-		});
+        VKApi.getSession($(authFrame)[0].contentWindow, function(err, sess){
+            if(!err) {
+                localStorage.setItem('vkSessionAccessToken', sess.accessToken);
+                localStorage.setItem('vkSessionExpires', Date.now() + sess.expiresIn);
+                localStorage.setItem('vkSessionUserId', sess.userId);
+                me.vk = new VKApi(sess.accessToken, sess.userId, app.VK_APP_ID);
+                me.trigger('vkAuthChanged');
+                cbk(callback, sess);
+            } else {
+                console.error(err);
+                cbk(callback, err);
+            }
+        });
 	};
 
 	Player.prototype.lastFmAuth = function(callback){

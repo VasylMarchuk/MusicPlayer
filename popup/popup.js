@@ -60,7 +60,7 @@
 
         if(!player.vk) {
             $mainContent.addClass('welcome');
-            var welcomeWidget = new WelcomeWidget(player);
+            var welcomeWidget = new WelcomeWidget(player, $mainContent);
             $mainContent.empty().append(welcomeWidget.$element);
             welcomeWidget.$element.trigger('addedToDom');
         } else {

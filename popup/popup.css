@@ -20,6 +20,12 @@ body {
     margin-bottom: 20px;
 }
 
+#main-content.auth {
+    height: auto;
+    margin-bottom: 15px;
+    width:502px;
+}
+
 #search-container {
     -webkit-transition: opacity, -webkit-transform, 0.3s ease-in-out 0.2s;
     position: relative;
@@ -48,7 +54,7 @@ body {
     height: 50px;
     border-radius: 5px;
     box-shadow: 0 0 2px gray;
-    background:-webkit-gradient(linear, left top, left bottom, from(#FBFBFB), to(whiteSmoke))
+    background:-webkit-gradient(linear, left top, left bottom, from(#FBFBFB), to(whiteSmoke));
 }
 
 #player-container.init-animation {
@@ -99,7 +105,10 @@ body {
     line-height: 30px;
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);
+    /*text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);*/
+    background:-webkit-gradient(linear, left top, left bottom, from(#999), to(black));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 #welcome-widget .step {
@@ -177,6 +186,34 @@ body {
 }
 #search-widget .omnibox-clear:hover {
     background-position: 0 0;
+}
+
+@-webkit-keyframes 'zoomAppear' {
+    from {
+        opacity:0;
+        -webkit-transform:scale(0.5,0.5);
+    }
+    to {
+        opacity:1;
+        -webkit-transform:scale(1,1);
+    }
+}
+
+#vk-auth-frame {
+    -webkit-animation-name: zoomAppear;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-direction: altername;
+    -webkit-animation-timing-function: ease-in;
+    opacity: 0;
+    border: 1px solid #DFDFDF;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 0;
+    width: 500px;
+    height: 300px;
 }
 
 

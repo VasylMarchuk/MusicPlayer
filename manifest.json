@@ -63,12 +63,13 @@
 		},
 		{
 			"matches" : [
-				"http://api.vkontakte.ru/blank.html",
-				"http://api.vk.com/blank.html",
-				"https://api.vkontakte.ru/blank.html",
-				"https://api.vk.com/blank.html"
+				"http://api.vkontakte.ru/blank.html*",
+				"http://api.vk.com/blank.html*",
+				"https://api.vkontakte.ru/blank.html*",
+				"https://api.vk.com/blank.html*"
 			],
-			"js" : ["inject/vkaccess.js"]
+			"js" : ["inject/vkaccess.js"],
+            "all_frames" : true
 		}
 	],
 
