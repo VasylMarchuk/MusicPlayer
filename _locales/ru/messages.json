@@ -1,10 +1,10 @@
 {
 	"extName" : {
-		"message" : "Chrome Player",
+		"message" : "Player для Google Chrome™",
 		"description" : "Имя расширения"
 	},
 	"extDescription" : {
-		"message" : "Лёгкий в обращении проигрыватель музыки для Chrome",
+		"message" : "Лёгкий в обращении проигрыватель музыки для Google Chrome™",
 		"description" : "Описание расширения"
 	},
 	"extId" : {
@@ -12,7 +12,7 @@
 		"description" : "ID расширения"
 	},
 	"extToolTip" : {
-		"message" : "Chrome Player",
+		"message" : "Player для Google Chrome™",
 		"description" : "Подсказка на иконке плагина по умолчанию"
 	},
 	"extToolTipPlaying" : {
@@ -20,7 +20,7 @@
 		"description" : "Подсказка на иконке плагина во время воспроизведения"
 	},
 	"playInPlayer" : {
-		"message" : "Играть в Chrome Player",
+		"message" : "Играть в Player для Google Chrome™",
 		"description" : "Подсказка на кнопке воспроизведения на страницах Last.fm"
 	},
 	"playbackStopped" : {

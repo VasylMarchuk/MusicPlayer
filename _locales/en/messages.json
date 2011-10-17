@@ -1,10 +1,10 @@
 {
 	"extName" : {
-		"message" : "Chrome Player",
+		"message" : "Player for Google Chrome™",
 		"description" : "Extension name"
 	},
 	"extDescription" : {
-		"message" : "Zero-effors music player for Google Chrome",
+		"message" : "Zero-effors music player for Google Chrome™",
 		"description" : "Extension description"
 	},
 	"extId" : {
@@ -12,7 +12,7 @@
 		"description" : "Extension ID  [id]"
 	},
 	"extToolTip" : {
-		"message" : "Chrome Player",
+		"message" : "Player for Google Chrome™",
 		"description" : "Default extenstion icon tooltip"
 	},
 	"extToolTipPlaying" : {
@@ -20,7 +20,7 @@
 		"description" : "Extenstion icon tooltip when playing a song [title, artist]"
 	},
 	"playInPlayer" : {
-		"message" : "Play in Chrome Player Player",
+		"message" : "Play in Player for Google Chrome™",
 		"description" : "Tooltip for Play button on Last.fm pages"
 	},
 	"playbackStopped" : {
