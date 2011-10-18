@@ -19,6 +19,17 @@ body {
     }
 }
 
+@-webkit-keyframes 'zoomAppear2' {
+    from {
+        opacity:0;
+        -webkit-transform: scale(0.2) translate(100px, 100px);
+    }
+    to {
+        opacity:1;
+        -webkit-transform: scale(1) translate(0, 0);
+    }
+}
+
 @-webkit-keyframes 'spinner' {
     from {
         -webkit-transform:rotate(0);
@@ -670,10 +681,10 @@ body {
     font-size: 12px;
     font-weight: bold;
     -webkit-font-smoothing: antialiased;
-    -webkit-animation-name: zoomAppear;
-    -webkit-animation-duration: .2s;
+    -webkit-animation-name: zoomAppear2;
+    -webkit-animation-duration: 0.1s;
     -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-timing-function: linear;
     opacity: 0;
 }
 
