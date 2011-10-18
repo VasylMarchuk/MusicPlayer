@@ -317,30 +317,32 @@ body {
     left:351px;
     width:17px;
     height:14px;
-    background-image:url('next.png');
-    background-position: 4px center;
+    background:url(next.png) no-repeat 4px center;
     border: 1px solid #dfdfdf;
 }
 
 #player-widget .button.love {
     top:29px;
     left:351px;
-    width:17px;
-    height:14px;
-    background-image:url('love.png');
-    background-position: 2px center;
+    width:13px;
+    height:11px;
+    padding: 2px;
+    background:url(love.png) no-repeat -13px 0;
+    background-origin: content-box;
+    background-clip: content-box;
     border: 1px solid #dfdfdf;
 }
 
 #player-widget .button.love.undetermined {
-    opacity:0.1;
+    background-position: 0 0;
 }
 #player-widget .button.love.disabled {
+    background-position: 0 0;
     opacity:0.1;
+    cursor: default;
 }
-
 #player-widget .button.love.loved {
-    background-image:url('loved.png');
+    background-position: -26px 0;
 }
 
 #player-widget.playing .button.play { display:none; }

@@ -96,7 +96,7 @@
 			}
 
 		});
-		if(player.lastFm) {
+		if(player.playList && player.playList.length && player.lastFm) {
 			ctrl.love.removeClass('disabled');
 		}
 
@@ -241,13 +241,18 @@
 	};
 	PlayerWidget.prototype.updateLovedStatus = function() {
 		var me = this;
+
+        if(!me.player.lastFm) {
+            return;
+        }
+
 		var trackId = me.player.currentTrackId;
-		me.controls.love.addClass('undetermined');
+		me.controls.love.removeClass('disabled').addClass('undetermined');
 		me.player.isTrackLoved(trackId, function(err, isLoved){
 			if(me.player.currentTrackId == trackId) { //if it's the same track still playing
 				me.controls.love.removeClass('undetermined');
 				me.controls.love.toggleClass('loved', isLoved);
-				me.controls.love.attr('title', i18n.getMessage('unLoveTrack'));
+				me.controls.love.attr('title', i18n.getMessage(isLoved ? 'unLoveTrack' : 'loveTrack'));
 			}
 		});
 	};

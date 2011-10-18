@@ -428,12 +428,13 @@
 		var track = me.getTrack(trackId);
 		if(track) {
 			if(me.lastFm) {
-				me.lastFm.getTrackInfo(track.artist, track.title, function(err, track) {
+				me.lastFm.getTrackInfo(track.artist, track.title, function(err, trackInfo) {
 					if(!err) {
-						console.log("Track loved status detected for track %s: %s", trackId, $('userloved', track).text());
-						cbk(callback, $('userloved', track).text() == '1');
+                        var loved = $('userloved', trackInfo).text();
+						console.log("Track loved status detected for track '%s - %s': %s", track.artist, track.title, loved);
+						cbk(callback, parseInt(loved) == 1);
 					} else {
-						console.log("Failed get loved status for track: %s", err.message);
+						console.log("Failed to get loved status for track: %s", err.message);
 						cbk(callback, err);
 					}
 				});
