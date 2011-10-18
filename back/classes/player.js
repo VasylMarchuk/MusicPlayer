@@ -341,6 +341,15 @@
 		});
 	};
 
+    Player.prototype.clearAuthorization = function(){
+        localStorage.removeItem('vkSessionAccessToken');
+        localStorage.removeItem('vkSessionExpires');
+        localStorage.removeItem('vkSessionUserId');
+        localStorage.removeItem('lastFmSessionKey');
+        localStorage.removeItem('lastFmSessionUserName');
+        localStorage.removeItem('lastFmSessionSubscriber');
+    };
+
 	Player.prototype.toggleScrobbling = function(enable, callback) {
 		var me = this;
 		if(enable) {

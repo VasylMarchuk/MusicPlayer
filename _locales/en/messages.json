@@ -118,5 +118,17 @@
 	"lastFmInfoMessage" : {
 		"message" : "Last.fm is used for searching music",
 		"description" : "Explanation for the welcome panel's 'login to last.fm'"
-	}
+	},
+    "resetAuthorization" : {
+        "message" : "Reset authorization",
+        "description" : "Text for menu item 'reset authorization'"
+    },
+    "donate" : {
+        "message" : "Donate",
+        "description" : "Text for menu item 'donate'"
+    },
+    "about" : {
+        "message" : "About",
+        "description" : "Text for menu item 'about'"
+    }
 }

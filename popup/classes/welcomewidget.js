@@ -35,7 +35,7 @@
             lastFmLoginButton : $('<span/>', {'class':'button', text : i18n.getMessage('welcomeAuthButton') }),
 
             vkAuthFrame : $('<iframe/>', { id:'vk-auth-frame', src:'authframe.html' }),
-            lastFmAuthFrame : $('<iframe/>', { id:'vk-auth-frame', src:'authframe.html' })
+            lastFmAuthFrame : $('<iframe/>', { id:'lastfm-auth-frame', src:'authframe.html' })
 		};
 
 		clickable(ctrl.vkLoginButton, function(){

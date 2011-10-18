@@ -118,5 +118,17 @@
 	"lastFmInfoMessage" : {
 		"message" : "Last.fm используется для поиска музыки",
 		"description" : "Explanation for the welcome panel's 'login to last.fm'"
-	}
+	},
+    "resetAuthorization" : {
+        "message" : "Сброс авторизации",
+        "description" : "Text for menu item 'reset authorization'"
+    },
+    "donate" : {
+        "message" : "Donate",
+        "description" : "Text for menu item 'donate'"
+    },
+    "about" : {
+        "message" : "О расширении",
+        "description" : "Text for menu item 'about'"
+    }
 }

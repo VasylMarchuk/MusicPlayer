@@ -5,6 +5,30 @@ body {
 }
 
 /*
+* Animations
+*/
+
+@-webkit-keyframes 'zoomAppear' {
+    from {
+        opacity:0;
+        -webkit-transform:scale(0.5,0.5);
+    }
+    to {
+        opacity:1;
+        -webkit-transform:scale(1,1);
+    }
+}
+
+@-webkit-keyframes 'spinner' {
+    from {
+        -webkit-transform:rotate(0);
+    }
+    to {
+        -webkit-transform:rotate(360deg);
+    }
+}
+
+/*
 * MAIN CONTAINERS
 */
 
@@ -158,22 +182,26 @@ body {
     border-color: #DDD;
 }
 
-@-webkit-keyframes 'zoomAppear' {
-    from {
-        opacity:0;
-        -webkit-transform:scale(0.5,0.5);
-    }
-    to {
-        opacity:1;
-        -webkit-transform:scale(1,1);
-    }
-}
-
 #vk-auth-frame {
     -webkit-animation-name: zoomAppear;
     -webkit-animation-duration: .2s;
     -webkit-animation-iteration-count: 1;
-    -webkit-animation-direction: altername;
+    -webkit-animation-timing-function: ease-in;
+    opacity: 0;
+    border: 1px solid #DFDFDF;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 5px;
+    bottom: 0;
+    width: 600px;
+    height: 400px;
+}
+
+#lastfm-auth-frame {
+    -webkit-animation-name: zoomAppear;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: ease-in;
     opacity: 0;
     border: 1px solid #DFDFDF;
@@ -620,18 +648,77 @@ body {
         inset rgba(0, 0, 0, 0.2) 0 1px 3px;
 }
 
+#status-bar-widget .settings-button {
+    float:right;
+    cursor:pointer;
+    margin-left:5px;
+    width: 12px;
+    height: 12px;
+    background-size: cover;
+    background: url(settings.png) no-repeat 0 0;
+    opacity: 0.7;
+}
+
+#status-bar-widget .settings-menu {
+    position: absolute;
+    background: white;
+    border-radius: 4px;
+    bottom: 16px;
+    right: 0;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+    padding: 5px 0;
+    font-size: 12px;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    -webkit-animation-name: zoomAppear;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    opacity: 0;
+}
+
+#status-bar-widget .settings-menu .item {
+    padding: 5px 15px;
+    color: #333;
+    position: relative;
+    cursor: default;
+}
+
+#status-bar-widget .settings-menu .item:hover {
+    text-shadow: 0 0 2px #ccc;
+    /*background: #99ccff;*/
+}
+
+#status-bar-widget .settings-menu .item.separator {
+    height: 1px;
+    background: #EEE;
+    margin: 4px 0;
+    padding: 0;
+}
+
+#status-bar-widget .settings-menu .item.disabled {
+    color: #B2B2B2;
+    font-weight: normal;
+    padding: 3px 15px;
+}
+#status-bar-widget .settings-menu .item.disabled:hover {
+    text-shadow: none;
+}
+
+#status-bar-widget .settings-menu .smiley {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+}
+
 #status-bar-widget .playlist-position {
     font:5.7pt Verdana;
     float:right;
     line-height: 12px;
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*right: 1px;*/
     background-color: #f9f9f9;
     border-radius: 3px;
     padding: 0 3px;
     text-align: center;
-    /*width: 40px;*/
     box-shadow:inset gray 0 0 2px;
     cursor:pointer;
 }
@@ -640,9 +727,6 @@ body {
     font:5.7pt Verdana;
     float:right;
     line-height: 12px;
-    /*position: absolute;*/
-    /*top: 0;*/
-    /*right: 46px;*/
     background-color: #f9f9f9;
     border-radius: 3px;
     padding: 0 3px;
@@ -656,6 +740,7 @@ body {
         inset gray 0 0 2px,
         inset rgba(0, 180, 255, 0.8) 0 0 3px;
 }
+
 
 #status-bar-widget .lastfm-status {
     font:5.7pt Verdana;
@@ -704,15 +789,6 @@ body {
     top: 50%;
     vertical-align: middle;
     position: static;
-}
-
-@-webkit-keyframes 'spinner' {
-    from {
-        -webkit-transform:rotate(0);
-    }
-    to {
-        -webkit-transform:rotate(360deg);
-    }
 }
 
 .spinner-widget .inner {
