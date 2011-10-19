@@ -1,9 +1,9 @@
 {
 	"name": "__MSG_extName__",
-	"version": "1.0",
+	"version": "0.0.0.1",
 	"description": "__MSG_extDescription__",
 	"default_locale" : "en",
-	"minimum_chrome_version" : "11.0.696.65",
+	"minimum_chrome_version" : "14.0.0.0",
 	"background_page": "back/back.html",
 
 	"icons": {
