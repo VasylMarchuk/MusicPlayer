@@ -90,7 +90,6 @@
 		"http://api.vkontakte.ru/*",
 		"https://api.vk.com/*",
 		"http://api.vk.com/*",
-		"http://ws.audioscrobbler.com/*",
-		"tabs"
+		"http://ws.audioscrobbler.com/*"
 	]
 }
