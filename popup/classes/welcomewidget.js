@@ -42,7 +42,9 @@
             if(ctrl.vkStepContainer.hasClass('success')) {
                 return;
             }
-            
+
+			app.analytics.vkAuthBegin();
+
             ctrl.vkStepContainer.hide();
             ctrl.lastFmStepContainer.hide();
             $mainContent.addClass('auth');
@@ -66,12 +68,15 @@
 
                 $mainContent.removeClass('auth');
                 if(!err) {
+					app.analytics.vkAuthComplete();
                     ctrl.vkLoginButton.text(i18n.getMessage('welcomeAuthDoneButton'));
                     ctrl.vkStepContainer.addClass('success');
                 }
                 ctrl.vkStepContainer.show();
                 ctrl.lastFmStepContainer.show();
                 if(player.lastFm) {
+					app.analytics.authComplete();
+					$(window).unbind('unload.popupCloseMonitor');
                     window.location.reload();
                 }
             }
@@ -83,6 +88,8 @@
             if(ctrl.lastFmStepContainer.hasClass('success')) {
                 return;
             }
+
+			app.analytics.lastFmAuthBegin();
 
             ctrl.vkStepContainer.hide();
             ctrl.lastFmStepContainer.hide();
@@ -100,12 +107,15 @@
                 ctrl.lastFmAuthFrame = $('<iframe/>', { id:'lastfm-auth-frame', src:'authframe.html' });
                 $mainContent.removeClass('auth-huge');
                 if(!err) {
+					app.analytics.lastFmAuthComplete();
                     ctrl.lastFmLoginButton.text(i18n.getMessage('welcomeAuthDoneButton'));
                     ctrl.lastFmStepContainer.addClass('success');
                 }
                 ctrl.vkStepContainer.show();
                 ctrl.lastFmStepContainer.show();
                 if(player.vk) {
+					app.analytics.authComplete();
+					$(window).unbind('unload.popupCloseMonitor');
                     window.location.reload();
                 }
             });

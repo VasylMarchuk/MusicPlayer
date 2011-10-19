@@ -50,12 +50,16 @@
             ctrl.settingsMenu.css('opacity', 1);
         });
 
-        clickable(ctrl.playListPosition, function(){ me.trackListWidget.scrollToCurrent(); });
+        clickable(ctrl.playListPosition, function(){
+			app.analytics.scrollToCurrent();
+			me.trackListWidget.scrollToCurrent();
+		});
         clickable(ctrl.scrobblingStatus, function(){ me.player.toggleScrobbling(!me.player.scrobblingEnabled); });
         clickable(ctrl.settingsButton, function(){
             if(ctrl.settingsMenu.is(':visible')) {
                 ctrl.settingsMenu.hide();
             } else {
+				app.analytics.settingsMenu();
                 ctrl.settingsMenu.show();
                 function clickHandler(ev){
                     var $clicked = $(ev.srcElement);
@@ -82,6 +86,7 @@
                         }
                     }
                 }
+				$(window).unbind('unload.popupCloseMonitor');
                 window.location.reload(true);
             }, 300);
         });

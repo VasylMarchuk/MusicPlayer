@@ -4,13 +4,13 @@ var ChromePlayer;
 
 	function Application() {
 		var me = this;
-		
+
 		me.classes = {};
 		me.LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
 		me.LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
 		me.VK_APP_ID = "2387324";
 		me.GA_ACCOUNT = 'UA-26418593-2';
-		
+
 	}
 
 	Application.prototype.md5 = function() {
@@ -26,6 +26,18 @@ var ChromePlayer;
 			callback.apply(undefined, argsa);
 		}
 	};
+
+	Object.defineProperty(Application.prototype, 'isFirstRun', {
+		get : function(){
+			if(this._fr) {
+				return this._fr;
+			}
+
+			var usedBefore = (localStorage.getItem('usedBefore') == 'true');
+			localStorage.setItem('usedBefore', 'true');
+			return this._fr = !usedBefore;
+		}
+	});
 
 	Object.defineProperty(Application.prototype, 'analytics', {
 		get : function(){

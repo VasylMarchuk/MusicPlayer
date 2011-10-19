@@ -32,6 +32,7 @@
 		me.cache = {};
 		me.currentState = 'stopped';
         me.lovedTracksCache = {};
+		me.freshPlayList = true;
 
 		//TODO: Start and stop progress checking only when needed
 		me.progressInterval = setInterval(function(){
@@ -40,6 +41,8 @@
 	}
     
 	Player.prototype.loadPlayList = function (playList, callback){
+		app.analytics.loadPlayList();
+
 		if(!playList) {
 			playList = [];
 		}
@@ -55,6 +58,7 @@
 				me.currentDuration = 0;
 				me.currentProgress = 0;
 				me.currentState = 'stopped';
+				me.freshPlayList = true;
 
 				if(playList && playList.length) {
 //                    me.refreshLovedTracks();
@@ -123,13 +127,16 @@
 
 		var track = me.getTrack(trackId);
 
-        var trackCacheKey = track.artist + '-' + track.title;
-
 		if(!track) {
 			var err = new Error(i18n.getMessage('trackNotInPlaylist', [trackId]));
 			me.trigger('trackError', [trackId, err]);
 			cbk(callback, err);
 		}
+
+		app.analytics.play(isNext && !me.freshPlayList);
+		me.freshPlayList = false;
+
+		var trackCacheKey = track.artist + '-' + track.title;
 
 		track.scrobbled = false;
 
@@ -342,6 +349,7 @@
 	};
 
     Player.prototype.clearAuthorization = function(){
+		app.analytics.clearAuth();
         localStorage.removeItem('vkSessionAccessToken');
         localStorage.removeItem('vkSessionExpires');
         localStorage.removeItem('vkSessionUserId');
@@ -352,6 +360,9 @@
 
 	Player.prototype.toggleScrobbling = function(enable, callback) {
 		var me = this;
+
+		app.analytics.toggleScrobbling(enable);
+
 		if(enable) {
 			if(me.lastFm) {
 				localStorage.setItem('lastFmScrobblingEnabled', true);
@@ -380,6 +391,7 @@
 		var track = me.getTrack(trackId);
 		if(track) {
 			if(me.lastFm) {
+				app.analytics.loveTrack(true);
 				me.lastFm.loveTrack(track.artist, track.title, function(err){
 					if(!err) {
 						console.log("Track loved: %s", trackId);
@@ -402,6 +414,7 @@
 		var track = me.getTrack(trackId);
 		if(track) {
 			if(me.lastFm) {
+				app.analytics.loveTrack(false);
 				me.lastFm.unLoveTrack(track.artist, track.title, function(err){
 					if(!err) {
 						console.log("Track unloved: %s", trackId);

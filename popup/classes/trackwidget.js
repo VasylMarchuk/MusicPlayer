@@ -36,6 +36,7 @@
 				if(trackCacheKey in tracksCache && tracksCache[trackCacheKey].tracks.length>1) {
 					tracksCache[trackCacheKey].tracks.push(tracksCache[trackCacheKey].tracks.shift());
 					localStorage.setItem('tracksCache', JSON.stringify(tracksCache));
+					app.analytics.nextMp3();
 					player.play(track.id, false);
 				}
 			},

@@ -95,6 +95,7 @@
                     });
                     playerAndPlayListContainer.addClass('collapsed');
 
+					app.analytics.search();
 
                     var playList = [];
 

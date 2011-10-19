@@ -23,6 +23,7 @@
                         }
                         setTimeout(function(){
                             $('#main-content').css('visibility', 'hidden');
+							$(window).unbind('unload.popupCloseMonitor');
                             window.location.reload(true);
                         }, shiftPressed ? 300 : 0);
                     }
@@ -56,11 +57,11 @@
         bgPage.popup = window;
 		var isAuthorized = (Boolean)(player.vk && player.lastFm);
 
-		app.analytics.popUpShown();
+		app.analytics.popUpShown(app.isFirstRun);
 
-		$(window).unload(function(){
+		$(window).bind('unload.popupCloseMonitor', (function(){
 			app.analytics.popUpHidden(isAuthorized, Date.now() - openTime);
-		});
+		}));
 
         initReloader(bgPage);
 

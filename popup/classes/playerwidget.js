@@ -43,6 +43,7 @@
 
 		ctrl.play.bind({
 			click : function(){
+				app.analytics.playButton();
 				player.resume(function(err){
 					if(err) {
 						ctrl.title.text(err.message);
@@ -63,7 +64,10 @@
 		});
 
 		ctrl.pause.bind({
-			click : function(){ player.pause(); },
+			click : function(){
+				app.analytics.pauseButton();
+				player.pause();
+			},
 			mousedown : function(){
 				$(this).addClass('down');
 				ctrl.play.addClass('down');
@@ -74,7 +78,10 @@
 			}
 		});
 
-		clickable(ctrl.next, function(){ player.playNextAvailable(player.currentTrackId); });
+		clickable(ctrl.next, function(){
+			app.analytics.nextButton();
+			player.playNextAvailable(player.currentTrackId);
+		});
 
 		ctrl.love.click(function(){
 			if($(this).hasClass('disabled')) {
