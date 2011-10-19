@@ -1,17 +1,20 @@
 var ChromePlayer;
 
-(function(){
+(function(window){
 
 	function Application() {
-		this.classes = {};
-        this.LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
-        this.LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
-        this.VK_APP_ID = "2387324";
-        this.GA_ACCOUNT = 'UA-26418593-2';
+		var me = this;
+		
+		me.classes = {};
+		me.LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
+		me.LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
+		me.VK_APP_ID = "2387324";
+		me.GA_ACCOUNT = 'UA-26418593-2';
+		
 	}
 
 	Application.prototype.md5 = function() {
-		throw new Error('MD5 module has not been loaded');	
+		throw new Error('MD5 module has not been loaded');
 	};
 
 	Application.prototype.cbk = function(callback, args) {
@@ -24,6 +27,13 @@ var ChromePlayer;
 		}
 	};
 
+	Object.defineProperty(Application.prototype, 'analytics', {
+		get : function(){
+			throw new Error('Analytics module has not been loaded');
+		},
+		configurable : true
+	});
+
 	ChromePlayer = new Application();
-	
-})();
+
+})(window);

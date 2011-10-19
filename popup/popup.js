@@ -1,15 +1,4 @@
 (function(app){
-
-    /* Google analytics */
-    var _gaq = window._gaq = window._gaq || [];
-    _gaq.push(['_setAccount', app.GA_ACCOUNT]);
-    _gaq.push(['_trackPageview']);
-    (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = 'https://ssl.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-
     var SearchWidget = app.classes.SearchWidget;
     var PlayerWidget = app.classes.PlayerWidget;
     var TrackListWidget = app.classes.TrackListWidget;
@@ -51,6 +40,7 @@
 
     //Constructor
     $(function(){
+		var openTime = Date.now();
         var bgPage = chrome.extension.getBackgroundPage();
         var player = bgPage.player;
 
@@ -64,12 +54,19 @@
         }
 
         bgPage.popup = window;
+		var isAuthorized = (Boolean)(player.vk && player.lastFm);
+
+		app.analytics.popUpShown();
+
+		$(window).unload(function(){
+			app.analytics.popUpHidden(isAuthorized, Date.now() - openTime);
+		});
 
         initReloader(bgPage);
 
         var $mainContent = $('#main-content');
 
-        if(!player.vk || !player.lastFm) {
+        if(!isAuthorized) {
             $mainContent.addClass('welcome');
             var welcomeWidget = new WelcomeWidget(player, $mainContent);
             $mainContent.empty().append(welcomeWidget.$element);
