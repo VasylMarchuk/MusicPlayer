@@ -7,6 +7,7 @@ var ChromePlayer;
         this.LASTFM_API_KEY = 'b6ee0c125425b77a1d35c95e1ac7647c';
         this.LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
         this.VK_APP_ID = "2387324";
+        this.GA_ACCOUNT = 'UA-26418593-2';
 	}
 
 	Application.prototype.md5 = function() {
