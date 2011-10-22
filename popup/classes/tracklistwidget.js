@@ -73,7 +73,9 @@
 		setTimeout(function(){
             me.initScroll();
             if(playList && playList.length) {
-                me.controls.scrollBar.show();
+                if(!me.controls.scrollBar.hasClass('disable')) {
+                    me.controls.scrollBar.show();
+                }
             }
         }, 200);
 	};

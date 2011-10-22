@@ -169,7 +169,10 @@
                     playerAndPlayListContainer.one('webkitTransitionEnd', function(){
                         trackList.scrollToCurrent();
                         if(trackList.playList && trackList.playList.length) {
-                            trackList.controls.scrollBar.show();
+                            if(!trackList.controls.scrollBar.hasClass('disable')) {
+                                trackList.controls.viewPort.removeClass('wide');
+                                trackList.controls.scrollBar.show();
+                            }
                         }
                     });
                     playerAndPlayListContainer.addClass('collapsed');
@@ -251,8 +254,12 @@
                 ctrl.results.hide().parent().removeClass('open');
                 playerAndPlayListContainer.one('webkitTransitionEnd', function(){
                     trackList.scrollToCurrent();
-                    if(trackList.playList && trackList.playList.length) {
-                        trackList.controls.scrollBar.show();
+                    if(!trackList.controls.scrollBar.hasClass('disable')) {
+                        if(trackList.playList && trackList.playList.length) {
+                            trackList.controls.scrollBar.show();
+                        }
+                    } else {
+                        trackList.controls.viewPort.addClass('wide');
                     }
                 });
                 playerAndPlayListContainer.removeClass('collapsed');
