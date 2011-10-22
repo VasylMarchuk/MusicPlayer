@@ -86,6 +86,13 @@
         var delay = true;
 
         ctrl.omniBox.keydown(function(ev){
+
+            if(ev.keyCode==27 && ctrl.omniBox.val()!=='') {//Esc
+                ctrl.omniBox.val('');
+                ctrl.omniBox.keyup();
+                ev.preventDefault();
+            }
+
             if(ev.keyCode == 40 || ev.keyCode == 38) {
                 var down = ev.keyCode == 40;
                 if(ctrl.overView.children().size()>0) {
@@ -129,7 +136,6 @@
         });
 
         ctrl.omniBox.keyup(function(ev){
-
             if(ev.keyCode == 13 && ctrl.overView.children('.focus').size()>0) {
                 ctrl.overView.children('.focus').click();
                 return;
