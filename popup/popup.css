@@ -366,10 +366,13 @@ body {
     width:13px;
     height:11px;
     padding: 2px;
-    background:url(love.png) no-repeat -13px 0;
+    background:url(love.png) no-repeat 0 0;
     background-origin: content-box;
     background-clip: content-box;
     border: 1px solid #dfdfdf;
+}
+#player-widget .button.love:hover {
+    background-position: -13px 0;
 }
 
 #player-widget .button.love.undetermined {
@@ -381,6 +384,9 @@ body {
     cursor: default;
 }
 #player-widget .button.love.loved {
+    background-position: -13px 0;
+}
+#player-widget .button.love.loved:hover {
     background-position: -26px 0;
 }
 
