@@ -303,7 +303,7 @@ body {
     line-height: 88px;
 }
 
-#search-widget .results .track {
+#search-widget .results .trackitem {
     position: relative;
     padding-left: 10px;
     height: 21px;
@@ -311,12 +311,12 @@ body {
     overflow: hidden;
     cursor: pointer;
 }
-#search-widget .results .track:hover {
+#search-widget .results .trackitem:hover {
     color: #DFDFDF;
     text-shadow: 0 0 3px black;
 }
 
-#search-widget .results .track .triangle {
+#search-widget .results .trackitem .triangle {
     width: 0;
     height: 0;
     position: absolute;
@@ -328,10 +328,64 @@ body {
     display:none;
 }
 
-#search-widget .results .track:hover .triangle {
+#search-widget .results .trackitem:hover .triangle {
     display:block;
     color: #DFDFDF;
     /*box-shadow:0 0 8px rgba(0,0,0,0.7);*/
+}
+
+#search-widget .results .viewport {
+    overflow: hidden;
+    position: absolute;
+    left: 7px;
+    right: 20px;
+    top: 7px;
+    bottom: 7px;
+}
+#search-widget .results .overview {
+    position: absolute;
+}
+
+#search-widget .results .thumb .end,
+#search-widget .results .thumb {
+    background-color: #3ccbff;
+    border-radius: 5px;
+}
+
+#search-widget .results .scrollbar {
+    position: absolute;
+    width: 8px;
+    cursor: pointer;
+    top: 7px;
+    right: 7px;
+    bottom: 7px;
+}
+
+#search-widget .results .scrollbar .track {
+    background-color: #666;
+    height: 100%;
+    width:8px;
+    position: relative;
+    padding: 0;
+    border-radius: 5px;
+    box-shadow: inset 0 0 1px black;
+    color: #003b00;
+}
+
+#search-widget .results .scrollbar .thumb {
+    height: 20px;
+    width: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+#search-widget .results .scrollbar .thumb .end {
+    overflow: hidden;
+    height: 5px;
+    width: 8px;
+    display:none;
 }
 
 
@@ -551,6 +605,7 @@ body {
     position: relative;
     padding: 0;
     border-radius: 5px;
+    box-shadow: inset 0 0 1px rgba(0,0,0, 0.3);
 }
 
 #track-list .thumb {

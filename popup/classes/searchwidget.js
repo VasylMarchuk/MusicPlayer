@@ -23,7 +23,7 @@
 
         playList.push(trackObject);
 
-        var $trackElem = $('<div/>', {'class':'track'});
+        var $trackElem = $('<div/>', {'class':'trackitem'});
         $trackElem.append($('<div />', { 'class':'triangle' }), trackObject.artist + ' - ' + trackObject.title);
         $trackElem.click(function(){
             player.loadPlayList(playList, function(err){
@@ -56,8 +56,26 @@
         var ctrl = me.controls = {
             omniBox : $('<input />', {'class':'omnibox', text : '', placeholder : i18n.getMessage('searchBoxPlaceholder') }),
             clearButton : $('<div />', { 'class' : 'omnibox-clear' }),
-            results : $('<div />', {'class':'results'})
+            results : $('<div />', {'class':'results'}),
+
+            viewPort : $('<div/>', {'class':'viewport'}),
+            overView : $('<div/>', {'class':'overview'}),
+            scrollBar : $('<div/>', {'class':'scrollbar'}),
+            scrollBarTrack : $('<div/>', {'class':'track'}),
+            scrollBarThumb : $('<div/>', {'class':'thumb'}),
+            scrollBarEnd : $('<div/>', {'class':'end'})
         };
+
+        var spinnerWidget;
+
+        ctrl.scrollBarThumb.append(ctrl.scrollBarEnd);
+        ctrl.scrollBarTrack.append(ctrl.scrollBarThumb);
+        ctrl.scrollBar.append(ctrl.scrollBarTrack);
+        ctrl.viewPort.append(ctrl.overView);
+
+        ctrl.results.append(ctrl.scrollBar,  ctrl.viewPort);
+
+        ctrl.results.tinyscrollbar({sizethumb: 15});
 
         ctrl.clearButton.click(function(){
             ctrl.omniBox.val('');
@@ -78,15 +96,23 @@
                 clearTimeout(searchTimeout);
                 //cancel ajax request?
             }
+            if(spinnerWidget) {
+                spinnerWidget.$element.remove();
+            }
             ctrl.omniBox.prevValue = txt;
 
             var searchQuery = (function(txt){
                 return function (){
-                    var sw = new SpinnerWidget(delay);
+                    spinnerWidget = new SpinnerWidget(delay);
                     delay = false;
 
-                    trackList.controls.scrollBar.hide();
-                    ctrl.results.empty().append(sw.$element).show().parent().addClass('open');
+                    if(!playerAndPlayListContainer.hasClass('collapsed')) {
+                        trackList.controls.scrollBar.hide();
+                    }
+                    
+                    ctrl.overView.empty();
+                    ctrl.results.append(spinnerWidget.$element).show().parent().addClass('open');
+
                     playerAndPlayListContainer.one('webkitTransitionEnd', function(){
                         trackList.scrollToCurrent();
                         if(trackList.playList && trackList.playList.length) {
@@ -101,11 +127,12 @@
 
                     if(txt.indexOf('-') === -1) { //artist
                         player.lastFm.getArtistTopTracks(txt.trim(), false, function(err, tracks){
-                            ctrl.results.empty();
+                            ctrl.overView.empty();
+                            ctrl.scrollBar.hide();
+                            spinnerWidget.$element.remove();
                             if(err) {
                                 var $m = $('<div/>', { 'class' : 'message' });
-                                ctrl.results.empty().append($m);
-
+                                ctrl.overView.empty().append($m);
                                 if(err.message && err.message.indexOf('code=6;')!==-1) {
                                     $m.text(i18n.getMessage('searchNoResults'));
                                 } else {
@@ -114,18 +141,24 @@
                             } else {
                                 var realArtistName = $('toptracks', tracks).attr('artist');
                                 $('track', tracks).each(function(index, track){
-                                    ctrl.results.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
+                                    ctrl.overView.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
                                 });
+                                if(ctrl.overView.children().size()>4) {
+                                    ctrl.scrollBar.show();
+                                }
                             }
+                            setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
                         })
                     } else { //track
                         var txtParts = txt.split(' - ', 2);
                         if(txtParts[0].trim() && txtParts[1].trim()) {
                             player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
-                                ctrl.results.empty();
+                                spinnerWidget.$element.remove();
+                                ctrl.overView.empty();
+                                ctrl.scrollBar.hide();
                                 if(err) {
                                     var $m = $('<div/>', { 'class' : 'message' });
-                                    ctrl.results.empty().append($m);
+                                    ctrl.overView.empty().append($m);
                                     if(err.message && err.message.indexOf('code=6;')!==-1) {
                                         $m.text(i18n.getMessage('searchNoResults'));
                                     } else {
@@ -133,9 +166,13 @@
                                     }
                                 } else {
                                     $('track', tracks).each(function(index, track){
-                                        ctrl.results.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
+                                        ctrl.overView.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
                                     });
+                                    if(ctrl.overView.children().size()>4) {
+                                        ctrl.scrollBar.show();
+                                    }
                                 }
+                                setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
                             });
                         }
                     }
@@ -162,9 +199,6 @@
 
 
         $el.append(ctrl.omniBox, ctrl.clearButton.hide(), ctrl.results.hide());
-
-//		$el.bind('addedToDom', function addedToDom(){
-//        });
     }
 
 //	SearchWidget.prototype.setVkStatus = function(username) {

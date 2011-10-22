@@ -91,7 +91,7 @@
 
 	TrackListWidget.prototype.updateScroll = function updateScroll(to) {
 		var me = this;
-		me.$element.update(to);
+		me.$element.tinyscrollbar_update(to);
 	};
 
 	TrackListWidget.prototype.scrollToCurrent = function scrollToCurrent() {
