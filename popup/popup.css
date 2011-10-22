@@ -311,7 +311,7 @@ body {
     overflow: hidden;
     cursor: pointer;
 }
-#search-widget .results .trackitem:hover {
+#search-widget .results .trackitem:hover, #search-widget .results .trackitem.focus {
     color: #DFDFDF;
     text-shadow: 0 0 3px black;
 }
@@ -328,7 +328,7 @@ body {
     display:none;
 }
 
-#search-widget .results .trackitem:hover .triangle {
+#search-widget .results .trackitem:hover .triangle, #search-widget .results .trackitem.focus .triangle {
     display:block;
     color: #DFDFDF;
     /*box-shadow:0 0 8px rgba(0,0,0,0.7);*/
@@ -344,6 +344,8 @@ body {
 }
 #search-widget .results .overview {
     position: absolute;
+    left: 0px;
+    right: 0px;
 }
 
 #search-widget .results .thumb .end,

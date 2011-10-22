@@ -84,7 +84,57 @@
 
         var searchTimeout;
         var delay = true;
+
+        ctrl.omniBox.keydown(function(ev){
+            if(ev.keyCode == 40 || ev.keyCode == 38) {
+                var down = ev.keyCode == 40;
+                if(ctrl.overView.children().size()>0) {
+                    ev.preventDefault();
+
+                    var $current = ctrl.overView.children('.focus');
+
+                    var $next;
+                    if($current.size()>0) {
+                        $next = down ? $current.next() : $current.prev();
+                        if($next.size()>0) {
+                            $current.removeClass('focus');
+                        }
+                    } else {
+                        if(down) {
+                            $next = ctrl.overView.children().first();
+                        } else {
+                            $next = ctrl.overView.children().last();
+                        }
+                    }
+
+                    if($next.size()>0) {
+                        $next.addClass('focus');
+                        if($next.position().top + ($next.outerHeight()*2) < ctrl.overView.height()) {
+                            var scr = $next.position().top;
+
+                            if(down) {
+                                if($current.size() && (ctrl.overView.position().top < ($next.position().top + $next.outerHeight())) && $next.next().size()>0) {
+                                    scr -= $next.outerHeight();
+                                }
+                            } else {
+                                if($current.size() && (ctrl.overView.position().top < ($next.position().top + $next.outerHeight())) && $next.prev().size()>0) {
+                                    scr -= $next.outerHeight();
+                                }
+                            }
+                            ctrl.results.tinyscrollbar_update(scr);
+                        }
+                    }
+                }
+            }
+        });
+
         ctrl.omniBox.keyup(function(ev){
+
+            if(ev.keyCode == 13 && ctrl.overView.children('.focus').size()>0) {
+                ctrl.overView.children('.focus').click();
+                return;
+            }
+
             var txt = ctrl.omniBox.val();
 
             ctrl.clearButton.toggle(txt!='');
@@ -92,6 +142,9 @@
             if(txt == ctrl.omniBox.prevValue && ev.keyCode != 13) { //also let the "enter" key get through to allow immediate search
                 return;
             }
+
+            ctrl.results.children('.focus').removeClass('focus');
+
             if(searchTimeout!==undefined) {
                 clearTimeout(searchTimeout);
                 //cancel ajax request?
@@ -109,7 +162,7 @@
                     if(!playerAndPlayListContainer.hasClass('collapsed')) {
                         trackList.controls.scrollBar.hide();
                     }
-                    
+
                     ctrl.overView.empty();
                     ctrl.results.append(spinnerWidget.$element).show().parent().addClass('open');
 
@@ -121,7 +174,7 @@
                     });
                     playerAndPlayListContainer.addClass('collapsed');
 
-					app.analytics.search();
+                    app.analytics.search();
 
                     var playList = [];
 
@@ -130,8 +183,9 @@
                             ctrl.overView.empty();
                             ctrl.scrollBar.hide();
                             spinnerWidget.$element.remove();
+                            var $m = $('<div/>', { 'class' : 'message' });
+
                             if(err) {
-                                var $m = $('<div/>', { 'class' : 'message' });
                                 ctrl.overView.empty().append($m);
                                 if(err.message && err.message.indexOf('code=6;')!==-1) {
                                     $m.text(i18n.getMessage('searchNoResults'));
@@ -143,6 +197,10 @@
                                 $('track', tracks).each(function(index, track){
                                     ctrl.overView.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
                                 });
+                                if(ctrl.overView.children().size()==0) {
+                                    ctrl.overView.empty().append($m);
+                                    $m.text(i18n.getMessage('searchNoResults'));
+                                }
                                 if(ctrl.overView.children().size()>4) {
                                     ctrl.scrollBar.show();
                                 }
@@ -156,8 +214,9 @@
                                 spinnerWidget.$element.remove();
                                 ctrl.overView.empty();
                                 ctrl.scrollBar.hide();
+                                var $m = $('<div/>', { 'class' : 'message' });
+
                                 if(err) {
-                                    var $m = $('<div/>', { 'class' : 'message' });
                                     ctrl.overView.empty().append($m);
                                     if(err.message && err.message.indexOf('code=6;')!==-1) {
                                         $m.text(i18n.getMessage('searchNoResults'));
@@ -168,6 +227,10 @@
                                     $('track', tracks).each(function(index, track){
                                         ctrl.overView.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
                                     });
+                                    if(ctrl.overView.children().size()==0) {
+                                        ctrl.overView.empty().append($m);
+                                        $m.text(i18n.getMessage('searchNoResults'));
+                                    }
                                     if(ctrl.overView.children().size()>4) {
                                         ctrl.scrollBar.show();
                                     }
