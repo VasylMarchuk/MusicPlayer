@@ -130,5 +130,21 @@
     "about" : {
         "message" : "О расширении",
         "description" : "Text for menu item 'about'"
+    },
+    "aboutVersion" : {
+        "message" : "Версия: $1",
+        "description" : "Text for Version: xxx label in 'about' window"
+    },
+    "aboutDevelopedBy" : {
+        "message" : "Разработано:&nbsp;",
+        "description" : "Text for Developed by: xxx hyperlink prefix in 'about' window"
+    },
+    "aboutCreditsLabel" : {
+        "message" : "Благодарности:",
+        "description" : "Text for Credits: header in 'about' window"
+    },
+    "aboutCreditsList" : {
+        "message" : "<ul><li>Google Chrome — торговая марка Google Inc.<br/>Использование этой торговой марки регулируется правилами Google</li><li>Иконка от ~barrymieny @ deviantART</li></ul>",
+        "description" : "Text for credits list in 'about' window"
     }
 }

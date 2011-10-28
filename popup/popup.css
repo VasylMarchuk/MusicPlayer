@@ -839,6 +839,83 @@ body {
     /*box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;*/
 }
 
+#about-widget {
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    padding: 20px 20px 5px 20px;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    border: 1px solid #DFDFDF;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.6), 0 3px 5px rgba(0,0,0,-0.1);
+}
+
+#about-widget .ext-name {
+    position: relative;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+}
+
+#about-widget .ext-descr {
+    position: relative;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+#about-widget .developed-by {
+    position: relative;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+#about-widget .developed-by a {
+    color: #66aecc;
+}
+
+#about-widget .ext-version {
+    position: relative;
+    margin-bottom: 20px;
+    color: #999;
+}
+
+#about-widget .credits-label {
+    position: relative;
+    color: #444;
+    margin-bottom: 20px;
+    border-top: 1px solid #DFDFDF;
+}
+
+#about-widget .credits-list {
+    position: relative;
+    margin-bottom: 20px;
+    color: #444;
+}
+
+#about-widget .credits-list ul {
+    margin:0;
+    padding-left: 20px;
+}
+
+#about-widget .credits-list ul li {
+    padding-bottom: 5px;
+}
+#about-widget .credits-list ul li:last-of-type {
+    padding-bottom: 0;
+}
+
+#about-widget .ninja {
+    position: relative;
+    color: #444;
+    text-align: center;
+    background: url(ninja.png) no-repeat center center;
+    height: 44px;
+    border-top: 1px solid #DFDFDF;
+    padding-top: 30px;
+}
+
 /*
 * VARIOUS PARTS
 */

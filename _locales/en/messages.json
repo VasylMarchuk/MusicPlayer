@@ -130,5 +130,21 @@
     "about" : {
         "message" : "About",
         "description" : "Text for menu item 'about'"
+    },
+    "aboutVersion" : {
+        "message" : "Version: $1",
+        "description" : "Text for Version: xxx label in 'about' window"
+    },
+    "aboutDevelopedBy" : {
+        "message" : "Developed by:&nbsp;",
+        "description" : "Text for Developed by: xxx hyperlink prefix in 'about' window"
+    },
+    "aboutCreditsLabel" : {
+        "message" : "Credits:",
+        "description" : "Text for Credits: header in 'about' window"
+    },
+    "aboutCreditsList" : {
+        "message" : "<ul><li>Google Chrome is a trademark of Google Inc.<br/>Use of this trademark is subject to Google Permissions</li><li>Player icon by ~barrymieny @ deviantART</li></ul>",
+        "description" : "Text for credits list in 'about' window"
     }
 }

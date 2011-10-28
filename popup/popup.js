@@ -88,7 +88,7 @@
             var trackListWidget = new TrackListWidget(player);
             var searchWidget = new SearchWidget(player, ctrl.playerAndTrackListContainer, trackListWidget);
             var playerWidget = new PlayerWidget(player, trackListWidget);
-            var statusBarWidget = new StatusBarWidget(player, trackListWidget);
+            var statusBarWidget = new StatusBarWidget(player, trackListWidget, $mainContent);
 
             ctrl.searchContainer.append(searchWidget.$element);
             ctrl.playerContainer.append(playerWidget.$element);

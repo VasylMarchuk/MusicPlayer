@@ -10,6 +10,8 @@
 	function Player() {
 		var me = this;
 
+        button.setToolTip(i18n.getMessage('extToolTip'));
+
 		if(localStorage.getItem('lastFmSessionKey')) {
 			me.lastFm = new LastFmApi(localStorage.getItem('lastFmSessionKey'), localStorage.getItem('lastFmSessionUserName'), app.LASTFM_API_KEY, app.LASTFM_API_SECRET);
 		}

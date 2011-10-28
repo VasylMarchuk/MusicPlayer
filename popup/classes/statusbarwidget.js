@@ -10,10 +10,11 @@
         });
     }
 
-    function StatusBarWidget(player, trackListWidget) {
+    function StatusBarWidget(player, trackListWidget, mainContent) {
         var me = this;
         me.player = player;
         me.trackListWidget = trackListWidget;
+        me.$mainContent = $(mainContent);
 
         var $el = me.$element = $('<div />', {
             id:'status-bar-widget'
@@ -61,14 +62,13 @@
             } else {
 				app.analytics.settingsMenu();
                 ctrl.settingsMenu.show();
-                function clickHandler(ev){
+                $(document).bind('click.menuCloseHandler', function clickHandler(ev){
                     var $clicked = $(ev.srcElement);
                     if($clicked.parents('.settings-menu, .settings-button').size() == 0 && !$clicked.is('.settings-menu, .settings-button')) {
-                        $(document).unbind('click', clickHandler);
+                        $(document).unbind('click.menuCloseHandler');
                         ctrl.settingsMenu.hide();
                     }
-                }
-                $(document).click(clickHandler);
+                });
             }
         });
 
@@ -89,6 +89,16 @@
 				$(window).unbind('unload.popupCloseMonitor');
                 window.location.reload(true);
             }, 300);
+        });
+
+        ctrl.about.click(function(ev){
+            ev.stopPropagation();
+            $(document).unbind('click.menuCloseHandler');
+            ctrl.settingsMenu.hide();
+            app.analytics.aboutShown();
+            var ab = new app.classes.AboutWidget();
+            me.$mainContent.append(ab.$element);
+            ab.$element.trigger('addedToDom');
         });
 
         player.bind( {
@@ -123,8 +133,6 @@
         }
 
         $el.append(ctrl.settingsButton, ctrl.playListPosition, ctrl.scrobblingStatus, ctrl.settingsMenu.hide());
-
-//		$el.bind('addedToDom', function addedToDom(){});
     }
 
     StatusBarWidget.prototype.setPlayListPosition = function(trackId) {

@@ -33,6 +33,7 @@
 	Analytics.prototype.popUpHidden = function(wasAuthorized, timeSpent){
 		return this.ga.push(['_trackEvent', 'App', 'Popup closed - '+ (wasAuthorized?'authorized':'unauthorized'), undefined, timeSpent]);
 	};
+
 	Analytics.prototype.vkAuthBegin = function() {
 		return this.ga.push(['_trackEvent', 'App', 'VK auth began']);
 	};
@@ -73,6 +74,9 @@
 	Analytics.prototype.settingsMenu = function() {
 		return this.ga.push(['_trackEvent', 'UI', 'Settings menu']);
 	};
+    Analytics.prototype.aboutShown = function(){
+        return this.ga.push(['_trackEvent', 'UI', 'About window opened']);
+    };
 
 	Analytics.prototype.loadPlayList = function() {
 		return this.ga.push(['_trackEvent', 'Player', 'Load playlist']);
