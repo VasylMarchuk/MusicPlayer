@@ -161,8 +161,9 @@
             }
 
             if(currentSearchRequest) { //clear ongoing search request
-                currentSearchRequest.abort();
-                currentSearchRequest=null;
+                var csr = currentSearchRequest;
+                currentSearchRequest = null;
+                csr.abort();
             }
 
             if(spinnerWidget) {
@@ -193,8 +194,6 @@
                     });
                     playerAndPlayListContainer.addClass('collapsed');
 
-                    app.analytics.search();
-
                     var playList = [];
 
                     if(txt.indexOf('-') === -1) { //artist
@@ -209,8 +208,10 @@
                                 if(err) {
                                     ctrl.overView.empty().append($m);
                                     if(err.message && err.message.indexOf('code=6;')!==-1) {
+                                        app.analytics.search(0);
                                         $m.text(i18n.getMessage('searchNoResults'));
                                     } else {
+                                        console.log(err);
                                         $m.text(i18n.getMessage('searchUnknownError'));
                                     }
                                 } else {
@@ -218,13 +219,18 @@
                                     $('track', tracks).each(function(index, track){
                                         ctrl.overView.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
                                     });
-                                    if(ctrl.overView.children().size()==0) {
+
+                                    var resultsCount = ctrl.overView.children().size();
+
+                                    if(resultsCount==0) {
                                         ctrl.overView.empty().append($m);
                                         $m.text(i18n.getMessage('searchNoResults'));
                                     }
-                                    if(ctrl.overView.children().size()>4) {
+                                    if(resultsCount>4) {
                                         ctrl.scrollBar.show();
                                     }
+                                    
+                                    app.analytics.search(resultsCount);
                                 }
                                 setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
                             }
@@ -244,20 +250,27 @@
                                         ctrl.overView.empty().append($m);
                                         if(err.message && err.message.indexOf('code=6;')!==-1) {
                                             $m.text(i18n.getMessage('searchNoResults'));
+                                            app.analytics.search(0);
                                         } else {
+                                            console.log(err);
                                             $m.text(i18n.getMessage('searchUnknownError'));
                                         }
                                     } else {
                                         $('track', tracks).each(function(index, track){
                                             ctrl.overView.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
                                         });
-                                        if(ctrl.overView.children().size()==0) {
+
+                                        var resultsCount = ctrl.overView.children().size();
+
+                                        if(resultsCount==0) {
                                             ctrl.overView.empty().append($m);
                                             $m.text(i18n.getMessage('searchNoResults'));
                                         }
-                                        if(ctrl.overView.children().size()>4) {
+                                        if(resultsCount>4) {
                                             ctrl.scrollBar.show();
                                         }
+
+                                        app.analytics.search(resultsCount);
                                     }
                                     setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
                                 }

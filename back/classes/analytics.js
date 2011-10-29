@@ -53,8 +53,8 @@
 		return this.ga.push(['_trackEvent', 'App', 'Clear auth']);
 	};
 
-	Analytics.prototype.search = function() {
-		return this.ga.push(['_trackEvent', 'UI', 'Search']);
+	Analytics.prototype.search = function(resultsCount) {
+		return this.ga.push(['_trackEvent', 'UI', 'Search', 'Results', resultsCount]);
 	};
 	Analytics.prototype.playButton = function() {
 		return this.ga.push(['_trackEvent', 'UI', 'Play']);
