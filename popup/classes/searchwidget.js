@@ -82,6 +82,7 @@
             ctrl.omniBox.keyup();
         });
 
+        var currentSearchRequest;
         var searchTimeout;
         var delay = true;
 
@@ -93,13 +94,15 @@
                 ev.preventDefault();
             }
 
-            if(ev.keyCode == 40 || ev.keyCode == 38) {
+            if(ev.keyCode == 40 || ev.keyCode == 38) { //Up or down
                 var down = ev.keyCode == 40;
                 if(ctrl.overView.children().size()>0) {
                     ev.preventDefault();
 
+                    //highlight next/prev item and scroll it into view
                     var $current = ctrl.overView.children('.focus');
 
+                    //detect item to highlight
                     var $next;
                     if($current.size()>0) {
                         $next = down ? $current.next() : $current.prev();
@@ -116,6 +119,7 @@
 
                     if($next.size()>0) {
                         $next.addClass('focus');
+                        //intelligently scroll to next item
                         if($next.position().top + ($next.outerHeight()*2) < ctrl.overView.height()) {
                             var scr = $next.position().top;
 
@@ -136,6 +140,7 @@
         });
 
         ctrl.omniBox.keyup(function(ev){
+            //if Enter key pressed on an item, selected by keyboard navigation
             if(ev.keyCode == 13 && ctrl.overView.children('.focus').size()>0) {
                 ctrl.overView.children('.focus').click();
                 return;
@@ -151,16 +156,21 @@
 
             ctrl.results.children('.focus').removeClass('focus');
 
-            if(searchTimeout!==undefined) {
+            if(searchTimeout!==undefined) { //clear scheduled search
                 clearTimeout(searchTimeout);
-                //cancel ajax request?
             }
+
+            if(currentSearchRequest) { //clear ongoing search request
+                currentSearchRequest.abort();
+                currentSearchRequest=null;
+            }
+
             if(spinnerWidget) {
                 spinnerWidget.$element.remove();
             }
             ctrl.omniBox.prevValue = txt;
 
-            var searchQuery = (function(txt){
+            var performSearch = (function(txt){
                 return function (){
                     spinnerWidget = new SpinnerWidget(delay);
                     delay = false;
@@ -188,41 +198,12 @@
                     var playList = [];
 
                     if(txt.indexOf('-') === -1) { //artist
-                        player.lastFm.getArtistTopTracks(txt.trim(), false, function(err, tracks){
-                            ctrl.overView.empty();
-                            ctrl.scrollBar.hide();
-                            spinnerWidget.$element.remove();
-                            var $m = $('<div/>', { 'class' : 'message' });
-
-                            if(err) {
-                                ctrl.overView.empty().append($m);
-                                if(err.message && err.message.indexOf('code=6;')!==-1) {
-                                    $m.text(i18n.getMessage('searchNoResults'));
-                                } else {
-                                    $m.text(i18n.getMessage('searchUnknownError'));
-                                }
-                            } else {
-                                var realArtistName = $('toptracks', tracks).attr('artist');
-                                $('track', tracks).each(function(index, track){
-                                    ctrl.overView.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
-                                });
-                                if(ctrl.overView.children().size()==0) {
-                                    ctrl.overView.empty().append($m);
-                                    $m.text(i18n.getMessage('searchNoResults'));
-                                }
-                                if(ctrl.overView.children().size()>4) {
-                                    ctrl.scrollBar.show();
-                                }
-                            }
-                            setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
-                        })
-                    } else { //track
-                        var txtParts = txt.split(' - ', 2);
-                        if(txtParts[0].trim() && txtParts[1].trim()) {
-                            player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
-                                spinnerWidget.$element.remove();
+                        currentSearchRequest = player.lastFm.getArtistTopTracks(txt.trim(), false, function(err, tracks){
+                            if(currentSearchRequest!==null) { //make sure this search was not cancelled
+                                currentSearchRequest = null;
                                 ctrl.overView.empty();
                                 ctrl.scrollBar.hide();
+                                spinnerWidget.$element.remove();
                                 var $m = $('<div/>', { 'class' : 'message' });
 
                                 if(err) {
@@ -233,8 +214,9 @@
                                         $m.text(i18n.getMessage('searchUnknownError'));
                                     }
                                 } else {
+                                    var realArtistName = $('toptracks', tracks).attr('artist');
                                     $('track', tracks).each(function(index, track){
-                                        ctrl.overView.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
+                                        ctrl.overView.append(createTrack(realArtistName, track.getElementsByTagName('name')[0].textContent, playList, player));
                                     });
                                     if(ctrl.overView.children().size()==0) {
                                         ctrl.overView.empty().append($m);
@@ -245,6 +227,40 @@
                                     }
                                 }
                                 setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
+                            }
+                        })
+                    } else { //track
+                        var txtParts = txt.split(' - ', 2);
+                        if(txtParts[0].trim() && txtParts[1].trim()) {
+                            currentSearchRequest = player.lastFm.findTrack(txtParts[0], txtParts[1], function(err, tracks){
+                                if(currentSearchRequest !== null) { //make sure this search was not cancelled
+                                    currentSearchRequest = null;
+                                    spinnerWidget.$element.remove();
+                                    ctrl.overView.empty();
+                                    ctrl.scrollBar.hide();
+                                    var $m = $('<div/>', { 'class' : 'message' });
+
+                                    if(err) {
+                                        ctrl.overView.empty().append($m);
+                                        if(err.message && err.message.indexOf('code=6;')!==-1) {
+                                            $m.text(i18n.getMessage('searchNoResults'));
+                                        } else {
+                                            $m.text(i18n.getMessage('searchUnknownError'));
+                                        }
+                                    } else {
+                                        $('track', tracks).each(function(index, track){
+                                            ctrl.overView.append(createTrack(track.getElementsByTagName('artist')[0].textContent, track.getElementsByTagName('name')[0].textContent, playList, player));
+                                        });
+                                        if(ctrl.overView.children().size()==0) {
+                                            ctrl.overView.empty().append($m);
+                                            $m.text(i18n.getMessage('searchNoResults'));
+                                        }
+                                        if(ctrl.overView.children().size()>4) {
+                                            ctrl.scrollBar.show();
+                                        }
+                                    }
+                                    setTimeout(function(){ ctrl.results.tinyscrollbar_update(); }, 100);
+                                }
                             });
                         }
                     }
@@ -252,7 +268,7 @@
             })(txt);
 
             if(txt) {
-                searchTimeout = setTimeout(searchQuery, ev.keyCode == 13 ? 0 : 500);
+                searchTimeout = setTimeout(performSearch, ev.keyCode == 13 ? 0 : 500);
             } else {
                 delay = true;
 

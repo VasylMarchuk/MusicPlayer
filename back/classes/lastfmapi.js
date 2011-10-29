@@ -102,7 +102,7 @@
         params.api_key = me.appId;
         params.sk = me.sessionKey;
 
-        $.ajax({
+        return $.ajax({
             url: apiBase,
             data: sign(params, me.apiSecret),
             type : method,
@@ -130,7 +130,7 @@
 
     LastFmApi.prototype.setNowPlaying = function(artist, title, album, duration, callback) {
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'track.updateNowPlaying',
             artist:artist,
             track:title,
@@ -140,7 +140,7 @@
     };
     LastFmApi.prototype.scrobble = function(artist, title, album, duration, callback){
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Track.scrobble',
             artist:artist,
             track:title,
@@ -152,22 +152,22 @@
 
     LastFmApi.prototype.getLovedTracks = function(callback){
         var me = this;
-        me.apiCall({
-            method : 'User.getLovedTracks',
+        return me.apiCall({
+            method : 'user.getlovedtracks',
             user : me.userName
         }, callback)
     };
 
     LastFmApi.prototype.getUserInfo = function(callback){
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'User.getInfo'
         }, callback)
     };
 
     LastFmApi.prototype.loveTrack = function(artist, title, callback){
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Track.love',
             artist : artist,
             track : title
@@ -175,7 +175,7 @@
     };
     LastFmApi.prototype.unLoveTrack = function(artist, title, callback){
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Track.unlove',
             artist : artist,
             track : title
@@ -184,7 +184,7 @@
 
     LastFmApi.prototype.getTrackInfo = function(artist, title, callback) {
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Track.getInfo',
             artist : artist,
             track : title,
@@ -194,7 +194,7 @@
 
     LastFmApi.prototype.getArtistTopTracks = function(artist, autoCorrect, callback) {
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Artist.getTopTracks',
             artist : artist,
             autocorrect : autoCorrect ? 1:0
@@ -203,7 +203,7 @@
 
     LastFmApi.prototype.findTrack = function(artist, track, callback) {
         var me = this;
-        me.apiCall({
+        return me.apiCall({
             method : 'Track.search',
             artist : artist,
             track: track
