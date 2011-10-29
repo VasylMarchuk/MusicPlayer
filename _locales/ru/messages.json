@@ -64,11 +64,11 @@
 		"description" : "Подсказка для лейбы номера текущего трека (1/500) в плеере"
 	},
 	"scrobblingStatusOn" : {
-		"message" : "Скробблинг: ВКЛ",
+		"message" : "Скробблинг: Включен",
 		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is on"
 	},
 	"scrobblingStatusOff" : {
-		"message" : "Скробблинг: ВЫКЛ",
+		"message" : "Скробблинг: Выключен",
 		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is off"
 	},
 	"toggleScrobbling" : {

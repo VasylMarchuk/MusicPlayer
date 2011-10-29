@@ -64,11 +64,11 @@
 		"description" : "Tooltip for the status bar's 'current track number (1/500)' label"
 	},
 	"scrobblingStatusOn" : {
-		"message" : "Scrobbling: ON",
+		"message" : "Scrobbling is: ON",
 		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is on"
 	},
 	"scrobblingStatusOff" : {
-		"message" : "Scrobbling: OFF",
+		"message" : "Scrobbling is: OFF",
 		"description" : "Text to display on the status bar's 'scrobbling status' label when scrobbling is off"
 	},
 	"toggleScrobbling" : {
