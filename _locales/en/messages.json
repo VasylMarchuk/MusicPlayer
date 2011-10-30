@@ -144,7 +144,7 @@
         "description" : "Text for Credits: header in 'about' window"
     },
     "aboutCreditsList" : {
-        "message" : "<ul><li>Google Chrome is a trademark of Google Inc.<br/>Use of this trademark is subject to Google Permissions</li><li>Player icon by ~barrymieny @ deviantART</li></ul>",
+        "message" : "<ul><li>Google Chrome is a trademark of Google Inc.<br/>Use of this trademark is subject to Google Permissions</li><li>Player icon by ~barrymieny @ deviantART</li><li>Last.fm is used for music discovery</li><li>VKontakte is used for music playback</li></ul>",
         "description" : "Text for credits list in 'about' window"
     }
 }

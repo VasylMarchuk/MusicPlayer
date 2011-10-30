@@ -144,7 +144,7 @@
         "description" : "Text for Credits: header in 'about' window"
     },
     "aboutCreditsList" : {
-        "message" : "<ul><li>Google Chrome — торговая марка Google Inc.<br/>Использование этой торговой марки регулируется правилами Google</li><li>Иконка от ~barrymieny @ deviantART</li></ul>",
+        "message" : "<ul><li>Google Chrome — торговая марка Google Inc.<br/>Использование этой торговой марки регулируется правилами Google</li><li>Иконка от ~barrymieny @ deviantART</li><li>Last.fm используется для поиска музыки</li><li>ВКонтакте используется для воспроизведения музыки</li></ul>",
         "description" : "Text for credits list in 'about' window"
     }
 }
