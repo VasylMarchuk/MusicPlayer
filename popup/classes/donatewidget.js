@@ -30,7 +30,11 @@
                     $('<input/>', { 'type':'hidden', name:'return', value:'http://hidev.it/thanks' }),
                     $('<input/>', { 'type':'image', name:'submit', border:0, src:'https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif', alt:'PayPal - The safer, easier way to pay online!' }),
                     $('<img/>', { border:0, src:'https://www.paypalobjects.com/en_US/i/scr/pixel.gif',  width:1, height:1, alt:'' })
-                )
+                ).submit((function(sum){
+                        return function() {
+                            app.analytics.donation(sum);
+                        }
+                    })(sum))
             ))
         });
 

@@ -105,7 +105,7 @@
             ev.stopPropagation();
             $(document).unbind('click.menuCloseHandler');
             ctrl.settingsMenu.hide();
-//            app.analytics.aboutShown();
+            app.analytics.donateShown();
             var dw = new app.classes.DonateWidget();
             me.$mainContent.append(dw.$element);
             dw.$element.trigger('addedToDom');

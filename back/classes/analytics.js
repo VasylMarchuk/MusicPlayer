@@ -53,6 +53,10 @@
 		return this.ga.push(['_trackEvent', 'App', 'Clear auth']);
 	};
 
+    Analytics.prototype.donation = function(sum) {
+		return this.ga.push(['_trackEvent', 'App', 'Donation', 'Sum', sum]);
+	};
+
 	Analytics.prototype.search = function(resultsCount) {
 		return this.ga.push(['_trackEvent', 'UI', 'Search', 'Results', resultsCount]);
 	};
@@ -76,6 +80,9 @@
 	};
     Analytics.prototype.aboutShown = function(){
         return this.ga.push(['_trackEvent', 'UI', 'About window opened']);
+    };
+    Analytics.prototype.donateShown = function(){
+        return this.ga.push(['_trackEvent', 'UI', 'Donate window opened']);
     };
 
 	Analytics.prototype.loadPlayList = function() {
