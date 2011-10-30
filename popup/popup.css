@@ -839,6 +839,10 @@ body {
     /*box-shadow:inset #F0F0F0 0 0 2px, inset rgba(0, 0, 0, 0.1) 0 1px 3px;*/
 }
 
+/*
+About widget
+*/
+
 #about-widget {
     position: absolute;
     background: white;
@@ -916,6 +920,58 @@ body {
     color: #444;
     text-align: center;
     background: url(ninja.png) no-repeat center center;
+    height: 44px;
+    border-top: 1px solid #DFDFDF;
+    padding-top: 30px;
+}
+
+/*
+Donate widget
+*/
+
+#donate-widget {
+    position: absolute;
+    background: white;
+    border-radius: 5px;
+    padding: 20px 20px 5px 20px;
+    left: 5px;
+    right: 5px;
+    top: 5px;
+    border: 1px solid #DFDFDF;
+    box-shadow: 0px 5px 20px rgba(0,0,0,0.6), 0 3px 5px rgba(0,0,0,-0.1);
+
+    -webkit-animation-name: zoomAppear;
+    -webkit-animation-duration: .2s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+}
+
+#donate-widget .donate-list .item{
+    position: relative;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+#donate-widget .donate-list .item .ninjas {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    top: 0;
+    background:url(ninja.png) repeat-x left center;
+    background-size: 24px;
+}
+
+#donate-widget .donate-list .item form {
+    position: absolute;
+    right: 0;
+    top: 5px;
+}
+
+#donate-widget .ninja {
+    position: relative;
+    color: #444;
+    text-align: center;
+    background: url(ninja.png) no-repeat 115px center;
     height: 44px;
     border-top: 1px solid #DFDFDF;
     padding-top: 30px;

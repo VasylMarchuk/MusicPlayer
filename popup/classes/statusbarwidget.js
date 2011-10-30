@@ -101,6 +101,16 @@
             ab.$element.trigger('addedToDom');
         });
 
+        ctrl.donate.click(function(ev){
+            ev.stopPropagation();
+            $(document).unbind('click.menuCloseHandler');
+            ctrl.settingsMenu.hide();
+//            app.analytics.aboutShown();
+            var dw = new app.classes.DonateWidget();
+            me.$mainContent.append(dw.$element);
+            dw.$element.trigger('addedToDom');
+        });
+
         player.bind( {
             'playList.statusBarWidget' : function onPlayList(ev) {
                 me.setPlayListPosition(undefined);
