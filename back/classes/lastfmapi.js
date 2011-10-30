@@ -71,8 +71,9 @@
             cbk(callback, new Error('Could not fetch token'));
         });
     };
-    LastFmApi.authToken = function(iFrameWindow, apiKey, token, callback) {
-        var url = 'http://www.last.fm/api/auth/?api_key='+apiKey+'&token='+token;
+    LastFmApi.authToken = function(iFrameWindow, apiKey, callback) {
+        //+'&token='+token
+        var url = 'http://www.last.fm/api/auth/?api_key='+apiKey+'&cb=chrome-extension://'+chrome.i18n.getMessage('@@extension_id')+'/inject/lfmsuccess.html';
 
         var authedHandler = function authedHandler(request, sender, back) {
             try {
@@ -81,14 +82,15 @@
 
             if(request.cmd == 'authSuccess') {
                 chrome.extension.onRequest.removeListener(authedHandler);
-                cbk(callback);
+                cbk(callback, request.token);
             }
         };
 
         chrome.extension.onRequest.addListener(authedHandler);
 
-
-        iFrameWindow.redirect(url);
+        setTimeout(function(){
+            iFrameWindow.redirect(url);
+        }, 300);
     };
 
     LastFmApi.prototype.apiCall = function(params, method, callback) {
