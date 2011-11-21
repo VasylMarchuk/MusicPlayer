@@ -42,6 +42,7 @@
 	],
 
 	"permissions": [
+        "https://oauth.vk.com/grant_access",
 		"https://api.vkontakte.ru/*",
 		"http://api.vkontakte.ru/*",
 		"https://api.vk.com/*",

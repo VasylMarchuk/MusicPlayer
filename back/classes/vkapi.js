@@ -11,12 +11,11 @@
     }
 
     VKApi.getSession = function(iFrameWindow, callback) {
-        var url = 'http://api.vkontakte.ru/oauth/authorize?client_id='+app.VK_APP_ID+'&scope=audio,offline&display=popup&response_type=token&_hash=0';
+        var url = 'https://api.vkontakte.ru/oauth/authorize?client_id='+app.VK_APP_ID+'&scope=audio,offline&display=popup&response_type=token&_hash=0';
 
         $.ajax({
             url:url,
             success: function(res, status, jXHR){
-
                 function authedHandler(request, sender, back) {
                     if(request.cmd == 'vkAuthSuccess') {
                         try {
@@ -79,7 +78,7 @@
                 if(iFrameWindow == null || !('setContent' in iFrameWindow)) {
                     return;
                 }
-                
+
                 iFrameWindow.setContent(res);
 
                 $('.box_login', iFrameWindow).css('width','385px');
@@ -94,6 +93,9 @@
                     }
                     var h = iFrameWindow.document.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
                 });
+            },
+            error : function(jqXHR, textStatus, errorThrown) {
+                console.log('Error getting session from VK: ' + textStatus);
             }
         });
     };
