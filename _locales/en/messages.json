@@ -1,6 +1,6 @@
 {
 	"extName" : {
-		"message" : "Player for Google Chrome™",
+		"message" : "Music Player",
 		"description" : "Extension name"
 	},
 	"extDescription" : {
@@ -12,7 +12,7 @@
 		"description" : "Extension ID  [id]"
 	},
 	"extToolTip" : {
-		"message" : "Player for Google Chrome™",
+		"message" : "Music Player",
 		"description" : "Default extenstion icon tooltip"
 	},
 	"extToolTipPlaying" : {
@@ -20,7 +20,7 @@
 		"description" : "Extenstion icon tooltip when playing a song [title, artist]"
 	},
 	"playInPlayer" : {
-		"message" : "Play in Player for Google Chrome™",
+		"message" : "Play in Music Player",
 		"description" : "Tooltip for Play button on Last.fm pages"
 	},
 	"playbackStopped" : {
