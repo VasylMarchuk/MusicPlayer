@@ -10,7 +10,7 @@ var MusicPlayer;
         me.LASTFM_API_SECRET = 'bc88fab51c9bc69376bfaece2566dada';
         me.VK_APP_ID = "2387324";
         me.VK_APP_SECRET = "kG4IQXqFvij8xseFQlPu";
-        me.GA_ACCOUNT = 'UA-26418593-2';
+        me.GA_ACCOUNT = 'UA-26418593-3';
         me.currentAuthTab = undefined;
 
         chrome.tabs.onRemoved.addListener(function(tabId){
