@@ -1,1 +1,1 @@
-chrome.extension.sendRequest({cmd: "vkAuthSuccess", hash: window.location.hash });
+chrome.extension.sendRequest({cmd: "vkAuthSuccess", hash: window.location.hash, href: window.location.href });

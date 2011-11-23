@@ -136,12 +136,11 @@ body {
 /*
 * WELCOME WIDGET
 */
-
 #welcome-widget { }
 
 #welcome-widget .title {
     font-size: 18px;
-    border-bottom: 1px solid #DFDFDF;
+    /*border-bottom: 1px solid #DFDFDF;*/
     color: #333;
     line-height: 30px;
     text-align: center;
@@ -153,28 +152,70 @@ body {
 }
 
 #welcome-widget .step {
+    width: 250px;
     font-size: 14px;
     line-height: 35px;
     border: 1px solid #DFDFDF;
-    margin: 10px;
+    margin: 10px auto 30px auto;
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-align: center;
+    cursor:pointer;
+    background-color: #87cefa;
+    color: white;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+}
+
+/*
+* AUTH WIDGET
+*/
+
+#auth-widget {
+    margin: 10px auto;
+    width: 500px;
+    border: 1px solid #DFDFDF;
+    border-radius: 10px;
+    padding: 10px 30px 20px 30px;
+    box-shadow: 0px 0px 2px rgba(0,0,0,0.1);
+}
+
+#auth-widget .title {
+    font-size: 18px;
+    /*border-bottom: 1px solid #DFDFDF;*/
+    color: #333;
+    line-height: 30px;
+    text-align: center;
+    font-weight: bold;
+    /*text-shadow: 0 0 1px rgba(0, 0, 0, 0.7);*/
+    background:-webkit-gradient(linear, left top, left bottom, from(#999), to(black));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#auth-widget .step {
+    /*width: 400px;*/
+    font-size: 14px;
+    line-height: 35px;
+    border: 1px solid #DFDFDF;
+    margin: 10px auto;
     border-radius: 5px;
     padding: 5px 10px;
     text-align: center;
     box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
 }
 
-#welcome-widget .step.success {
+#auth-widget .step.success {
     background: #FAFAFA;
     box-shadow: inset 0 0 5px #dfdfdf;
     color:gray;
 }
 
-#welcome-widget .step .number {
+#auth-widget .step .number {
     color:gray;
     font-size: 13px;
 }
 
-#welcome-widget .step .button {
+#auth-widget .step .button {
     font-size: 12px;
     background: #F0F0F0;
     border: 1px solid #DFDFDF;
@@ -186,45 +227,27 @@ body {
     cursor: pointer;
 }
 
-#welcome-widget .step.success .button {
+#auth-widget .step.success .button {
     cursor: default;
     background: #EEE;
     box-shadow: none;
     border-color: #DDD;
 }
 
-#vk-auth-frame {
-    -webkit-animation-name: zoomAppear;
-    -webkit-animation-duration: .2s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
-    opacity: 0;
-    border: 1px solid #DFDFDF;
-    position: relative;
-    left: 0;
-    right: 0;
-    top: 5px;
-    bottom: 0;
-    width: 600px;
-    height: 400px;
+#auth-widget #final-step {
+    cursor: default;
+    background: white;
+    box-shadow: none;
+    border-color: whiteSmoke;
+    color: #F0F0F0;
 }
 
-#lastfm-auth-frame {
-    -webkit-animation-name: zoomAppear;
-    -webkit-animation-duration: .2s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: ease-in;
-    opacity: 0;
-    border: 1px solid #DFDFDF;
-    position: relative;
-    left: 0;
-    right: 0;
-    top: 5px;
-    bottom: 0;
-    width: 600px;
-    height: 400px;
+#auth-widget #final-step.success {
+    background-color: #87cefa;
+    color: white;
+    box-shadow: inset 0 0 3px rgba(0,0,0,0.1);
+    border-color: #DFDFDF;
 }
-
 
 /*
 * Search widget

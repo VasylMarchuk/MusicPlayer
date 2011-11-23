@@ -19,7 +19,7 @@ div>.lastplayer.button {
 	margin:1px 0 0 3px !important;
 }
 
-#welcome-widget {
+#auth-widget {
 	font: 9pt 'Lucida Grande', 'Trebuchet MS', Verdana,Tahoma, Sans-Serif;
 	position: fixed;
 	top: 0;
@@ -35,7 +35,7 @@ div>.lastplayer.button {
 	box-shadow:#F0F0F0 0 0 2px, rgba(0, 0, 0, 0.1) 0 1px 3px, inset #F0F0F0 0 0 2px;
 }
 
-#welcome-widget .vk-login-button {
+#auth-widget .vk-login-button {
 	font-size:14px;
 	font-weight:bold;
 	position: relative;
@@ -51,7 +51,7 @@ div>.lastplayer.button {
 	cursor:pointer;
 }
 
-#welcome-widget .vk-info-message {
+#auth-widget .vk-info-message {
 	font-size: 10px;
 	color:#999999;
 	text-align: center;

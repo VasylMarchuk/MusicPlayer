@@ -88,4 +88,4 @@
 
 	app.classes.TrackWidget = TrackWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

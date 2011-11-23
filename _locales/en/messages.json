@@ -96,7 +96,7 @@
         "description" : "Title for vkontakte.ru"
     },
     "welcomeAuthButton" : {
-        "message" : "Log in",
+        "message" : "Authorize",
         "description": "Text for 'log in' button on the welcome widget"
     },
     "welcomeAuthDoneButton" : {
@@ -104,7 +104,7 @@
         "description": "Text for 'log in' button on the welcome widget when auth is done"
     },
 	"loginToVk" : {
-		"message" : "Log in to VKontakte",
+		"message" : "Authorize access to VKontakte",
 		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
 	},
 	"vkInfoMessage" : {
@@ -112,7 +112,7 @@
 		"description" : "Explanation for the welcome panel's 'login to vk'"
 	},
 	"loginToLastFm" : {
-		"message" : "Log in to Last.fm",
+		"message" : "Authorize access to Last.fm",
 		"description" : "Tooltip for the welcome panel's 'login to last.fm' button and tooltip"
 	},
 	"lastFmInfoMessage" : {
@@ -146,5 +146,17 @@
     "aboutCreditsList" : {
         "message" : "<ul><li>Google Chrome is a trademark of Google Inc.<br/>Use of this trademark is subject to Google Permissions</li><li>Player icon by ~barrymieny @ deviantART</li><li>Last.fm is used for music discovery</li><li>VKontakte is used for music playback</li></ul>",
         "description" : "Text for credits list in 'about' window"
-    }
+    },
+	"setUp" : {
+		"message" : "Set up $1",
+		"description" : "Used as the Setup page title: Setup __extName"
+	},
+	"authFinalStep" : {
+		"message" : "All done. Now click $1's icon",
+		"description" : "Final step message on Setup page"
+	},
+	"weNeedSetUp" : {
+		"message" : "Click to do a simple set up",
+		"description" : "Message to display if extension needs setting up"
+	}
 }

@@ -27,18 +27,7 @@
 			],
 			"js" : ["inject/vkaccess.js"],
             "all_frames" : true
-		},
-        {
-            "matches" : [
-                "http://api.vkontakte.ru/oauth/authorize*",
-                "http://api.vk.com/oauth/authorize*",
-                "https://api.vkontakte.ru/oauth/authorize*",
-                "https://api.vk.com/oauth/authorize*"
-            ],
-            "js" : ["inject/vkframe.js"],
-            "all_frames" : true,
-            "run_at" : "document_start"
-        }
+		}
 	],
 
 	"permissions": [

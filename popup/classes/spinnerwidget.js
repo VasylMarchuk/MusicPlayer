@@ -33,4 +33,4 @@
 
     app.classes.SpinnerWidget = SpinnerWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

@@ -41,4 +41,4 @@
 
     app.classes.AboutWidget = AboutWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

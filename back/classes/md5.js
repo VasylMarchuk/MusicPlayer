@@ -201,4 +201,4 @@
 		return temp.toLowerCase();
 	}
 
-})(ChromePlayer);
+})(MusicPlayer);

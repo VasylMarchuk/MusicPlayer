@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Music Player</title>
+	<link rel="stylesheet" href="../popup/popup.css" />
+	<script type="text/javascript" src="../jquery-1.6.2.min.js"></script>
+	<script type="text/javascript">
+		var MusicPlayer = chrome.extension.getBackgroundPage().MusicPlayer;
+	</script>
+	<script type="text/javascript" src="../popup/classes/spinnerwidget.js"></script>
+	<script type="text/javascript" src="../popup/classes/authwidget.js"></script>
+</head>
+<script type="text/javascript">
+
+	function requestListener(request, sender, back) {
+		if(request.cmd == 'authTabShouldClose') {
+			try {
+				back({});
+			} catch(e) {}
+
+			window.open('', '_self', '');
+			window.close();
+
+			chrome.extension.onRequest.removeListener(requestListener);
+		}
+	}
+
+	chrome.extension.onRequest.addListener(requestListener);
+
+	(function($, app) {
+		$(function(){
+			var authWidget = new app.classes.AuthWidget(app.classes.Player);
+			$('body').empty().append(authWidget.$element);
+			authWidget.$element.trigger('addedToDom');
+		});
+	})(jQuery, MusicPlayer);
+</script>
+<body>
+Hi
+</body>
+</html>

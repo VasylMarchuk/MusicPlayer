@@ -267,4 +267,4 @@
 
 	app.classes.PlayerWidget = PlayerWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

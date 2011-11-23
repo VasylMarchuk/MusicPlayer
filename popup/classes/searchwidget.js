@@ -311,4 +311,4 @@
 
     app.classes.SearchWidget = SearchWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

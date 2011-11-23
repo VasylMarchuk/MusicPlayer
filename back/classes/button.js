@@ -103,4 +103,4 @@
 
 	app.classes.Button = new Button();
 
-})(ChromePlayer);
+})(MusicPlayer);

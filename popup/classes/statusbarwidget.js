@@ -167,4 +167,4 @@
 
     app.classes.StatusBarWidget = StatusBarWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

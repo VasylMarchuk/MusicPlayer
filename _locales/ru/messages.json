@@ -79,72 +79,84 @@
 		"message" : "Играть следующий найденный mp3 для этого трека",
 		"description" : "Explanation for the track's mp3 count label"
 	},
-    "searchBoxPlaceholder" : {
-        "message" : "Поиск: \"Исполнитель\" или \"Исполнитель - Трек\"",
-        "description" : "Placeholder text shown in the search field"
-    },
-    "searchNoResults" : {
-        "message" : "Ничего не нашлось :(",
-        "description" : "Error message when search did not return results (should be short)"
-    },
-    "searchUnknownError" : {
-        "message" : "Ошибка O_o",
-        "description" : "Error message when search had errors"
-    },
-    "vkontakte" : {
-        "message" : "ВКонтакте",
-        "description" : "Title for vkontakte.ru"
-    },
-    "welcomeAuthButton" : {
-        "message" : "Авторизоваться",
-        "description": "Text for 'log in' button on the welcome widget"
-    },
-    "welcomeAuthDoneButton" : {
-        "message" : "Готово",
-        "description": "Text for 'log in' button on the welcome widget when auth is done"
-    },
-    "loginToVk" : {
-        "message" : "Авторизоваться ВКонтакте",
-        "description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
-    },
+	"searchBoxPlaceholder" : {
+		"message" : "Поиск: \"Исполнитель\" или \"Исполнитель - Трек\"",
+		"description" : "Placeholder text shown in the search field"
+	},
+	"searchNoResults" : {
+		"message" : "Ничего не нашлось :(",
+		"description" : "Error message when search did not return results (should be short)"
+	},
+	"searchUnknownError" : {
+		"message" : "Ошибка O_o",
+		"description" : "Error message when search had errors"
+	},
+	"vkontakte" : {
+		"message" : "ВКонтакте",
+		"description" : "Title for vkontakte.ru"
+	},
+	"welcomeAuthButton" : {
+		"message" : "Авторизовать",
+		"description": "Text for 'log in' button on the welcome widget"
+	},
+	"welcomeAuthDoneButton" : {
+		"message" : "Готово",
+		"description": "Text for 'log in' button on the welcome widget when auth is done"
+	},
+	"loginToVk" : {
+		"message" : "Авторизуйте доступ к ВКонтакте",
+		"description" : "Tooltip for the welcome panel's 'login to vk' button and tooltip"
+	},
 	"vkInfoMessage" : {
 		"message" : "файлы mp3 играют из ВКонтакте",
 		"description" : "Explanation for the welcome panel's 'login to vk'"
 	},
 	"loginToLastFm" : {
-		"message" : "Авторизоваться на Last.fm",
+		"message" : "Авторизуйте доступ к Last.fm",
 		"description" : "Tooltip for the welcome panel's 'login to last.fm' button and tooltip"
 	},
 	"lastFmInfoMessage" : {
 		"message" : "Last.fm используется для поиска музыки",
 		"description" : "Explanation for the welcome panel's 'login to last.fm'"
 	},
-    "resetAuthorization" : {
-        "message" : "Сброс авторизации",
-        "description" : "Text for menu item 'reset authorization'"
-    },
-    "donate" : {
-        "message" : "Donate",
-        "description" : "Text for menu item 'donate'"
-    },
-    "about" : {
-        "message" : "О расширении",
-        "description" : "Text for menu item 'about'"
-    },
-    "aboutVersion" : {
-        "message" : "Версия: $1",
-        "description" : "Text for Version: xxx label in 'about' window"
-    },
-    "aboutDevelopedBy" : {
-        "message" : "Разработано:&nbsp;",
-        "description" : "Text for Developed by: xxx hyperlink prefix in 'about' window"
-    },
-    "aboutCreditsLabel" : {
-        "message" : "Благодарности:",
-        "description" : "Text for Credits: header in 'about' window"
-    },
-    "aboutCreditsList" : {
-        "message" : "<ul><li>Google Chrome — торговая марка Google Inc.<br/>Использование этой торговой марки регулируется правилами Google</li><li>Иконка от ~barrymieny @ deviantART</li><li>Last.fm используется для поиска музыки</li><li>ВКонтакте используется для воспроизведения музыки</li></ul>",
-        "description" : "Text for credits list in 'about' window"
-    }
+	"resetAuthorization" : {
+		"message" : "Сброс авторизации",
+		"description" : "Text for menu item 'reset authorization'"
+	},
+	"donate" : {
+		"message" : "Donate",
+		"description" : "Text for menu item 'donate'"
+	},
+	"about" : {
+		"message" : "О расширении",
+		"description" : "Text for menu item 'about'"
+	},
+	"aboutVersion" : {
+		"message" : "Версия: $1",
+		"description" : "Text for Version: xxx label in 'about' window"
+	},
+	"aboutDevelopedBy" : {
+		"message" : "Разработано:&nbsp;",
+		"description" : "Text for Developed by: xxx hyperlink prefix in 'about' window"
+	},
+	"aboutCreditsLabel" : {
+		"message" : "Благодарности:",
+		"description" : "Text for Credits: header in 'about' window"
+	},
+	"aboutCreditsList" : {
+		"message" : "<ul><li>Google Chrome — торговая марка Google Inc.<br/>Использование этой торговой марки регулируется правилами Google</li><li>Иконка от ~barrymieny @ deviantART</li><li>Last.fm используется для поиска музыки</li><li>ВКонтакте используется для воспроизведения музыки</li></ul>",
+		"description" : "Text for credits list in 'about' window"
+	},
+	"setUp" : {
+		"message" : "Настройка $1",
+		"description" : "Used as the set up page title: Set up __extName"
+	},
+	"authFinalStep" : {
+		"message" : "Всё готово. Щелкните на иконке $1",
+		"description" : "Final step message on Setup page"
+	},
+	"weNeedSetUp" : {
+		"message" : "Настроить $1",
+		"description" : "Message to display if extension needs setting up"
+	}
 }

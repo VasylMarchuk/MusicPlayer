@@ -103,4 +103,4 @@
 		value : new Analytics()
 	});
 	
-})(ChromePlayer);
+})(MusicPlayer);

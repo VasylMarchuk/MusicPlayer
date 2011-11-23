@@ -1,4 +1,4 @@
-var ChromePlayer = {
+var MusicPlayer = {
 	classes : {}
 };
 

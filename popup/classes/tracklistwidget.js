@@ -123,4 +123,4 @@
 
 	app.classes.TrackListWidget = TrackListWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

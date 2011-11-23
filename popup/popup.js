@@ -5,6 +5,8 @@
     var StatusBarWidget = app.classes.StatusBarWidget;
     var WelcomeWidget = app.classes.WelcomeWidget;
 
+    var i18n = chrome.i18n;
+
     function initReloader(bgPage){
         var metaPressed;
         var shiftPressed;
@@ -23,7 +25,7 @@
                         }
                         setTimeout(function(){
                             $('#main-content').css('visibility', 'hidden');
-							$(window).unbind('unload.popupCloseMonitor');
+                            $(window).unbind('unload.popupCloseMonitor');
                             window.location.reload(true);
                         }, shiftPressed ? 300 : 0);
                     }
@@ -41,7 +43,7 @@
 
     //Constructor
     $(function(){
-		var openTime = Date.now();
+        var openTime = Date.now();
         var bgPage = chrome.extension.getBackgroundPage();
         var player = bgPage.player;
 
@@ -55,24 +57,28 @@
         }
 
         bgPage.popup = window;
-		var isAuthorized = (Boolean)(player.vk && player.lastFm);
+        var isAuthorized = (Boolean)(player.vk && player.lastFm);
 
-		app.analytics.popUpShown(app.isFirstRun);
+        app.analytics.popUpShown(app.isFirstRun);
 
-		$(window).bind('unload.popupCloseMonitor', (function(){
-			app.analytics.popUpHidden(isAuthorized, Date.now() - openTime);
-		}));
+        $(window).bind('unload.popupCloseMonitor', (function(){
+            app.analytics.popUpHidden(isAuthorized, Date.now() - openTime);
+        }));
 
         initReloader(bgPage);
 
         var $mainContent = $('#main-content');
 
         if(!isAuthorized) {
-            $mainContent.addClass('welcome');
-            var welcomeWidget = new WelcomeWidget(player, $mainContent);
-            $mainContent.empty().append(welcomeWidget.$element);
+            var welcomeWidget = new WelcomeWidget(app.classes.Player);
+            $mainContent.empty().addClass('welcome').append(welcomeWidget.$element);
             welcomeWidget.$element.trigger('addedToDom');
         } else {
+
+            if(app.currentAuthTab) {
+                chrome.extension.sendRequest({cmd: "authTabShouldClose"});
+            }
+
             player.bind('vkAuthChanged.mainWindow', function(){
                 window.location.reload();
             });
@@ -108,4 +114,4 @@
         }
     });
 
-})(ChromePlayer);
+})(MusicPlayer);

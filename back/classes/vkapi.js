@@ -1,6 +1,6 @@
 (function(app){
 
-    var apiBase = 'https://api.vkontakte.ru/method/';
+    var apiBase = 'https://api.vk.com/method/';
 
     var cbk = app.cbk;
 
@@ -10,94 +10,67 @@
         this.appId = appId;
     }
 
-    VKApi.getSession = function(iFrameWindow, callback) {
-        var url = 'https://api.vkontakte.ru/oauth/authorize?client_id='+app.VK_APP_ID+'&scope=audio,offline&display=popup&response_type=token&_hash=0';
+    VKApi.getSession = function(win, callback) {
 
-        $.ajax({
-            url:url,
-            success: function(res, status, jXHR){
-                function authedHandler(request, sender, back) {
-                    if(request.cmd == 'vkAuthSuccess') {
-                        try {
-                            back({});
-                        } catch(e) {}
+        var url = 'https://api.vk.com/oauth/authorize?client_id='+app.VK_APP_ID+'&scope=audio,offline&response_type=code';
 
-                        chrome.extension.onRequest.removeListener(authedHandler);
 
-                        var hash = request.hash.substr(1).split('&');
+        function authedHandler(request, sender, back) {
+            if(request.cmd == 'vkAuthSuccess') {
+                try {
+                    back({});
+                } catch(e) {}
 
-                        var userId, expiresIn, accessToken;
+                chrome.extension.onRequest.removeListener(authedHandler);
 
-                        if(hash) {
-                            for(var hi=0; hi<hash.length; hi++) {
-                                var hp = hash[hi].split('=', 2);
+                var hash = request.hash.substr(1).split('&');
 
-                                switch(hp[0]) {
-                                    case 'access_token':
-                                        accessToken = hp[1];
-                                        break;
-                                    case 'expires_in':
-                                        expiresIn = hp[1];
-                                        break;
-                                    case 'user_id':
-                                        userId = hp[1];
-                                        break;
-                                }
-                            }
+                var code, userId, expiresIn, accessToken;
+
+                if(hash) {
+                    for(var hi=0; hi<hash.length; hi++) {
+                        var hp = hash[hi].split('=');
+
+                        switch(hp[0]) {
+                            case 'code':
+                                code = hp[1];
+                                break;
+                            case 'access_token':
+                                accessToken = hp[1];
+                                break;
+                            case 'expires_in':
+                                expiresIn = hp[1];
+                                break;
+                            case 'user_id':
+                                userId = hp[1];
+                                break;
                         }
+                    }
+                }
 
-                        if(userId !== undefined && accessToken !== undefined && expiresIn !== undefined) {
-                            cbk(callback, {userId:userId, accessToken:accessToken,expiresIn:expiresIn});
-                        } else {
+                if(userId !== undefined && accessToken !== undefined && expiresIn !== undefined) {
+                    cbk(callback, {userId:userId, accessToken:accessToken,expiresIn:expiresIn});
+                } else if(code) {
+                    $.ajax({
+                        url:'https://api.vk.com/oauth/access_token?client_id=' + app.VK_APP_ID + '&client_secret=' + app.VK_APP_SECRET + '&code='+code,
+                        success: function(res, status, jXHR){
+                            cbk(callback, {userId:res.user_id, accessToken:res.access_token,expiresIn:res.expires_in});
+                        },
+                        fail: function(jqXHR, textStatus, errorThrown) {
+                            console.log('Error getting session from VK: ' + textStatus);
                             cbk(callback, new Error('Failed to get session'));
                         }
-                    }
+                    });
+
+                } else {
+                    cbk(callback, new Error('Failed to get session'));
                 }
-
-                chrome.extension.onRequest.addListener(authedHandler);
-
-                function reloadHandler(request, sender, back) {
-                    if(request.cmd == 'vkFrameReload') {
-                        try {
-                            back({});
-                        } catch(e){}
-
-                        chrome.extension.onRequest.removeListener(authedHandler);
-
-                        cbk(callback, new Error('Need reload'));
-                    }
-                }
-
-                chrome.extension.onRequest.addListener(reloadHandler);
-
-                if(res.indexOf('Login success') !== -1) {
-                    iFrameWindow.redirect(url);
-                    return;
-                }
-
-                if(iFrameWindow == null || !('setContent' in iFrameWindow)) {
-                    return;
-                }
-
-                iFrameWindow.setContent(res);
-
-                $('.box_login', iFrameWindow).css('width','385px');
-
-                $('head script', iFrameWindow.document).each(function(){
-                    var s = iFrameWindow.document.createElement('script'); s.type = 'text/javascript';
-                    if(this.src) {
-                        s.async=true; s.src = this.src;
-                    }
-                    else {
-                        s.innerHTML = this.innerHTML.replace('parent','0');
-                    }
-                    var h = iFrameWindow.document.getElementsByTagName('script')[0]; h.parentNode.insertBefore(s, h);
-                });
-            },
-            error : function(jqXHR, textStatus, errorThrown) {
-                console.log('Error getting session from VK: ' + textStatus);
             }
-        });
+        }
+
+        chrome.extension.onRequest.addListener(authedHandler);
+
+        win.location.href = url;
     };
 
     VKApi.prototype.apiCall = function(method, params, type, callback) {
@@ -156,4 +129,4 @@
 
     app.classes.VKApi = VKApi;
 
-})(ChromePlayer);
+})(MusicPlayer);

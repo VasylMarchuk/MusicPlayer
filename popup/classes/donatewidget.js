@@ -55,4 +55,4 @@
 
     app.classes.DonateWidget = DonateWidget;
 
-})(ChromePlayer);
+})(MusicPlayer);

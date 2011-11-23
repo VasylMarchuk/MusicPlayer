@@ -54,4 +54,4 @@ var popup;
         }
     });
 
-})(ChromePlayer);
+})(MusicPlayer);

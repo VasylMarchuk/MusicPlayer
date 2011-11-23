@@ -1,1 +1,0 @@
-chrome.extension.sendRequest({cmd: "authSuccess" });
