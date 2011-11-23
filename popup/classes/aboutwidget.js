@@ -18,7 +18,7 @@
             extensionName : $('<div/>', { 'class' : 'ext-name', text:i18n.getMessage('extName') }),
             extensionDescr : $('<div/>', { 'class' : 'ext-descr', text:i18n.getMessage('extDescription') }),
             extensionVersion : $('<div/>', { 'class' : 'ext-version', text:i18n.getMessage('aboutVersion', [version]) }),
-            developedBy : $('<div/>', { 'class' : 'developed-by' }).append(i18n.getMessage('aboutDevelopedBy'), $('<a />', { text:'V of HyperDev', href:'http://v.hyperdev.it', target:'_blank' })),
+            developedBy : $('<div/>', { 'class' : 'developed-by' }).append(i18n.getMessage('aboutDevelopedBy'), $('<a />', { text:'HyperDev', href:'http://hyperdev.it/musicplayer', target:'_blank' })),
             creditsLabel : $('<div/>', { 'class' : 'credits-label' }), //text: i18n.getMessage('aboutCreditsLabel')
             creditsList : $('<div />', {'class':'credits-list', html: i18n.getMessage('aboutCreditsList')}),
             ninja : $('<div/>', {'class': 'ninja', title:'Ninja!'})
