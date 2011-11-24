@@ -65,7 +65,7 @@
             app.analytics.popUpHidden(isAuthorized, Date.now() - openTime);
         }));
 
-        initReloader(bgPage);
+//        initReloader(bgPage);
 
         var $mainContent = $('#main-content');
 
