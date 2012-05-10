@@ -93,7 +93,7 @@
     },
     "vkontakte" : {
         "message" : "VKontakte",
-        "description" : "Title for vkontakte.ru"
+        "description" : "Title for vk.com"
     },
     "welcomeAuthButton" : {
         "message" : "Authorize",

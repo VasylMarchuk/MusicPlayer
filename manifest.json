@@ -1,6 +1,6 @@
 {
 	"name": "__MSG_extName__",
-	"version": "0.0.0.7",
+	"version": "0.0.0.8",
 	"description": "__MSG_extDescription__",
 	"default_locale" : "en",
 	"minimum_chrome_version" : "14.0.0.0",
@@ -22,8 +22,10 @@
 			"matches" : [
 				"http://api.vkontakte.ru/blank.html*",
 				"http://api.vk.com/blank.html*",
+				"http://oauth.vk.com/blank.html*",
 				"https://api.vkontakte.ru/blank.html*",
-				"https://api.vk.com/blank.html*"
+				"https://api.vk.com/blank.html*",
+				"https://oauth.vk.com/blank.html*"
 			],
 			"js" : ["inject/vkaccess.js"],
             "all_frames" : true

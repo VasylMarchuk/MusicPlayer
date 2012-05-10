@@ -247,7 +247,7 @@
                     }
                 })
             } else {
-                var e = new Error('Must be logged in to VKontakte.ru');
+                var e = new Error('Must be logged in to vk.com');
                 e.code = 156;
                 cbk(callback, e);
             }
