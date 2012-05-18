@@ -190,9 +190,9 @@
                     var curr = me.currentState;
                     me.currentState = 'stopped';
                     me.currentTrackId = undefined;
-                    if(curr=='playing') {
+//                    if(curr=='playing') {
                         me.playNextAvailable(trackId);
-                    }
+//                    }
                 });
                 $aud.bind('durationchange', function(){
                     me.currentDuration = $aud.get(0).duration;
